@@ -4,11 +4,11 @@ include_once('pasm.php');
 
     $x = new PASM();
 
-    $x->set('ecx',3)
-        ->set('ldp',2)
-        ->set('pdb',1)
-        ->set('rdx',3)
-        ->set('ah',2)
+    $x->set('ecx',3)    // REGISTER
+        ->set('ldp',2)  // NUMBER OF COMMANDS TO GO BACK
+        ->set('pdb',1)  // DEBUG FIELD
+        ->set('rdx',3)  // REGISTER
+        ->set('ah',2)   // REGISTER
         ->end();
     
     //print_r($x);
