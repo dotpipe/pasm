@@ -1,8 +1,8 @@
 <?php
 
-include_once('pasm.php');
+include_once('pas.php');
 
-    $x = new PASM();
+    $x = new PAS();
 
     $x->set('ecx',3)    // REGISTER
         ->set('ldp',2)  // NUMBER OF COMMANDS TO GO BACK
@@ -11,6 +11,7 @@ include_once('pasm.php');
         ->set('ah',2)   // REGISTER
         ->end();
     
+    $y = "ecx";
     //print_r($x);
     $x->mov_ecx()->decr()->jne()->loope()->end();
 
