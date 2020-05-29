@@ -1,6 +1,6 @@
 <?php
 
-class PAS //implements pASM_interface
+class PASM //implements pASM_interface
 {
 
     private $ZF = 0;    // Comparison Flag for Exchanges
@@ -2406,9 +2406,9 @@ class PAS //implements pASM_interface
         while ($this->lop + $counted < $count) {
             $func = $this->chain[$this->lop + $counted];
             if ($func == 'set')
-                PAS::$func($this->args[$this->lop + $counted][0],$this->args[$this->lop + $counted][1]);
+                PASM::$func($this->args[$this->lop + $counted][0],$this->args[$this->lop + $counted][1]);
             else
-                PAS::$func();
+                PASM::$func();
             $counted++;
         }
         $this->ldp = 0;

@@ -1,8 +1,8 @@
 <?php
 
-include_once('pas.php');
+include_once('pasm.php');
 
-    $x = new PAS();
+    $x = new PASM();
 
     $x->set('ecx',3)    // REGISTER
         ->set('ldp',2)  // NUMBER OF COMMANDS TO GO BACK
