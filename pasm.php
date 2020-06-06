@@ -1,6 +1,6 @@
 <?php
 
-class PASM 
+class PASM
 {
 
     private $ZF = 0;    // Comparison Flag for Exchanges
@@ -45,7 +45,7 @@ class PASM
     public function get () {    // Useful for some testing
                                 // Will be easier to just play around
                                 // However this verifies all methods work
-        foreach (get_class_methods($this) as $method) 
+        foreach (get_class_methods($this) as $method)
         {
             if ($method == "get")
                 continue;
@@ -57,10 +57,10 @@ class PASM
                 //$param is an instance of ReflectionParameter
                 $p[] = $param->getName();
                 $results = $p;
-                
+
                 //echo $param->isOptional();
             }
-            
+
             $x = new PASM();
             $y = "$" . implode(',$',$results);
             try {
@@ -95,12 +95,12 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         $this->rdx = chr(($this->ecx + $this->ah)%256);
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
-        return $this; 
+        return $this;
 
     }
 
@@ -749,7 +749,7 @@ class PASM
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args  
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->ah) || !$this->stack[array_key_last($this->stack)])
             return $this;
         $this->rdx = $this->ah - $this->stack[array_key_last($this->stack)];
@@ -913,7 +913,7 @@ class PASM
         if (!file_exists($filename))
             return false;
         $this->stack = (unserialize(file_get_contents($filename)));
-        //$this->addr() 
+        //$this->addr()
           //  ->movr()
             //->end();
         return $this;
@@ -935,7 +935,7 @@ class PASM
         $this->lop++;
         return $this;
     }
-    
+
     public function stack_mrg() // stack with count on stack
     {
         array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
@@ -952,7 +952,7 @@ class PASM
         $this->lop++;
         return $this;
     }
-    
+
     public function fmul()                  // multiplies ecx and ah
     {
         array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
@@ -984,7 +984,7 @@ class PASM
         return $this;
     }
 
-    public function store_int()         // subtracts $ST0 - 2-to-the-$ah and puts answer in $rdx 
+    public function store_int()         // subtracts $ST0 - 2-to-the-$ah and puts answer in $rdx
     {
         array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
         $argv = [];
@@ -1902,7 +1902,7 @@ class PASM
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_string($this->buffer) && !is_numeric($this->buffer))
             return;
-    
+
         file_put_contents($this->string, $this->buffer);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -1921,7 +1921,7 @@ class PASM
             echo "Missing file: $this->string";
             return;
         }
-    
+
         $this->buffer = file_get_contents($this->string);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -1951,7 +1951,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ah > $this->ecx) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -1960,11 +1960,11 @@ class PASM
                     $this->$func($this->args[$this->lop][0],$this->args[$this->lop][1]);
                 else
                     $this->$func();
-            }   
+            }
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -1978,7 +1978,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ah >= $this->ecx) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -1991,7 +1991,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2005,7 +2005,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ah < $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2018,7 +2018,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2037,7 +2037,7 @@ class PASM
         else
             return false;
         echo $this->chain[$this->lop]['function'];
-        
+
         if ($this->ah <= $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2062,7 +2062,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ecx == 1 && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2075,7 +2075,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2089,7 +2089,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ah == $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2102,7 +2102,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2116,7 +2116,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ah == $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2129,7 +2129,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2143,7 +2143,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ah > $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2156,7 +2156,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2170,7 +2170,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ah >= $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2183,7 +2183,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2197,7 +2197,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ah < $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2210,7 +2210,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2224,7 +2224,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ah < $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2237,7 +2237,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2246,7 +2246,7 @@ class PASM
 
     public function jmp()
     {
-        
+
         array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
             $this->lop -= $this->ldp;
         array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
@@ -2257,7 +2257,7 @@ class PASM
             else
                 $this->$func();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2271,7 +2271,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ah < $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2284,7 +2284,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2298,7 +2298,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ah >= $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2311,7 +2311,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2325,7 +2325,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ah > $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2338,7 +2338,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2352,7 +2352,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ecx == 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2365,7 +2365,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2379,7 +2379,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ah != $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2392,7 +2392,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2406,7 +2406,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ah < $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2419,7 +2419,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2433,7 +2433,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ecx > $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2446,7 +2446,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2460,7 +2460,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ecx == 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2473,7 +2473,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2487,7 +2487,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ecx >= 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2500,7 +2500,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2514,7 +2514,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ecx != 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2527,7 +2527,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2541,7 +2541,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ecx > 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2554,7 +2554,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2568,7 +2568,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ecx < 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2581,7 +2581,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2595,7 +2595,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ecx >= 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2608,7 +2608,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2622,7 +2622,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ecx <= 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2635,7 +2635,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2649,7 +2649,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ecx == 1 && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2662,7 +2662,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2676,7 +2676,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ecx%2 == 0 && $this->ah%2 && $this->ecx%2 == 0) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2689,7 +2689,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2703,7 +2703,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ecx%2 == 1 && $this->ah%2 == 1 && $this->ecx%2 == 1) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2716,7 +2716,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2730,7 +2730,7 @@ class PASM
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
         array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
-        
+
         if ($this->ecx == 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
             if ($this->ah != null && $this->ecx != null) {
@@ -2743,7 +2743,7 @@ class PASM
             $this->jbl = 1;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2838,7 +2838,7 @@ class PASM
     {
         array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['function']);
         array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
-         
+
         $count = count($this->chain);
             $this->lop -= $this->ldp;
         if ($this->counter < $this->ecx && $this->lop + $this->counter < $count) {
@@ -2865,7 +2865,7 @@ class PASM
     public function loope()     // loop while ah == ecx
     {
         $counter = 0;
-        
+
         $count = count($this->chain);
             $this->lop -= $this->ldp;
         if ($this->ah == $this->ecx && $this->lop < $count) {
@@ -2876,9 +2876,9 @@ class PASM
                 $this->$func();
             $this->counter++;
         }
-        
+
         $this->coast();
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2890,8 +2890,8 @@ class PASM
         $counter = 0;
         if (!is_numeric($this->ah) || !is_numeric($this->ah))
             return $this;
-            
-        
+
+
         $count = count($this->chain);
             $this->lop -= $this->ldp;
         if ($this->ah != $this->ecx && $this->lop < $count) {
@@ -2902,9 +2902,9 @@ class PASM
                 $this->$func();
             $this->counter++;
         }
-        
+
         $this->coast();
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2921,8 +2921,8 @@ class PASM
         $counter = 0;
         if (!is_numeric($this->ah) || !is_numeric($this->ah))
             return $this;
-            
-        
+
+
         $count = count($this->chain);
             $this->lop -= $this->ldp;
         if (0 != $this->ecx && $this->lop < $count) {
@@ -2934,7 +2934,7 @@ class PASM
             $this->counter++;
         }
         $this->coast();
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2951,7 +2951,7 @@ class PASM
         $counter = 0;
         if (!is_numeric($this->ah) || !is_numeric($this->ah))
             return $this;
-        
+
         $count = count($this->chain);
             $this->lop -= $this->ldp;
         if (0 == $this->ecx && $this->lop < $count) {
@@ -2963,7 +2963,7 @@ class PASM
             $this->counter++;
             $this->coast();
         }
-        
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -4183,7 +4183,7 @@ class PASM
         return $this;
     }
 
-    public function clear_buffer() 
+    public function clear_buffer()
     {
         $this->buffer = "";
         if ($this->pdb == 1)
@@ -4206,7 +4206,7 @@ class PASM
         return $this;
     }
 
-    public function subtract_byte() // 
+    public function subtract_byte() //
     {
         array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
         $argv = [];
@@ -4400,5 +4400,3 @@ class PASM
         return $this;
     }
 }
-
-?>
