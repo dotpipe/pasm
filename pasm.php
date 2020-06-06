@@ -42,9 +42,12 @@ class PASM
     public $err;    // Error No.
     public $err_str;    // Error String
 
-    public function get () {    // Useful for some testing
-                                // Will be easier to just play around
-                                // However this verifies all methods work
+    /**
+     * Useful for some testing.
+     * Will be easier to just play around.
+     * However this verifies all methods work.
+     */
+    public function get () {
         foreach (get_class_methods($this) as $method)
         {
             if ($method == "get")
@@ -90,11 +93,15 @@ class PASM
     // amount of documentation.
     public function char_adjust_addition()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         $this->rdx = chr(($this->ecx + $this->ah)%256);
         if ($this->pdb == 1)
@@ -106,11 +113,16 @@ class PASM
 
     public function carry_add()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->cl = $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -120,11 +132,16 @@ class PASM
 
     public function add()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->rdx = $this->ecx + $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -134,11 +151,16 @@ class PASM
 
     public function and()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->cl = $this->ecx & $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -148,11 +170,16 @@ class PASM
 
     public function chmod()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         chmod($this->string, $this->ah);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -162,13 +189,21 @@ class PASM
 
     public function bit_scan_fwd()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->tp == null) {
-            $this->tp = $this->qword;   // qword is used to look through a string via bit scanning
+
+            // qword is used to look through a string via bit scanning
+            $this->tp = $this->qword;
+
             $this->tp = decbin($this->tp);
             $this->tp = str_split($this->tp,1);
             reset($this->tp);
@@ -181,13 +216,19 @@ class PASM
         return $this;
     }
 
-    public function bit_scan_rvr()                  // reverse of above
+    // bit_scan_rvr reverses bit_scan_fwd.
+    public function bit_scan_rvr()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->tp == null) {
             $this->tp = $this->qword;
             $this->tp = decbin($this->tp);
@@ -202,13 +243,19 @@ class PASM
         return $this;
     }
 
-    public function byte_rvr()                  // reverse byte
+    // reverse byte
+    public function byte_rvr()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $temp = decbin($this->ecx);
         $this->rdx = strrev($temp);
         $this->rdx = bindec($this->rdx);
@@ -218,23 +265,35 @@ class PASM
         return $this;
     }
 
-    public function bit_test()                  // bit is filled in pointer
+    // bit is filled in pointer
+    public function bit_test()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         return $this->tp[$this->ah];
     }
 
-    public function bit_test_comp()         // look thru byte and see the $ah'th bit
+    // look through byte and see the $ah'nth bit
+    public function bit_test_comp()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $bo = decbin($this->ecx);
         $bo = $bo[$this->ah];
         $this->CF = (bool)($bo);
@@ -244,13 +303,19 @@ class PASM
         return $this;
     }
 
-    public function bit_test_reset()    // Clear bit test flag
+    // Clear bit test flag
+    public function bit_test_reset()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $bo = decbin($this->ecx);
         $bo = $bo[$this->ah];
         $this->CF = (bool)($bo);
@@ -261,13 +326,19 @@ class PASM
         return $this;
     }
 
-    public function bit_test_set()                  // Test bit
+    // Test bit
+    public function bit_test_set()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $bo = decbin($this->ecx);
         $bo = $bo[$this->ah];
         $this->CF = (bool)($bo);
@@ -278,24 +349,36 @@ class PASM
         return $this;
     }
 
-    public function call()                  // call any function
+    // call any function
+    public function call()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (is_callable($this->ST0))
             return call_user_func($this->ST0(), $this->string, $this->ah);
     }
 
-    public function cmp_mov_a()         // heck ah against top of stack
+    // heck ah against top of stack
+    public function cmp_mov_a()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ecx = ($this->ah > $this->ST0) ? $this->ah : $this->ecx;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -303,13 +386,19 @@ class PASM
         return $this;
     }
 
-    public function cmp_mov_ae()    // same (documenting will continue below)
+    // same (documenting will continue below)
+    public function cmp_mov_ae()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ecx = ($this->ah >= $this->ST0) ? $this->ah : $this->ecx;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -319,11 +408,16 @@ class PASM
 
     public function cmp_mov_b()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ecx = ($this->ah < $this->ST0) ? $this->ah : $this->ecx;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -333,11 +427,15 @@ class PASM
 
     public function cmp_mov_be()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ecx = ($this->ah <= $this->ST0) ? $this->ah : $this->ecx;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -347,11 +445,16 @@ class PASM
 
     public function cmp_mov_e()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ecx = ($this->ah == $this->ST0) ? $this->ah : $this->ecx;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -361,11 +464,16 @@ class PASM
 
     public function cmp_mov_nz()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ecx = ($this->CF == 1 & $this->ah == $this->ST0) ? $this->ah : $this->ecx;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -375,11 +483,16 @@ class PASM
 
     public function cmp_mov_pe()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ecx = ($this->CF == 0) ? $this->ah : $this->ecx;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -389,11 +502,16 @@ class PASM
 
     public function cmp_mov_po()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ecx = ($this->CF == 1) ? $this->ah : $this->ecx;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -403,11 +521,16 @@ class PASM
 
     public function cmp_mov_s()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ecx = ($this->ah < 0) ? $this->ah : $this->ecx;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -417,11 +540,16 @@ class PASM
 
     public function cmp_mov_z()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ecx = ($this->ah > 0) ? $this->ah : $this->ecx;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -429,13 +557,19 @@ class PASM
         return $this;
     }
 
-    public function mov()   // move ah to ecx. Same as mov_ah()
+    // move ah to ecx. Same as mov_ah()
+    public function mov()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ecx = $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -443,13 +577,19 @@ class PASM
         return $this;
     }
 
-    public function movabs()    // copy $ecx to stack
+    // copy $ecx to stack
+    public function movabs()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         array_push($this->stack, array("movabs" => $this->ecx));
         $this->ST0 = $this->stack[array_key_last($this->stack)];
         if ($this->pdb == 1)
@@ -458,13 +598,19 @@ class PASM
         return $this;
     }
 
-    public function clear_carry()   // clear $CF
+    // clear $CF
+    public function clear_carry()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->CF = 0;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -472,13 +618,19 @@ class PASM
         return $this;
     }
 
-    public function clear_registers()   // make all registers 0
+    // make all registers 0
+    public function clear_registers()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->CF = $this->adx = $this->bdx = $this->cdx = $this->ddx = $this->edx = $this->rdx = 0;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -486,13 +638,19 @@ class PASM
         return $this;
     }
 
-    public function comp_carry()    // negate $CF
+    // negate $CF
+    public function comp_carry()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->CF = !($this->CF);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -500,13 +658,19 @@ class PASM
         return $this;
     }
 
-    public function cmp_e()         // bool of equality comparison (documentation continues below)
+    // bool of equality comparison (documentation continues below)
+    public function cmp_e()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->cl = $this->ecx == $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -516,11 +680,16 @@ class PASM
 
     public function cmp_same()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->cl = $this->ecx == $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -530,11 +699,16 @@ class PASM
 
     public function cmp_xchg()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ecx == $this->ah) {
             $this->rdx = $this->ah;
             $this->ZF = 1;
@@ -547,13 +721,19 @@ class PASM
         }
     }
 
-    public function decr()                  // decrement ecx
+    // decrement ecx
+    public function decr()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ecx--;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -561,13 +741,19 @@ class PASM
         return $this;
     }
 
-    public function divide()    // $ecx/$ah
+    // $ecx/$ah
+    public function divide()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (is_numeric($this->ecx) && is_numeric($this->ah))
         $this->rdx = round($this->ecx/$this->ah);
         if ($this->pdb == 1)
@@ -576,13 +762,19 @@ class PASM
         return $this;
     }
 
-    public function absf()                  // absolute value of $ah
+    // absolute value of $ah
+    public function absf()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->rdx = abs($this->ah);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -590,13 +782,19 @@ class PASM
         return $this;
     }
 
-    public function addf()                  // add $ecx and $ah
+    // add $ecx and $ah
+    public function addf()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->rdx = $this->ecx + $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -604,7 +802,8 @@ class PASM
         return $this;
     }
 
-    public function round()         // round top stack to RC decimal
+    // round top stack to RC decimal
+    public function round()
     {
         $this->ST0 = &$this->stack[array_key_last($this->stack)];
         $this->ST0 = round($this->ST0, $this->RC);
@@ -614,7 +813,8 @@ class PASM
         return $this;
     }
 
-    public function round_pop()         // same but pop
+    // same but pop
+    public function round_pop()
     {
         $this->ah = &$this->stack[array_key_last($this->stack)];
         $this->ah = round($this->ST0, $this->RC);
@@ -629,13 +829,19 @@ class PASM
         return $this;
     }
 
-    public function neg()   // negate $ah
+    // negate $ah
+    public function neg()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (is_numeric($this->ah))
             $this->rdx = $this->ah * (-1);
             if ($this->pdb == 1)
@@ -644,13 +850,19 @@ class PASM
         return $this;
     }
 
-    public function stack_cmov_b()                  // move on comparison (begins again below)
+    // move on comparison (begins again below)
+    public function stack_cmov_b()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (count($this->stack) > 0)
             $this->ST0 = $this->stack[array_key_last($this->stack)];
         else
@@ -665,11 +877,16 @@ class PASM
 
     public function stack_cmov_be()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (count($this->stack) > 0)
             $this->ST0 = $this->stack[array_key_last($this->stack)];
         else
@@ -681,11 +898,16 @@ class PASM
 
     public function stack_cmov_e()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (count($this->stack) > 0)
             $this->ST0 = $this->stack[array_key_last($this->stack)];
         else
@@ -697,11 +919,16 @@ class PASM
 
     public function stack_cmov_nb()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (count($this->stack) > 0)
             $this->ST0 = $this->stack[array_key_last($this->stack)];
         else
@@ -713,11 +940,16 @@ class PASM
 
     public function stack_cmov_nbe()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (count($this->stack) > 0)
             $this->ST0 = $this->stack[array_key_last($this->stack)];
         else
@@ -729,11 +961,16 @@ class PASM
 
     public function stack_cmov_ne()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (count($this->stack) > 0)
             $this->ST0 = $this->stack[array_key_last($this->stack)];
         else
@@ -743,13 +980,19 @@ class PASM
             return $this;
     }
 
-    public function fcomp()         // subtract top of stack from $ah and pop
+    // subtract top of stack from $ah and pop
+    public function fcomp()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->ah) || !$this->stack[array_key_last($this->stack)])
             return $this;
         $this->rdx = $this->ah - $this->stack[array_key_last($this->stack)];
@@ -764,13 +1007,19 @@ class PASM
         return $this;
     }
 
-    public function cosine()    // change top of stack to cosine of top of stack
+    // change top of stack to cosine of top of stack
+    public function cosine()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ST0 = &$this->stack[array_key_last($this->stack)];
         $this->ST0 = ($this->ST0 != null) ? cos($this->ST0) : null;
         if ($this->pdb == 1)
@@ -779,13 +1028,19 @@ class PASM
         return $this;
     }
 
-    public function stack_pnt_rev()         // go reverse the stack
+    // go reverse the stack
+    public function stack_pnt_rev()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         prev($this->stack);
         $this->sp = current($this->stack);
         if ($this->pdb == 1)
@@ -794,13 +1049,19 @@ class PASM
         return $this;
     }
 
-    public function fdiv()                  // divide ST0 into $ecx
+    // divide ST0 into $ecx
+    public function fdiv()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah == 0) {
             echo "Denominator cannot be 0";
             $this->cl = 0;
@@ -815,13 +1076,19 @@ class PASM
         return $this;
     }
 
-    public function fdiv_pop()                  // opposite as above and pop
+    // opposite as above and pop
+    public function fdiv_pop()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ST0 == 0) {
             echo "Denominator cannot be 0";
             $this->cl = 0;
@@ -836,13 +1103,19 @@ class PASM
         return $this;
     }
 
-    public function fdiv_rev()                  // opposite of fdiv
+    // opposite of fdiv
+    public function fdiv_rev()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ST0 == 0) {
             echo "Denominator cannot be 0";
             $this->cl = 0;
@@ -855,13 +1128,19 @@ class PASM
         return $this;
     }
 
-    public function fdiv_rev_pop()                  // same as above with po
+    // same as above with po
+    public function fdiv_rev_pop()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ST0 == 0) {
             echo "Denominator cannot be 0";
             $this->cl = 0;
@@ -876,13 +1155,19 @@ class PASM
         return $this;
     }
 
-    public function add_stack()         // add top of stack to ecx
+    // add top of stack to ecx
+    public function add_stack()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->ah) || !$this->stack[array_key_last($this->stack)])
             return $this;
         $this->rdx = $this->ecx + $this->ST0;
@@ -892,13 +1177,19 @@ class PASM
         return $this;
     }
 
-    public function ficomp()    // compare and pop
+    // compare and pop
+    public function ficomp()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ST0 == $this->ah)
             $this->cl = 1;
         array_pop($this->stack);
@@ -919,13 +1210,19 @@ class PASM
         return $this;
     }
 
-    public function stack_load() // stack with count on stack
+    // stack with count on stack
+    public function stack_load()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $key = "f" . count($this->stack);
         array_push($this->stack, array($key => $this->ecx));
         $this->ecx = null;
@@ -936,13 +1233,19 @@ class PASM
         return $this;
     }
 
-    public function stack_mrg() // stack with count on stack
+    // stack with count on stack
+    public function stack_mrg()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $key = "f" . count($this->stack);
         array_merge($this->stack, $this->array);
         $this->ecx = null;
@@ -953,13 +1256,19 @@ class PASM
         return $this;
     }
 
-    public function fmul()                  // multiplies ecx and ah
+    // multiplies ecx and ah
+    public function fmul()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->ah) || !$this->stack[array_key_last($this->stack)])
             return $this;
         $this->rdx = $this->ecx * $this->ah;
@@ -969,13 +1278,19 @@ class PASM
         return $this;
     }
 
-    public function stack_pnt_fwd()         // moves stack pointer forward
+    // moves stack pointer forward
+    public function stack_pnt_fwd()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         next($this->stack);
         $this->sp = current($this->stack);
         if ($this->pdb == 1)
@@ -984,13 +1299,19 @@ class PASM
         return $this;
     }
 
-    public function store_int()         // subtracts $ST0 - 2-to-the-$ah and puts answer in $rdx
+    // subtracts $ST0 - 2-to-the-$ah and puts answer in $rdx
+    public function store_int()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (ctype_xdigit($this->stack[array_key_last($this->stack)]))
             $this->ST0 = hexdec($this->stack[array_key_last($this->stack)]);
         if (is_numeric($this->stack[array_key_last($this->stack)]))
@@ -1013,13 +1334,19 @@ class PASM
         return $this;
     }
 
-    public function store_int_pop() // same as above, but with pop
+    // same as above, but with pop
+    public function store_int_pop()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->ah) || !is_numeric($this->stack[array_key_last($this->stack)])) {
             echo "Invalid Operand in store_int_pop: \$ah = $this->ah & $ST0 = " . $this->stack[array_key_last($this->stack)];
             return;
@@ -1047,13 +1374,19 @@ class PASM
         return $this;
     }
 
-    public function subtract_rev() // like subtract but backwards
+    // like subtract but backwards
+    public function subtract_rev()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->ah) || !is_numeric($this->ecx) || !$this->stack[array_key_last($this->stack)])
             return;
         $this->rdx = $this->ecx - $this->ah;
@@ -1063,13 +1396,19 @@ class PASM
         return $this;
     }
 
-    public function subtract()  // $ah - $ecx
+    // $ah - $ecx
+    public function subtract()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->ah) || !is_numeric($this->ecx) || !$this->stack[array_key_last($this->stack)])
             return;
         $this->rdx = $this->ah - $this->ecx;
@@ -1079,13 +1418,19 @@ class PASM
         return $this;
     }
 
-    public function fld1()  // pushes ecx+1 to stack
+    // pushes ecx+1 to stack
+    public function fld1()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->ecx))
             return;
         array_push($this->stack, array("inc" => ($this->ecx + 1)));
@@ -1097,11 +1442,16 @@ class PASM
 
     public function load_logl2() //
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         array_push($this->stack, array("logl2" => log(log(2))));
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -1111,11 +1461,16 @@ class PASM
 
     public function load_logl2t()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         array_push($this->stack, array("logl2t" => log(2,10)));
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -1125,11 +1480,16 @@ class PASM
 
     public function load_loglg2()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->ah))
         {
             echo "\$ah must be numeric for load_loglg2";
@@ -1144,11 +1504,16 @@ class PASM
 
     public function load_ln2()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $e = M_E;
         array_push($this->stack, array("ln2" => log($e,2)));
         if ($this->pdb == 1)
@@ -1159,11 +1524,16 @@ class PASM
 
     public function load_pi()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         array_push($this->stack, array("pi" => M_PI));
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -1173,11 +1543,16 @@ class PASM
 
     public function float_test()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->ah))
         {
             echo "\$ah must be numeric for float_test";
@@ -1190,13 +1565,19 @@ class PASM
         return $this;
     }
 
-    public function fmul_pop() // ah * ecx and pop
+    // ah * ecx and pop
+    public function fmul_pop()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->ah) || !$this->stack[array_key_last($this->stack)])
             return;
         $this->rdx = $this->ah * $this->ecx;
@@ -1208,13 +1589,19 @@ class PASM
         return $this;
     }
 
-    public function clean_exceptions()  // clear exception bit
+    // clear exception bit
+    public function clean_exceptions()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $thiz->ZF = 0;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -1222,13 +1609,19 @@ class PASM
         return $this;
     }
 
-    public function clean_reg() // clear cl
+    // clear cl
+    public function clean_reg()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->cl = 0;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -1236,26 +1629,37 @@ class PASM
         return $this;
     }
 
-    public function fnop()  // counts as function, does nothing but takes up space (like in assembly)
+    // counts as function, does nothing but takes up space (like in assembly)
+    public function fnop()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
         return $this;
     }
 
-    public function fpatan()    // gets arctan of $ah
+    // gets arctan of $ah
+    public function fpatan()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         $this->cl = atan($this->ah);
         if ($this->pdb == 1)
@@ -1264,13 +1668,19 @@ class PASM
         return $this;
     }
 
-    public function fptan() // gets tangent of ah
+    // gets tangent of ah
+    public function fptan()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->cl = tan($this->ah);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -1278,13 +1688,19 @@ class PASM
         return $this;
     }
 
-    public function fprem() // look to documentation (Oracle Systems Manual)
+    // look to documentation (Oracle Systems Manual)
+    public function fprem()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->stack[count($this->stack)-2]) || !is_numeric($this->stack[array_key_last($this->stack)]))
             return $this;
         if (count($this->stack) > 1)
@@ -1297,13 +1713,19 @@ class PASM
         return $this;
     }
 
-    public function frndint()   // round top of stack into $rdx
+    // round top of stack into $rdx
+    public function frndint()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->ecx) || !$this->stack[array_key_last($this->stack)])
             return $this;
         $this->rdx = round($this->stack[array_key_last($this->stack)], $this->RC);
@@ -1313,13 +1735,19 @@ class PASM
         return $this;
     }
 
-    public function frstor() // copy $ah to $rdx
+    // copy $ah to $rdx
+    public function frstor()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->rdx = $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -1327,7 +1755,8 @@ class PASM
         return $this;
     }
 
-    public function fsin() // change top of stack to sin of top of stack
+    // change top of stack to sin of top of stack
+    public function fsin()
     {
         $this->ST0 = &$this->stack[array_key_last($this->stack)];
         $this->ST0 = ($this->ST0 != null) ? sin($this->ST0) : null;
@@ -1337,7 +1766,8 @@ class PASM
         return $this;
     }
 
-    public function fsincos() // push cos of $ST0 to stack and fill $ST0 with sin of itself
+    // push cos of $ST0 to stack and fill $ST0 with sin of itself
+    public function fsincos()
     {
         $this->ST0 = $this->stack[array_key_last($this->stack)];
         array_push($this->stack, array("cos" => cos($this->ST0)));
@@ -1350,13 +1780,19 @@ class PASM
         return $this;
     }
 
-    public function fscale()    // round top 2 stack elements and push to rdx ans powers of 2
+    // round top 2 stack elements and push to rdx ans powers of 2
+    public function fscale()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $sp1 = round($this->stack[count($this->stack)-2]);
         $sp0 = $this->stack[array_key_last($this->stack)];
         if (!is_numeric($sp1) || !is_numeric($sp0))
@@ -1371,13 +1807,19 @@ class PASM
         return $this;
     }
 
-    public function fsqrt() // push to stack top value's sqrt
+    // push to stack top value's sqrt
+    public function fsqrt()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->stack[array_key_last($this->stack)] = sqrt($this->stack[array_key_last($this->stack)]);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -1385,13 +1827,19 @@ class PASM
         return $this;
     }
 
-    public function fst() // copy ST0 to another position ($ecx)
+    // copy ST0 to another position ($ecx)
+    public function fst()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ST0 = $this->stack[array_key_last($this->stack)];
         $this->stack[$this->ecx] = $this->ST0;
         if ($this->pdb == 1)
@@ -1400,13 +1848,19 @@ class PASM
         return $this;
     }
 
-    public function fstcw() // push $ah to $rdx
+    // push $ah to $rdx
+    public function fstcw()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->rdx = $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -1414,13 +1868,19 @@ class PASM
         return $this;
     }
 
-    public function fstp()  // same as fst() but pops
+    // same as fst() but pops
+    public function fstp()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->stack[$this->ecx] = $this->stack[array_key_last($this->stack)];
         array_pop($this->stack);
         $this->ST0 = $this->stack[array_key_last($this->stack)];
@@ -1430,13 +1890,19 @@ class PASM
         return $this;
     }
 
-    public function subtract_pop()  // like it says ($ah - $ST0)
+    // like it says ($ah - $ST0)
+    public function subtract_pop()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ST0 = $this->stack[array_key_last($this->stack)];
         if (!is_numeric($this->ah) || !is_numeric($this->stack[array_key_last($this->stack)]))
         {
@@ -1452,13 +1918,19 @@ class PASM
         return $this;
     }
 
-    public function subtract_rev_pop() // (same only reverse)
+    // (same only reverse)
+    public function subtract_rev_pop()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->ah) || !is_numeric($this->stack[array_key_last($this->stack)]))
         {
             echo "\$ST0 & \$ah must be numeric for subtract_rev_pop";
@@ -1473,13 +1945,19 @@ class PASM
         return $this;
     }
 
-    public function ftst()  // check that math works
+    // check that math works
+    public function ftst()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->rdx))
         {
             echo "\$rdx must be numeric for ftst";
@@ -1492,13 +1970,19 @@ class PASM
         return $this;
     }
 
-    public function fucom() // ecx == $sp and $rdx = $ST0
+    // ecx == $sp and $rdx = $ST0
+    public function fucom()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->ecx) || !$this->stack[array_key_last($this->stack)])
             return $this;
         if (!is_float($this->stack[$this->ecx]) || !is_float($this->ST0))
@@ -1515,13 +1999,19 @@ class PASM
         return $this;
     }
 
-    public function fucomp()    // above ith pop
+    // above ith pop
+    public function fucomp()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->fucom();
         array_pop($this->stack);
         $this->ST0 = $this->stack[array_key_last($this->stack)];
@@ -1531,13 +2021,19 @@ class PASM
         return $this;
     }
 
-    public function fucompp()   // above with another pop
+    // above with another pop
+    public function fucompp()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->fucom();
         array_pop($this->stack);
         array_pop($this->stack);
@@ -1548,13 +2044,19 @@ class PASM
         return $this;
     }
 
-    public function fxam()  // get decimal value, without integer
+    // get decimal value, without integer
+    public function fxam()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->ah) || !$this->stack[array_key_last($this->stack)])
             return $this;
         $this->rdx = $this->ah - round($this->ah);
@@ -1564,13 +2066,19 @@ class PASM
         return $this;
     }
 
-    public function fxch()  // exchange values from one stack place to another (the top)
+    // exchange values from one stack place to another (the top)
+    public function fxch()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ST0 = &$this->stack[array_key_last($this->stack)];
         $temp = $this->stack[$this->ecx];
         $this->stack[$this->ecx] = $this->ST0;  // goes into $this->ecx
@@ -1581,13 +2089,19 @@ class PASM
         return $this;
     }
 
-    public function fxtract()   // get highest significand and exponent of number
+    // get highest significand and exponent of number
+    public function fxtract()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->ah) || !is_numeric($this->stack[array_key_last($this->stack)]))
         {
             echo "\$ST0 & \$ah must be numeric for fxtract";
@@ -1624,11 +2138,16 @@ class PASM
 
     public function fyl2x()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->ecx) || !is_numeric($this->ah))
             return $this;
         $this->rdx = $this->ecx * log($this->ah,2);
@@ -1640,11 +2159,16 @@ class PASM
 
     public function fyl2xp1()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->ecx) || !is_numeric($this->ah))
             return $this;
         $this->rdx = $this->ecx * log($this->ah,2 + 1);
@@ -1676,13 +2200,19 @@ class PASM
         return $this;
     }
 
-    public function idiv()  // divide $ah / $ecx
+    // divide $ah / $ecx
+    public function idiv()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->ecx) || !is_numeric($this->ah))
             return $this;
         $this->rdx = $this->ah / $this->ecx;
@@ -1692,13 +2222,19 @@ class PASM
         return $this;
     }
 
-    public function imul()  // $ah * $ecx
+    // $ah * $ecx
+    public function imul()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->ecx) || !is_numeric($this->ah))
             return $this;
         $this->rdx = $this->ah * $this->ecx;
@@ -1708,13 +2244,19 @@ class PASM
         return $this;
     }
 
-    public function in()    // $string is server, collects in $buffer
+    // $string is server, collects in $buffer
+    public function in()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $socket = stream_socket_server($this->string, $err, $err_str);
         if (!$socket) {
             echo "$this->err ($this->err_str)<br />\n";
@@ -1735,13 +2277,19 @@ class PASM
         return $this;
     }
 
-    public function inc()   // increment $ecx
+    // increment $ecx
+    public function inc()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_numeric($this->ecx))
             return $this;
         $this->ecx++;
@@ -1751,13 +2299,19 @@ class PASM
         return $this;
     }
 
-    public function in_b()  // read 1 byte at a time
+    // read 1 byte at a time
+    public function in_b()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_string($this->string) || 0 == count($this->string))
         {
             echo "\$string must be numeric for in_b";
@@ -1783,13 +2337,19 @@ class PASM
         return $this;
     }
 
-    public function in_d() // read 1 dword at a time
+    // read 1 dword at a time
+    public function in_d()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_string($this->string) || 0 == count($this->string))
         {
             echo "\$string must be numeric for in_d";
@@ -1815,13 +2375,19 @@ class PASM
         return $this;
     }
 
-    public function in_w()  // read word at a time
+    // read word at a time
+    public function in_w()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_string($this->string) || 0 == count($this->string))
         {
             echo "\$string must be numeric for in_w";
@@ -1847,13 +2413,19 @@ class PASM
         return $this;
     }
 
-    public function in_q()  // read quad word at a time
+    // read quad word at a time
+    public function in_q()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_string($this->string) || 0 == count($this->string))
         {
             echo "\$string must be numeric for in_q";
@@ -1893,13 +2465,19 @@ class PASM
         return $this;
     }
 
-    public function write() // write to file $string from $buffer
+    // write to file $string from $buffer
+    public function write()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!is_string($this->buffer) && !is_numeric($this->buffer))
             return;
 
@@ -1910,13 +2488,19 @@ class PASM
         return $this;
     }
 
-    public function read()     // read from file $this->string
+    // read from file $this->string
+    public function read()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (!file_exists($this->string)) {
             echo "Missing file: $this->string";
             return;
@@ -1929,13 +2513,19 @@ class PASM
         return $this;
     }
 
-    public function mov_buffer()    // (really) move $buffer to stack
+    // (really) move $buffer to stack
+    public function mov_buffer()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         array_push($this->stack, $this->buffer);
         $this->buffer = "";
         if ($this->pdb == 1)
@@ -1944,13 +2534,18 @@ class PASM
         return $this;
     }
 
-    public function ja()    // from here down to next letter, is jmp commands (obvious to anyone)
+    // from here down to next letter, is jmp commands (obvious to anyone)
+    public function ja()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ah > $this->ecx) {
             $this->lop -= $this->ldp;
@@ -1973,11 +2568,15 @@ class PASM
 
     public function jae()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ah >= $this->ecx) {
             $this->lop -= $this->ldp;
@@ -2000,11 +2599,15 @@ class PASM
 
     public function jb()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ah < $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2027,11 +2630,16 @@ class PASM
 
     public function jbe()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->chain != null && $this->chain[$this->lop] == '' && $this->jbl == 1)
             $this->ecxl = 0;
         else
@@ -2057,11 +2665,15 @@ class PASM
 
     public function jc()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ecx == 1 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2084,11 +2696,15 @@ class PASM
 
     public function jcxz()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ah == $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2111,11 +2727,15 @@ class PASM
 
     public function je()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ah == $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2138,11 +2758,15 @@ class PASM
 
     public function jg()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ah > $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2165,11 +2789,15 @@ class PASM
 
     public function jge()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ah >= $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2192,11 +2820,15 @@ class PASM
 
     public function jl()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ah < $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2219,11 +2851,15 @@ class PASM
 
     public function jle()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ah < $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2246,7 +2882,6 @@ class PASM
 
     public function jmp()
     {
-
         array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
             $this->lop -= $this->ldp;
         array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
@@ -2266,11 +2901,15 @@ class PASM
 
     public function jnae()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ah < $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2293,11 +2932,15 @@ class PASM
 
     public function jnb()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ah >= $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2320,11 +2963,15 @@ class PASM
 
     public function jnbe()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ah > $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2347,11 +2994,15 @@ class PASM
 
     public function jnc()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ecx == 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2374,11 +3025,15 @@ class PASM
 
     public function jne()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ah != $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2401,11 +3056,15 @@ class PASM
 
     public function jng()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ah < $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2428,11 +3087,15 @@ class PASM
 
     public function jnl()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ecx > $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2455,11 +3118,15 @@ class PASM
 
     public function jno()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ecx == 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2482,11 +3149,15 @@ class PASM
 
     public function jns()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ecx >= 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2509,11 +3180,15 @@ class PASM
 
     public function jnz()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ecx != 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2536,11 +3211,15 @@ class PASM
 
     public function jgz()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ecx > 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2563,11 +3242,15 @@ class PASM
 
     public function jlz()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ecx < 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2590,11 +3273,15 @@ class PASM
 
     public function jzge()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ecx >= 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2617,11 +3304,15 @@ class PASM
 
     public function jzle()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ecx <= 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2644,11 +3335,15 @@ class PASM
 
     public function jo()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ecx == 1 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2671,11 +3366,15 @@ class PASM
 
     public function jpe()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ecx%2 == 0 && $this->ah%2 && $this->ecx%2 == 0) {
             $this->lop -= $this->ldp;
@@ -2698,11 +3397,15 @@ class PASM
 
     public function jpo()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ecx%2 == 1 && $this->ah%2 == 1 && $this->ecx%2 == 1) {
             $this->lop -= $this->ldp;
@@ -2725,11 +3428,15 @@ class PASM
 
     public function jz()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
 
         if ($this->ecx == 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2750,13 +3457,19 @@ class PASM
         return $this;
     }
 
-    public function load_all_flags()    // load all flags to $ah
+    // load all flags to $ah
+    public function load_all_flags()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ah = ($this->OF) + ($this->CF * 2) + ($this->ZF * 4);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -2764,23 +3477,31 @@ class PASM
         return $this;
     }
 
-    public function end() {     // reset all command chains
+    // reset all command chains
+    public function end() {
         $this->chain = array();
         $this->args = array();
         $this->lop = 0;
     }
 
-    public function leave() // exit program
+    // exit program
+    public function leave()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         exit();
     }
 
-    public function mov_ecx()   // move ecx to ah
+    // move ecx to ah
+    public function mov_ecx()
     {
         array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['function']);
         array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
@@ -2791,7 +3512,8 @@ class PASM
         return $this;
     }
 
-    public function mov_ah()    // move ah to ecx
+    // move ah to ecx
+    public function mov_ah()
     {
         array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['function']);
         array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
@@ -2813,7 +3535,8 @@ class PASM
         return $this;
     }
 
-    public function coast()     // the secret sauce. Go thru rest of commands after $ldp drop
+    // the secret sauce. Go through rest of the commands after $ldp drop
+    public function coast()
     {
         $counted = 0;
         $count = count($this->chain);
@@ -2829,12 +3552,13 @@ class PASM
         $this->counter = 0;
     }
 
-    /*
+    /**
      * This function requires that $this->ecx
      * be filled with a value > counter. Otherwise
      * it will not work out.
-    */
-    public function loop()      // loop til $counter == $ecx
+     */
+    // loop til $counter == $ecx
+    public function loop()
     {
         array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['function']);
         array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
@@ -2862,7 +3586,8 @@ class PASM
      * it will not work out. Change $this->ecx
      * in the previous function
     */
-    public function loope()     // loop while ah == ecx
+    // loop while ah == ecx
+    public function loope()
     {
         $counter = 0;
 
@@ -2885,12 +3610,12 @@ class PASM
         return $this;
     }
 
-    public function loopne()    // loop while ah and ecx are not equal
+    // loop while ah and ecx are not equal
+    public function loopne()
     {
         $counter = 0;
         if (!is_numeric($this->ah) || !is_numeric($this->ah))
             return $this;
-
 
         $count = count($this->chain);
             $this->lop -= $this->ldp;
@@ -2911,17 +3636,22 @@ class PASM
         return $this;
     }
 
-    public function loopnz()    // loop while ecx is not 0
+    // loop while ecx is not 0
+    public function loopnz()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $counter = 0;
         if (!is_numeric($this->ah) || !is_numeric($this->ah))
             return $this;
-
 
         $count = count($this->chain);
             $this->lop -= $this->ldp;
@@ -2941,13 +3671,19 @@ class PASM
         return $this;
     }
 
-    public function loopz()     // loop while ecx == 0
+    // loop while ecx == 0
+    public function loopz()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $counter = 0;
         if (!is_numeric($this->ah) || !is_numeric($this->ah))
             return $this;
@@ -2970,13 +3706,19 @@ class PASM
         return $this;
     }
 
-    public function mul()   // another ah * ecx
+    // another ah * ecx
+    public function mul()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ecx *= $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -2984,13 +3726,19 @@ class PASM
         return $this;
     }
 
-    public function movs()  // move $string to stack and clear
+    // move $string to stack and clear
+    public function movs()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         array_push($this->stack, $this->string);
         $this->string = "";
         if ($this->pdb == 1)
@@ -3000,23 +3748,34 @@ class PASM
     }
 
     public function reset_sp() {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         end($this->stack);
         $this->sp = current($this->stack);
         return $this;
     }
 
-    public function movr()  // move $string to stack and clear
+    // move $string to stack and clear
+    public function movr()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         foreach ($this->array as $kv)
             $this->stack[count($this->stack)] = ($kv);
         $this->array = [];
@@ -3028,11 +3787,16 @@ class PASM
 
     public function addr(array $ar)  // move $string to stack and clear
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         array_push($this->array, $ar);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -3040,7 +3804,8 @@ class PASM
         return $this;
     }
 
-    public function mwait()   // wait $wait microseconds
+    // wait $wait microseconds
+    public function mwait()
     {
         usleep($this->wait);
         if ($this->pdb == 1)
@@ -3051,13 +3816,19 @@ class PASM
 
     public function nop() {}    //
 
-    public function not()   // performs a not on $ah ad ecx
+    // performs a not on $ah ad ecx
+    public function not()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ecx != $this->ah)
             $this->cl = 1;
         if ($this->pdb == 1)
@@ -3066,13 +3837,19 @@ class PASM
         return $this;
     }
 
-    public function or()    // performs a or on ecx and ah
+    // performs a or on ecx and ah
+    public function or()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ecx or $this->ah)
             $this->cl = 1;
             if ($this->pdb == 1)
@@ -3081,13 +3858,19 @@ class PASM
         return $this;
     }
 
-    public function out()   // moves buffer to site $string
+    // moves buffer to site $string
+    public function out()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $socket = stream_socket_server($this->string, $err, $err_str);
         if (!$socket) {
             echo "$this->err ($this->err_str)<br />\n";
@@ -3112,13 +3895,19 @@ class PASM
         array_push($this->stack, array("obj" => $x));
     }
 
-    public function pop()   // pop stack
+    // pop stack
+    public function pop()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         array_pop($this->stack);
         $this->ST0 = $this->stack[array_key_last($this->stack)];
         if ($this->pdb == 1)
@@ -3127,13 +3916,19 @@ class PASM
         return $this;
     }
 
-    public function push()  // push ecx to stack
+    // push ecx to stack
+    public function push()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         array_push($this->stack, $this->ecx);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -3141,13 +3936,19 @@ class PASM
         return $this;
     }
 
-    public function shift_left()    // shift ah left ecx times
+    // shift ah left ecx times
+    public function shift_left()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ah = decbin($this->ah);
         if (strlen($this->ah) == 1) {
             $this->OF = 1;
@@ -3168,13 +3969,19 @@ class PASM
         return $this;
     }
 
-    public function shift_right()   // shift ah right ecx times
+    // shift ah right ecx times
+    public function shift_right()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ah = decbin($this->ah);
         if (strlen($this->ah) == 1) {
             $this->OF = 1;
@@ -3198,13 +4005,19 @@ class PASM
         return $this;
     }
 
-    public function mv_shift_left() // pull bit around ecx times on ah (left)
+    // pull bit around ecx times on ah (left)
+    public function mv_shift_left()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ah = decbin($this->ah);
         if (strlen($this->ah) == 1) {
             $this->OF = 1;
@@ -3226,13 +4039,19 @@ class PASM
         return $this;
     }
 
-    public function mv_shift_right()    // same as above but (right)
+    // same as above but (right)
+    public function mv_shift_right()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ah = decbin($this->ah);
         if (strlen($this->ah) == 1) {
             $this->OF = 1;
@@ -3256,7 +4075,8 @@ class PASM
         return $this;
     }
 
-    public function run() {     // run file on linux $ST0 is command and arguments are $string
+    // run file on linux $ST0 is command and arguments are $string
+    public function run() {
                                 // $rdx is the output file to show what happened.
         if (substr(php_uname(), 0, 7) == "Windows") {
             pclose(popen("start /B ". $this->ST0 . " " . $this->string, "r"));
@@ -3269,7 +4089,8 @@ class PASM
         return $this;
     }
 
-    public function run_pop() {     // same as above but pop
+    // same as above but pop
+    public function run_pop() {
                                     // again, $rdx is the output
         if (substr(php_uname(), 0, 7) == "Windows") {
             pclose(popen("start /B ". $this->ST0 . " " . $this->string . " > " . $this->rdx, "r"));
@@ -3284,13 +4105,19 @@ class PASM
         return $this;
     }
 
-    public function set_flags()     // set flags from ah bits [0,2]
+    // set flags from ah bits [0,2]
+    public function set_flags()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->OF = $this->ah%2;
         $this->ah >>= 1;
         $this->CF = $this->ah%2;
@@ -3303,13 +4130,19 @@ class PASM
         return $this;
     }
 
-    public function bitwisel()  // bitewise left
+    // bitewise left
+    public function bitwisel()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ecx <<= $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -3317,13 +4150,19 @@ class PASM
         return $this;
     }
 
-    public function bitewiser() // same right
+    // same right
+    public function bitewiser()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->ecx >>= $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -3331,13 +4170,19 @@ class PASM
         return $this;
     }
 
-    public function scan_str()  // next(string);
+    // next(string);
+    public function scan_str()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->strp = next($this->string);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -3345,13 +4190,19 @@ class PASM
         return $this;
     }
 
-    public function reset_str()  // next(string);
+    // next(string);
+    public function reset_str()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         reset($this->string);
         $this->strp = current($this->string);
         if ($this->pdb == 1)
@@ -3362,11 +4213,16 @@ class PASM
 
     public function set($key, $new_value)   // set $key with $new_value
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         try {
             $this->$key = $new_value;
         }
@@ -3381,13 +4237,19 @@ class PASM
         return $this;
     }
 
-    public function set_ecx_adx()   // copy adx to ecx
+    // copy adx to ecx
+    public function set_ecx_adx()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         try {
             $this->ecx = $this->adx;
         }
@@ -3404,11 +4266,16 @@ class PASM
 
     public function set_ecx_rdx()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         try {
             $this->ecx = $this->rdx;
         }
@@ -3425,11 +4292,16 @@ class PASM
 
     public function set_ecx_bdx()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         try {
             $this->ecx = $this->bdx;
         }
@@ -3446,11 +4318,16 @@ class PASM
 
     public function set_ecx_cdx()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         try {
             $this->ecx = $this->cdx;
         }
@@ -3467,11 +4344,16 @@ class PASM
 
     public function set_ecx_ddx()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         try {
             $this->ecx = $this->ddx;
         }
@@ -3488,11 +4370,16 @@ class PASM
 
     public function set_ecx_edx()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         try {
             $this->ecx = $this->edx;
         }
@@ -3507,13 +4394,19 @@ class PASM
         return $this;
     }
 
-    public function set_ah_adx()   // copy adx to ecx
+    // copy adx to ecx
+    public function set_ah_adx()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         try {
             $this->ah = $this->adx;
         }
@@ -3530,11 +4423,16 @@ class PASM
 
     public function set_ah_rdx()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         try {
             $this->ah = $this->rdx;
         }
@@ -3551,11 +4449,16 @@ class PASM
 
     public function set_ah_bdx()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         try {
             $this->ah = $this->bdx;
         }
@@ -3572,11 +4475,16 @@ class PASM
 
     public function set_ah_cdx()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         try {
             $this->ah = $this->cdx;
         }
@@ -3593,11 +4501,16 @@ class PASM
 
     public function set_ah_ddx()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         try {
             $this->ah = $this->ddx;
         }
@@ -3614,11 +4527,16 @@ class PASM
 
     public function set_ah_edx()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         try {
             $this->ah = $this->edx;
         }
@@ -3633,13 +4551,19 @@ class PASM
         return $this;
     }
 
-    public function seta()  // set if ah is above ecx
+    // set if ah is above ecx
+    public function seta()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah > $this->ecx)
             $this->cl = 1;
         else
@@ -3653,11 +4577,16 @@ class PASM
 
     public function setae()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah >= $this->ecx)
             $this->cl = 1;
         else
@@ -3671,11 +4600,16 @@ class PASM
 
     public function setb()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah < $this->ecx)
             $this->cl = 1;
         else
@@ -3689,11 +4623,16 @@ class PASM
 
     public function setbe()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah <= $this->ecx)
             $this->cl = 1;
         else
@@ -3707,11 +4646,16 @@ class PASM
 
     public function setc()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->CF != 0)
             $this->cl = 1;
         else
@@ -3725,11 +4669,16 @@ class PASM
 
     public function sete()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah == $this->ecx)
             $this->cl = 1;
         else
@@ -3743,11 +4692,16 @@ class PASM
 
     public function setg()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah > $this->ecx)
             $this->cl = 1;
         else
@@ -3761,11 +4715,16 @@ class PASM
 
     public function setge()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah >= $this->ecx)
             $this->cl = 1;
         else
@@ -3779,11 +4738,16 @@ class PASM
 
     public function setl()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah < $this->ecx)
             $this->cl = 1;
         else
@@ -3797,11 +4761,16 @@ class PASM
 
     public function setle()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah <= $this->ecx)
             $this->cl = 1;
         else
@@ -3815,11 +4784,16 @@ class PASM
 
     public function setna()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah < $this->ecx)
             $this->cl = 1;
         else
@@ -3833,11 +4807,16 @@ class PASM
 
     public function setnae()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah > $this->ecx)
             $this->cl = 1;
         else
@@ -3851,11 +4830,16 @@ class PASM
 
     public function setnb()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah > $this->ecx)
             $this->cl = 1;
         else
@@ -3869,11 +4853,16 @@ class PASM
 
     public function setnbe()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah >= $this->ecx)
             $this->cl = 1;
         else
@@ -3887,11 +4876,16 @@ class PASM
 
     public function setnc()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->CF == 0)
             $this->cl = 1;
         else
@@ -3905,11 +4899,16 @@ class PASM
 
     public function setne()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah != $this->ecx)
             $this->cl = 1;
         else
@@ -3923,11 +4922,16 @@ class PASM
 
     public function setng()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah <= $this->ecx)
             $this->cl = 1;
         else
@@ -3941,11 +4945,16 @@ class PASM
 
     public function setnge()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah < $this->ecx)
             $this->cl = 1;
         else
@@ -3959,11 +4968,16 @@ class PASM
 
     public function setnl()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah >= $this->ecx)
             $this->cl = 1;
         else
@@ -3977,11 +4991,16 @@ class PASM
 
     public function setnle()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah > $this->ecx)
             $this->cl = 1;
         else
@@ -3995,11 +5014,16 @@ class PASM
 
     public function setno()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->OF != 1)
             $this->cl = 1;
         else
@@ -4013,11 +5037,16 @@ class PASM
 
     public function setnp()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (decbin($this->ah) != decbin($this->ecx))
             $this->cl = 1;
         else
@@ -4031,11 +5060,16 @@ class PASM
 
     public function setns()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah >= 0)
             $this->cl = 1;
         else
@@ -4049,11 +5083,16 @@ class PASM
 
     public function seto()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->OF == 1)
             $this->cl = 1;
         else
@@ -4067,11 +5106,16 @@ class PASM
 
     public function setp()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (decbin($this->ecx) != decbin($this->ah))
             $this->cl = 1;
         else
@@ -4085,11 +5129,16 @@ class PASM
 
     public function setpe()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (decbin($this->ecx) != decbin($this->ah) && $this->cl%2 == 0)
             $this->cl = 1;
         else
@@ -4103,11 +5152,16 @@ class PASM
 
     public function setpo()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if (decbin($this->ecx) != decbin($this->ah) && $this->cl%2 == 1)
             $this->cl = 1;
         else
@@ -4121,11 +5175,16 @@ class PASM
 
     public function sets()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah < 0)
             $this->cl = 1;
         else
@@ -4139,11 +5198,16 @@ class PASM
 
     public function setz()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah == 0)
             $this->cl = 1;
         else
@@ -4157,11 +5221,16 @@ class PASM
 
     public function stc()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->CF = 1;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -4169,13 +5238,19 @@ class PASM
         return $this;
     }
 
-    public function add_to_buffer() // continue buffer string
+    // continue buffer string
+    public function add_to_buffer()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->buffer .= $this->string;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -4192,13 +5267,19 @@ class PASM
         return $this;
     }
 
-    public function save_stack_file()   // save state of $stack to file $string
+    // save state of $stack to file $string
+    public function save_stack_file()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         file_put_contents($this->string, serialize(($this->stack)));
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -4208,11 +5289,16 @@ class PASM
 
     public function subtract_byte() //
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->rdx = ($this->ecx - $this->ah)%256;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -4222,11 +5308,16 @@ class PASM
 
     public function subtract_word()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->rdx = ($this->ecx - $this->ah)%pow(2,16);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -4236,11 +5327,16 @@ class PASM
 
     public function subtract_double()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->rdx = ($this->ecx - $this->ah)%pow(2,32);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -4250,11 +5346,16 @@ class PASM
 
     public function subtract_quad()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->rdx = ($this->ecx - $this->ah)%pow(2,8);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -4264,11 +5365,16 @@ class PASM
 
     public function load_cl()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $this->cl = $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -4278,11 +5384,16 @@ class PASM
 
     public function test_compare()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah == $this->ecx)
             $this->cl = 0;
         else if ($this->ah > $this->ecx)
@@ -4299,13 +5410,19 @@ class PASM
         return $this;
     }
 
-    public function thread() // thread php pages on demand on linux
+    // thread php pages on demand on linux
+    public function thread()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $x = "?";
         foreach ($this->ST0 as $key => $value)
         {
@@ -4318,13 +5435,19 @@ class PASM
         return $this;
     }
 
-    public function xadd()  // ah = $ah + ecx && rdx = ah
+    // ah = $ah + ecx && rdx = ah
+    public function xadd()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $temp = $this->ah;
         $this->rdx = $this->ah;
         $this->ah = $temp + $this->ecx;
@@ -4334,13 +5457,19 @@ class PASM
         return $this;
     }
 
-    public function exchange()  // reverse ecx and ah
+    // reverse ecx and ah
+    public function exchange()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $temp = $this->ah;
         $this->ecx = $this->ah;
         $this->ah = $temp;
@@ -4350,13 +5479,19 @@ class PASM
         return $this;
     }
 
-    public function xor() // xor $ah and ecx
+    // xor $ah and ecx
+    public function xor()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         if ($this->ah xor $this->ecx)
             $this->rdx = 1;
             if ($this->pdb == 1)
@@ -4365,13 +5500,19 @@ class PASM
         return $this;
     }
 
-    public function popcnt()    // pop $ah times
+    // pop $ah times
+    public function popcnt()
     {
-        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        // Here we collect the current function name (all functions contain 1/2)
+        array_push($this->chain, __METHOD__);
+
         $argv = [];
         for ($i = 0; $i < func_num_args() ; $i++)
             array_push($argv,func_get_arg($i));
-        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+
+        // And if there are args we are putting them in $this->args
+        array_push($this->args, $argv);
+
         $counter = count($this->stack);
         while (count($this->stack) > 0 && $this->ah < --$counter)
             array_pop($this->stack);
@@ -4383,7 +5524,8 @@ class PASM
         return $this;
     }
 
-    public function stack_func() {  // do top of stack as function
+    // do top of stack as function
+    public function stack_func() {
         $this->ST0();
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -4391,7 +5533,8 @@ class PASM
         return $this;
     }
 
-    public function stack_func_pos() {  // sync stack pointer
+    // sync stack pointer
+    public function stack_func_pos() {
         $this->sp = current($this->stack);
         $this->sp();
         if ($this->pdb == 1)
