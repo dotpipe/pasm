@@ -3,17 +3,17 @@
 class PASM
 {
 
-    private $ZF = 0;    // Comparison Flag for Exchanges
-    private $OF = 0;    // Overflow Flag
-    private $CF = 0;    // Carry Flag
+    private $ZF = 0;        // Comparison Flag for Exchanges
+    private $OF = 0;        // Overflow Flag
+    private $CF = 0;        // Carry Flag
     private $counter = 0;   // Needed for loops
-    private $chain = array();   // Chain of events in line use $this->end() to stop and start again
-    private $args = array();    // Array to hold args for set variables
-    public $stack = array();    // Stack
-    public $array = array();    // array for stack formations
-    public $sp;         // Stack pointer
-    public $ST0;        // LAST STACK ELEMENT
-    public $pdb = 0;    // debug flag (DEFAULT FALSE)
+    private $chain = [];    // Chain of events in line use $this->end() to stop and start again
+    private $args = [];     // Array to hold args for set variables
+    public $stack = [];     // Stack
+    public $array = [];     // array for stack formations
+    public $sp;             // Stack pointer
+    public $ST0;            // LAST STACK ELEMENT
+    public $pdb = 0;        // debug flag (DEFAULT FALSE)
     // The stack is referenced under objects
     // The pairing, is to be justified, with
     // a simulacrum between the object and the
@@ -3481,8 +3481,8 @@ class PASM
     // reset all command chains
     public function end()
     {
-        $this->chain = array();
-        $this->args = array();
+        $this->chain = [];
+        $this->args = [];
         $this->lop = 0;
     }
 
