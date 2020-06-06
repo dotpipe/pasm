@@ -47,7 +47,8 @@ class PASM
      * Will be easier to just play around.
      * However this verifies all methods work.
      */
-    public function get () {
+    public function get ()
+    {
         foreach (get_class_methods($this) as $method)
         {
             if ($method == "get")
@@ -65,7 +66,7 @@ class PASM
             }
 
             $x = new PASM();
-            $y = "$" . implode(',$',$results);
+            $y = "$" . implode(',$', $results);
             try {
                 $this->ecx = 3;
                 $this->ah = 3;
@@ -97,7 +98,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -117,7 +118,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -136,7 +137,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -155,7 +156,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -174,7 +175,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -193,7 +194,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -223,7 +224,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -250,7 +251,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -272,7 +273,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -288,7 +289,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -310,7 +311,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -333,7 +334,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -356,7 +357,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -373,7 +374,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -393,7 +394,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -412,7 +413,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -430,7 +431,7 @@ class PASM
         // Here we collect the current function name (all functions contain 1/2)
         array_push($this->chain, __METHOD__);
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -449,7 +450,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -468,7 +469,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -487,7 +488,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -506,7 +507,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -525,7 +526,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -544,7 +545,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -564,7 +565,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -584,7 +585,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -605,7 +606,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -625,7 +626,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -645,7 +646,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -665,7 +666,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -684,7 +685,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -703,7 +704,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -728,7 +729,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -748,7 +749,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -769,7 +770,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -789,7 +790,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -836,7 +837,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -857,7 +858,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -881,7 +882,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -902,7 +903,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -923,7 +924,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -944,7 +945,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -965,7 +966,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -987,7 +988,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1014,7 +1015,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1035,7 +1036,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1056,7 +1057,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1083,7 +1084,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1110,7 +1111,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1135,7 +1136,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1162,7 +1163,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1184,7 +1185,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1217,7 +1218,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1240,7 +1241,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1263,7 +1264,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1285,7 +1286,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1306,7 +1307,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1341,7 +1342,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1381,7 +1382,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1403,7 +1404,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1425,7 +1426,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1446,7 +1447,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1465,7 +1466,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1484,7 +1485,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1508,7 +1509,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1528,7 +1529,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1547,7 +1548,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1572,7 +1573,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1596,7 +1597,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1616,7 +1617,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1636,7 +1637,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1655,7 +1656,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1675,7 +1676,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1695,7 +1696,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1720,7 +1721,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1742,7 +1743,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1787,7 +1788,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1814,7 +1815,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1834,7 +1835,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1855,7 +1856,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1875,7 +1876,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1897,7 +1898,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1925,7 +1926,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1952,7 +1953,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -1977,7 +1978,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2006,7 +2007,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2028,7 +2029,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2051,7 +2052,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2073,7 +2074,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2096,7 +2097,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2142,7 +2143,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2163,7 +2164,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2207,7 +2208,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2229,7 +2230,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2251,7 +2252,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2284,7 +2285,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2306,7 +2307,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2344,7 +2345,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2382,7 +2383,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2420,7 +2421,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2472,7 +2473,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2495,7 +2496,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2520,7 +2521,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2541,7 +2542,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2572,7 +2573,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2603,7 +2604,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2634,7 +2635,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2669,7 +2670,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2700,7 +2701,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2731,7 +2732,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2762,7 +2763,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2793,7 +2794,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2824,7 +2825,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2855,7 +2856,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2905,7 +2906,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2936,7 +2937,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2967,7 +2968,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -2998,7 +2999,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3029,7 +3030,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3060,7 +3061,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3091,7 +3092,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3122,7 +3123,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3153,7 +3154,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3184,7 +3185,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3215,7 +3216,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3246,7 +3247,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3277,7 +3278,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3308,7 +3309,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3339,7 +3340,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3370,7 +3371,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3401,7 +3402,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3432,7 +3433,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3464,7 +3465,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3478,7 +3479,8 @@ class PASM
     }
 
     // reset all command chains
-    public function end() {
+    public function end()
+    {
         $this->chain = array();
         $this->args = array();
         $this->lop = 0;
@@ -3491,7 +3493,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3643,7 +3645,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3678,7 +3680,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3713,7 +3715,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3733,7 +3735,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3747,12 +3749,13 @@ class PASM
         return $this;
     }
 
-    public function reset_sp() {
+    public function reset_sp()
+    {
         // Here we collect the current function name (all functions contain 1/2)
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3770,7 +3773,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3791,7 +3794,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3814,7 +3817,9 @@ class PASM
         return $this;
     }
 
-    public function nop() {}    //
+    public function nop()
+    {
+    }
 
     // performs a not on $ah ad ecx
     public function not()
@@ -3823,7 +3828,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3844,7 +3849,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3865,7 +3870,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3902,7 +3907,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3923,7 +3928,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3943,7 +3948,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -3976,7 +3981,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4012,7 +4017,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4046,7 +4051,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4076,7 +4081,8 @@ class PASM
     }
 
     // run file on linux $ST0 is command and arguments are $string
-    public function run() {
+    public function run()
+    {
                                 // $rdx is the output file to show what happened.
         if (substr(php_uname(), 0, 7) == "Windows") {
             pclose(popen("start /B ". $this->ST0 . " " . $this->string, "r"));
@@ -4090,7 +4096,8 @@ class PASM
     }
 
     // same as above but pop
-    public function run_pop() {
+    public function run_pop()
+    {
                                     // again, $rdx is the output
         if (substr(php_uname(), 0, 7) == "Windows") {
             pclose(popen("start /B ". $this->ST0 . " " . $this->string . " > " . $this->rdx, "r"));
@@ -4112,7 +4119,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4137,7 +4144,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4157,7 +4164,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4177,7 +4184,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4197,7 +4204,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4217,7 +4224,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4244,7 +4251,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4270,7 +4277,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4296,7 +4303,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4322,7 +4329,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4348,7 +4355,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4374,7 +4381,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4401,7 +4408,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4427,7 +4434,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4453,7 +4460,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4479,7 +4486,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4505,7 +4512,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4531,7 +4538,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4558,7 +4565,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4581,7 +4588,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4604,7 +4611,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4627,7 +4634,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4650,7 +4657,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4673,7 +4680,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4696,7 +4703,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4719,7 +4726,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4742,7 +4749,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4765,7 +4772,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4788,7 +4795,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4811,7 +4818,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4834,7 +4841,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4857,7 +4864,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4880,7 +4887,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4903,7 +4910,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4926,7 +4933,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4949,7 +4956,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4972,7 +4979,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -4995,7 +5002,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5018,7 +5025,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5041,7 +5048,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5064,7 +5071,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5087,7 +5094,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5110,7 +5117,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5133,7 +5140,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5156,7 +5163,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5179,7 +5186,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5202,7 +5209,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5225,7 +5232,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5245,7 +5252,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5274,7 +5281,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5293,7 +5300,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5312,7 +5319,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5331,7 +5338,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5350,7 +5357,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5369,7 +5376,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5388,7 +5395,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5417,7 +5424,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5442,7 +5449,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5464,7 +5471,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5486,7 +5493,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5507,7 +5514,7 @@ class PASM
         array_push($this->chain, __METHOD__);
 
         $argv = [];
-        for ($i = 0; $i < func_num_args() ; $i++)
+        for ($i = 0; $i < func_num_args(); $i++)
             array_push($argv,func_get_arg($i));
 
         // And if there are args we are putting them in $this->args
@@ -5525,7 +5532,8 @@ class PASM
     }
 
     // do top of stack as function
-    public function stack_func() {
+    public function stack_func()
+    {
         $this->ST0();
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -5534,7 +5542,8 @@ class PASM
     }
 
     // sync stack pointer
-    public function stack_func_pos() {
+    public function stack_func_pos()
+    {
         $this->sp = current($this->stack);
         $this->sp();
         if ($this->pdb == 1)
