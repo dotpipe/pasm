@@ -2735,6 +2735,17 @@ class PASM //implements pASM_interface
         return $this;
     }
 
+    public function create_register(string $register, $value)
+    {
+        
+        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
+        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        $this->$register = $value;
+        if ($this->pdb == 1)
+            echo $this->lop . " ";
+        $this->lop++;
+        return $this;
+    }
     public function mv_shift_right()    // same as above but (right)
     {
         array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
