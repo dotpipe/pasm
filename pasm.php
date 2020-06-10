@@ -111,27 +111,24 @@ class PASM
 
     }
 
-    public function addr(array $var)  // mov ecx to $string
+    public function movr()  // move $string to stack and clear
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['function']);
+        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
         array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
-        echo $this->array = $var;
+        foreach ($this->array as $kv)
+            $this->stack[count($this->stack)] = ($kv);
+        $this->array = [];
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
         return $this;
     }
 
-    public function movr()  // mov ecx to $string
+    public function addr(array $ar)  // move $string to stack and clear
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['function']);
+        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
         array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
-       
-        foreach ($this->array as $key => $val)
-        {
-            $this->stack[$key] = $val;
-        }
-        $this->ST0 = $this->stack[array_key_last($this->stack)];
+        array_push($this->array, $ar);
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
