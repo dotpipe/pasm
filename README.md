@@ -53,9 +53,9 @@ pi
 
 always 3.14..
 
-The reduced Planck length, is always the same
+The reduced Planck length, is it always the same?
 
-OK.
+friend who knows this and just wants to hear programming: OK.
 
 I'll take that as a yes
 
