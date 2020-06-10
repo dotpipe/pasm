@@ -1,6 +1,6 @@
 <?php
 
-class PAS //implements pASM_interface
+class PASM //implements pASM_interface
 {
 
     private $ZF = 0;    // Comparison Flag for Exchanges
