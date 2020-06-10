@@ -1,4 +1,5 @@
 <?php
+include_once 'pasm.php';
 
 include_once('pasm.php');
 
