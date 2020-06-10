@@ -5,11 +5,11 @@ PASM is an attempted port of Oracle's Assembly into PHP (the "P" in "PASM" stand
 PASM requires at least PHP >= 5.4 to run correctly.
 
 
-Here's an Assembly book I'm writing. Jsut in case you wonder if I have any idea of the language itself as to be so crazy as to put it in PHP :)
+Here's an Assembly book I'm writing. Just in case you wonder if I have any idea of the language itself as to be so crazy as to put it in PHP :)
 
 
 # Complex Coding for Dummies
-\#/
+\\#/
 
 a wastebin!
 
