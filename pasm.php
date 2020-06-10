@@ -135,11 +135,11 @@ class PASM
         return $this;
     }
 
-    public function carry_add()
+    public function carry_add(int $power_of_ten, int $round_decimal)
     {
         array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
         array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
-        $this->cl = $this->ah;
+        $this->cl = round(($this->ecx + $this->ah)%pow(10,$power_of_ten),$round_decimal);
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2430,10 +2430,12 @@ class PASM
         $count = count($this->chain);
         while ($this->lop + $counted < $count) {
             $func = $this->chain[$this->lop + $counted];
-            if ($func == 'set')
-                PAS::$func($this->args[$this->lop + $counted][0],$this->args[$this->lop + $counted][1]);
+            if (count($this->args[$this->lop + $counted]) > 1)
+                PASM::$func($this->args[$this->lop + $counted][0],$this->args[$this->lop + $counted][1]);
+            elseif (count($this->args[$this->lop + $counted]) > 0)
+                PASM::$func($this->args[$this->lop + $counted][0]);
             else
-                PAS::$func();
+                PASM::$func();
             $counted++;
         }
         $this->ldp = 0;
