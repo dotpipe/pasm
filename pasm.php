@@ -7,10 +7,10 @@ class PASM
     private $OF = 0;    // Overflow Flag
     private $CF = 0;    // Carry Flag
     private $counter = 0;   // Needed for loops
-    private $chain = array();   // Chain of events in line use $this->end() to stop and start again
-    private $args = array();    // Array to hold args for set variables
-    public $stack = array();    // Stack
-    public $array = array();    // Public array
+    private $chain = [];   // Chain of events in line use $this->end() to stop and start again
+    private $args = [];    // Array to hold args for set variables
+    public $stack = [];    // Stack
+    public $array = [];    // Public array
     public $sp;         // Stack pointer
     public $ST0;        // LAST STACK ELEMENT
     public $pdb = 0;    // debug flag (DEFAULT FALSE)
@@ -860,7 +860,7 @@ class PASM
         array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
         array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
         if (!is_numeric($this->ah) || !is_numeric($this->stack[array_key_last($this->stack)])) {
-            echo "Invalid Operand in store_int_pop: \$ah = $this->ah & $ST0 = " . $this->stack[array_key_last($this->stack)];
+            echo "Invalid Operand in store_int_pop: \$ah = $this->ah & $this->ST0 = " . $this->stack[array_key_last($this->stack)];
             return;
         }
         if (ctype_xdigit($this->stack[array_key_last($this->stack)]))
@@ -1021,7 +1021,7 @@ class PASM
     {
         array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
         array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
-        $thiz->ZF = 0;
+        $this->ZF = 0;
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -1598,7 +1598,7 @@ class PASM
             return $this;
         $async = file_get_contents($async_filename);
         $async = json_encode($async);
-        $async->signal = $this->ecx;
+        $async['signal'] = $this->ecx;
         file_put_contents($async_filename,json_decode($async));
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -2379,8 +2379,8 @@ class PASM
     }
 
     public function end() {     // reset all command chains
-        $this->chain = array();
-        $this->args = array();
+        $this->chain = [];
+        $this->args = [];
         $this->lop = 0;
     }
 
@@ -2698,9 +2698,8 @@ class PASM
         while ($this->ecx-- > 0)
         {
             $this->ah = rtrim($this->ah,"0");
-            $t = &$rhs[strlen($this->ah)-1];
-            array_unshift($this->ah,$t);
-            $this->CF = $this->CF ^ $t;
+            array_unshift($this->array, $this->ah);
+            $this->CF = $this->CF ^ $this->ah;
         }
         $this->ah = bindec($this->ah);
         $t = 0;
@@ -2905,7 +2904,7 @@ class PASM
         }
         catch (exception $e)
         {
-            echo "#Register $key not in object...<br>Failing...";
+            echo "#Register {$e} not in object...<br>Failing...";
             exit();
         }
         if ($this->pdb == 1)
@@ -2923,7 +2922,7 @@ class PASM
         }
         catch (exception $e)
         {
-            echo "#Register $key not in object...<br>Failing...";
+            echo "#Register {$e} not in object...<br>Failing...";
             exit();
         }
         if ($this->pdb == 1)
@@ -2941,7 +2940,7 @@ class PASM
         }
         catch (exception $e)
         {
-            echo "#Register $key not in object...<br>Failing...";
+            echo "#Register $e not in object...<br>Failing...";
             exit();
         }
         if ($this->pdb == 1)
@@ -2959,7 +2958,7 @@ class PASM
         }
         catch (exception $e)
         {
-            echo "#Register $key not in object...<br>Failing...";
+            echo "#Register $e not in object...<br>Failing...";
             exit();
         }
         if ($this->pdb == 1)
@@ -2977,7 +2976,7 @@ class PASM
         }
         catch (exception $e)
         {
-            echo "#Register $key not in object...<br>Failing...";
+            echo "#Register $e not in object...<br>Failing...";
             exit();
         }
         if ($this->pdb == 1)
@@ -2995,7 +2994,7 @@ class PASM
         }
         catch (exception $e)
         {
-            echo "#Register $key not in object...<br>Failing...";
+            echo "#Register $e not in object...<br>Failing...";
             exit();
         }
         if ($this->pdb == 1)
@@ -3013,7 +3012,7 @@ class PASM
         }
         catch (exception $e)
         {
-            echo "#Register $key not in object...<br>Failing...";
+            echo "#Register $e not in object...<br>Failing...";
             exit();
         }
         if ($this->pdb == 1)
@@ -3031,7 +3030,7 @@ class PASM
         }
         catch (exception $e)
         {
-            echo "#Register $key not in object...<br>Failing...";
+            echo "#Register $e not in object...<br>Failing...";
             exit();
         }
         if ($this->pdb == 1)
@@ -3049,7 +3048,7 @@ class PASM
         }
         catch (exception $e)
         {
-            echo "#Register $key not in object...<br>Failing...";
+            echo "#Register $e not in object...<br>Failing...";
             exit();
         }
         if ($this->pdb == 1)
@@ -3067,7 +3066,7 @@ class PASM
         }
         catch (exception $e)
         {
-            echo "#Register $key not in object...<br>Failing...";
+            echo "#Register $e not in object...<br>Failing...";
             exit();
         }
         if ($this->pdb == 1)
@@ -3085,7 +3084,7 @@ class PASM
         }
         catch (exception $e)
         {
-            echo "#Register $key not in object...<br>Failing...";
+            echo "#Register $e not in object...<br>Failing...";
             exit();
         }
         if ($this->pdb == 1)
@@ -3103,7 +3102,7 @@ class PASM
         }
         catch (exception $e)
         {
-            echo "#Register $key not in object...<br>Failing...";
+            echo "#Register $e not in object...<br>Failing...";
             exit();
         }
         if ($this->pdb == 1)
@@ -3180,7 +3179,7 @@ class PASM
             $this->cl = 1;
         else
             return $this;
-        $this->rdx = $ah;
+        $this->rdx = $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -3330,7 +3329,7 @@ class PASM
             $this->cl = 1;
         else
             return $this;
-        $this->rdx = $ah;
+        $this->rdx = $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -3420,7 +3419,7 @@ class PASM
             $this->cl = 1;
         else
             return $this;
-        $this->rdx = $ah;
+        $this->rdx = $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -3435,7 +3434,7 @@ class PASM
             $this->cl = 1;
         else
             return $this;
-        $this->rdx = $ah;
+        $this->rdx = $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -3450,7 +3449,7 @@ class PASM
             $this->cl = 1;
         else
             return $this;
-        $this->rdx = $ah;
+        $this->rdx = $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -3465,7 +3464,7 @@ class PASM
             $this->cl = 1;
         else
             return $this;
-        $this->rdx = $ah;
+        $this->rdx = $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -3480,7 +3479,7 @@ class PASM
             $this->cl = 1;
         else
             return $this;
-        $this->rdx = $ah;
+        $this->rdx = $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -3495,7 +3494,7 @@ class PASM
             $this->cl = 1;
         else
             return $this;
-        $this->rdx = $ah;
+        $this->rdx = $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -3510,7 +3509,7 @@ class PASM
             $this->cl = 1;
         else
             return $this;
-        $this->rdx = $ah;
+        $this->rdx = $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -3525,7 +3524,7 @@ class PASM
             $this->cl = 1;
         else
             return $this;
-        $this->rdx = $ah;
+        $this->rdx = $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -3540,7 +3539,7 @@ class PASM
             $this->cl = 1;
         else
             return $this;
-        $this->rdx = $ah;
+        $this->rdx = $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
