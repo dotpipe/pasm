@@ -1,6 +1,6 @@
 <?php
 
-namespace wise\src\pasm;
+namespace src\pasm;
 
 class PASM
 {
@@ -48,7 +48,7 @@ class PASM
 
     public static function get()
     {    // Useful for some testing
-                   
+
         $method_del = explode("::", __METHOD__);
         PASM::$chain[] = $method_del[1];// Will be easier to just play around
         // However this verifies all methods work
@@ -64,10 +64,10 @@ class PASM
                 //$param is an instance of ReflectionParameter
                 $p[] = $param->getName();
                 $results = $p;
-                
+
                 //echo $param->isOptional();
             }
-            
+
             $x = new PASM();
             $y = "$" . implode(',$', $results);
             try {
@@ -88,14 +88,14 @@ class PASM
         }
     }
 
-    public static function varp(string $var = "ah")
+    public static function var_p(string $var = "ah")
     {
         $method_del = explode("::", __METHOD__);
 
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
         echo PASM::${$var};
@@ -111,15 +111,15 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
         PASM::$rdx = chr((PASM::$ecx + PASM::$ah)%256);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -128,16 +128,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$cl = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -146,16 +146,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$rdx = PASM::$ecx + PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -164,16 +164,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$cl = PASM::$ecx & PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -182,16 +182,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         chmod(PASM::$string, PASM::$ah);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -200,8 +200,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -214,9 +214,9 @@ class PASM
         }
         next(PASM::$tp);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -225,8 +225,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -239,9 +239,9 @@ class PASM
         }
         prev(PASM::$tp);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -250,8 +250,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -259,9 +259,9 @@ class PASM
         PASM::$rdx = strrev($temp);
         PASM::$rdx = bindec(PASM::$rdx);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -270,8 +270,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -283,8 +283,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -292,19 +292,19 @@ class PASM
         $bo = $bo[PASM::$ah];
         PASM::$CF = (bool)($bo);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
-    public static function bit_test_reset()    // Clear bit test flag
+    public static function bit_test_reset()    // Clear bit (ah) test flag
     {
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -313,9 +313,9 @@ class PASM
         PASM::$CF = (bool)($bo);
         PASM::$ecx = 0;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -324,8 +324,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -334,19 +334,19 @@ class PASM
         PASM::$CF = (bool)($bo);
         PASM::$ecx[PASM::$ah] = 1;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
-    public static function call()                  // call any function
+    public static function call()                  // call top of stack function
     {
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -355,21 +355,21 @@ class PASM
         }
     }
 
-    public static function cmp_mov_a()         // heck ah against top of stack
+    public static function cmp_mov_a()         // check ah against top of stack
     {
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$ecx = (PASM::$ah > PASM::$ST0) ? PASM::$ah : PASM::$ecx;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -378,16 +378,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$ecx = (PASM::$ah >= PASM::$ST0) ? PASM::$ah : PASM::$ecx;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -396,16 +396,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$ecx = (PASM::$ah < PASM::$ST0) ? PASM::$ah : PASM::$ecx;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -414,16 +414,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$ecx = (PASM::$ah <= PASM::$ST0) ? PASM::$ah : PASM::$ecx;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -432,16 +432,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$ecx = (PASM::$ah == PASM::$ST0) ? PASM::$ah : PASM::$ecx;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -450,16 +450,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$ecx = (PASM::$CF == 1 & PASM::$ah == PASM::$ST0) ? PASM::$ah : PASM::$ecx;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -468,16 +468,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$ecx = (PASM::$CF == 0) ? PASM::$ah : PASM::$ecx;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -486,16 +486,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$ecx = (PASM::$CF == 1) ? PASM::$ah : PASM::$ecx;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -504,16 +504,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$ecx = (PASM::$ah < 0) ? PASM::$ah : PASM::$ecx;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -522,16 +522,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$ecx = (PASM::$ah > 0) ? PASM::$ah : PASM::$ecx;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -540,16 +540,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$ecx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -558,17 +558,17 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         array_push(PASM::$stack, array("movabs" => PASM::$ecx));
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -577,16 +577,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$CF = 0;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -595,16 +595,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$CF = PASM::$adx = PASM::$bdx = PASM::$cdx = PASM::$ddx = PASM::$edx = PASM::$rdx = 0;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -613,16 +613,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$CF = !(PASM::$CF);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -631,16 +631,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$cl = PASM::$ecx == PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -649,16 +649,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$cl = PASM::$ecx == PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -667,20 +667,28 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        if (PASM::$ecx == PASM::$ah) {
-            PASM::$rdx = PASM::$ah;
-            PASM::$ZF = 1;
-            return new static;
-        } else {
-            PASM::$rdx = PASM::$ah;
-            PASM::$ZF = 0;
-            return new static;
+        PASM::$ZF = PASM::$ecx == PASM::$ah;
+        list(PASM::$rdx, PASM::$ah) = array(PASM::$ah, PASM::$rdx);
+        return new static;
+    }
+
+
+    public static function xchg(&$x, &$y)
+    {
+        $method_del = explode("::", __METHOD__);
+        {
+            PASM::$chain[PASM::$counter] = $method_del[1];
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
+            PASM::$counter++;
         }
+        list(PASM::$dx, PASM::$ah) = array(PASM::$ah, PASM::$rdx);
+        return new static;
     }
 
     public static function decr()                  // decrement ecx
@@ -688,16 +696,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$ecx--;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -706,8 +714,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -715,9 +723,9 @@ class PASM
             PASM::$rdx = round(PASM::$ecx/PASM::$ah);
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -726,16 +734,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$rdx = abs(PASM::$ah);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -744,16 +752,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$rdx = PASM::$ecx + PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -764,9 +772,9 @@ class PASM
         PASM::$ST0 = &PASM::$stack[array_key_last(PASM::$stack)];
         PASM::$ST0 = round(PASM::$ST0, PASM::$RC);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -783,9 +791,9 @@ class PASM
             PASM::$ST0 = null;
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -794,8 +802,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -803,9 +811,9 @@ class PASM
             PASM::$rdx = PASM::$ah * (-1);
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -814,8 +822,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -828,9 +836,9 @@ class PASM
             PASM::$rdx = PASM::$ah;
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -839,8 +847,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -860,8 +868,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -881,8 +889,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -902,8 +910,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -923,8 +931,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -944,11 +952,11 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
-  
+
         if (!is_numeric(PASM::$ah) || !PASM::$stack[array_key_last(PASM::$stack)]) {
             return new static;
         }
@@ -960,9 +968,9 @@ class PASM
             PASM::$ST0 = null;
         }
         if (PASM::$ST0 != null && PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -971,17 +979,17 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$ST0 = &PASM::$stack[array_key_last(PASM::$stack)];
         PASM::$ST0 = (PASM::$ST0 != null) ? cos(PASM::$ST0) : null;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -990,17 +998,17 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         prev(PASM::$stack);
         PASM::$sp = current(PASM::$stack);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1009,8 +1017,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1023,9 +1031,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ecx / PASM::$ST0;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1034,8 +1042,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1048,9 +1056,9 @@ class PASM
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1059,8 +1067,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1071,9 +1079,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ST0 / PASM::$ecx;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1082,8 +1090,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1096,9 +1104,9 @@ class PASM
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1107,8 +1115,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1117,9 +1125,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ecx + PASM::$ST0;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1128,8 +1136,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1139,9 +1147,9 @@ class PASM
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1164,8 +1172,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1174,19 +1182,19 @@ class PASM
         PASM::$ecx = null;
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
-    
+
     public static function stack_mrg() // stack with count on stack
     {
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1195,19 +1203,19 @@ class PASM
         PASM::$ecx = null;
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
-    
+
     public static function fmul()                  // multiplies ecx and ah
     {
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1216,9 +1224,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ecx * PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1227,17 +1235,17 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         next(PASM::$stack);
         PASM::$sp = current(PASM::$stack);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1246,8 +1254,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1271,9 +1279,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1282,8 +1290,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1312,9 +1320,9 @@ class PASM
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1323,8 +1331,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1333,9 +1341,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ecx - PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1344,8 +1352,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1354,9 +1362,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah - PASM::$ecx;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1365,8 +1373,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1375,9 +1383,9 @@ class PASM
         }
         array_push(PASM::$stack, array("inc" => (PASM::$ecx + 1)));
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1386,16 +1394,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         array_push(PASM::$stack, array("logl2" => log(log(2))));
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1404,16 +1412,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         array_push(PASM::$stack, array("logl2t" => log(2, 10)));
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1422,8 +1430,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1433,9 +1441,9 @@ class PASM
         }
         array_push(PASM::$stack, array("loglg2" => log(2, log(PASM::$ah))));
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1444,17 +1452,17 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         $e = M_E;
         array_push(PASM::$stack, array("ln2" => log($e, 2)));
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1463,16 +1471,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         array_push(PASM::$stack, array("pi" => M_PI));
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1481,8 +1489,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1492,9 +1500,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah + 0.0;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1503,8 +1511,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1515,9 +1523,9 @@ class PASM
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1526,16 +1534,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$ZF = 0;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1544,16 +1552,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$cl = 0;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1562,15 +1570,15 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1579,17 +1587,17 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
 
         PASM::$cl = atan(PASM::$ah);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1598,16 +1606,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$cl = tan(PASM::$ah);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1616,8 +1624,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1630,9 +1638,9 @@ class PASM
         PASM::$rdx = (round(PASM::$ecx, (PASM::$RC+1)) - (PASM::$ecx*10*(PASM::$RC+1)))/10/(1+PASM::$RC);
         PASM::$cl = 0;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1641,8 +1649,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1651,9 +1659,9 @@ class PASM
         }
         PASM::$rdx = round(PASM::$stack[array_key_last(PASM::$stack)], PASM::$RC);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1662,16 +1670,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1682,9 +1690,9 @@ class PASM
         PASM::$ST0 = &PASM::$stack[array_key_last(PASM::$stack)];
         PASM::$ST0 = (PASM::$ST0 != null) ? sin(PASM::$ST0) : null;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1698,9 +1706,9 @@ class PASM
         next(PASM::$stack);
         PASM::$ST0 = current(PASM::$stack);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1709,8 +1717,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1722,9 +1730,9 @@ class PASM
         }
         PASM::$rdx = pow(2, $sp0+$sp1);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1733,16 +1741,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$stack[array_key_last(PASM::$stack)] = sqrt(PASM::$stack[array_key_last(PASM::$stack)]);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1751,17 +1759,17 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
         PASM::$stack[PASM::$ecx] = PASM::$ST0;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1770,16 +1778,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1788,8 +1796,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1797,9 +1805,9 @@ class PASM
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1808,8 +1816,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1822,9 +1830,9 @@ class PASM
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1833,8 +1841,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1846,9 +1854,9 @@ class PASM
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1857,8 +1865,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1868,9 +1876,9 @@ class PASM
         }
         PASM::$rdx -= 0.0;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1879,8 +1887,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1898,9 +1906,9 @@ class PASM
             PASM::$CF = 4;
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1909,8 +1917,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1918,9 +1926,9 @@ class PASM
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1929,8 +1937,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1939,9 +1947,9 @@ class PASM
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1950,8 +1958,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1960,9 +1968,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah - round(PASM::$ah);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1971,8 +1979,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -1981,9 +1989,9 @@ class PASM
         PASM::$stack[PASM::$ecx] = PASM::$ST0;  // goes into PASM::$ecx
         PASM::$ST0 = $temp;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -1992,8 +2000,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -2025,9 +2033,9 @@ class PASM
         PASM::$stack[array_key_last(PASM::$stack)] = $significand;
         array_push(PASM::$stack, array("exp" => $exponent));
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2036,8 +2044,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -2046,9 +2054,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ecx * log(PASM::$ah, 2);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2057,8 +2065,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -2067,9 +2075,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ecx * log(PASM::$ah, 2 + 1);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2092,9 +2100,9 @@ class PASM
             goto go_again;
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2103,8 +2111,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -2113,9 +2121,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah / PASM::$ecx;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2124,8 +2132,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -2134,9 +2142,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah * PASM::$ecx;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2145,8 +2153,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -2164,9 +2172,9 @@ class PASM
         }
         PASM::$cl = 1;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2175,8 +2183,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -2185,9 +2193,9 @@ class PASM
         }
         PASM::$ecx++;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2196,8 +2204,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -2219,9 +2227,9 @@ class PASM
         }
         PASM::$cl = 1;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2230,8 +2238,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -2253,9 +2261,9 @@ class PASM
         }
         PASM::$cl = 1;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2266,8 +2274,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -2289,9 +2297,9 @@ class PASM
         }
         PASM::$cl = 1;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2300,8 +2308,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -2323,9 +2331,9 @@ class PASM
         }
         PASM::$cl = 1;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2341,9 +2349,9 @@ class PASM
         $async->signal = PASM::$ecx;
         file_put_contents($async_filename, json_decode($async));
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2352,20 +2360,20 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         if (!is_string(PASM::$buffer) && !is_numeric(PASM::$buffer)) {
             return;
         }
-    
+
         file_put_contents(PASM::$string, PASM::$buffer);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2374,8 +2382,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -2383,12 +2391,12 @@ class PASM
             echo "Missing file: " . PASM::$string;
             return;
         }
-    
+
         PASM::$buffer = file_get_contents(PASM::$string);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2397,17 +2405,17 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         array_push(PASM::$stack, PASM::$buffer);
         PASM::$buffer = "";
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2416,12 +2424,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ah > PASM::$ecx) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2435,11 +2443,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2448,12 +2456,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ah >= PASM::$ecx) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2467,11 +2475,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2480,12 +2488,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ah < PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2499,11 +2507,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2512,8 +2520,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -2523,7 +2531,7 @@ class PASM
             return false;
         }
         echo PASM::$chain[PASM::$lop]['function'];
-        
+
         if (PASM::$ah <= PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2538,9 +2546,9 @@ class PASM
         }
         PASM::coast();
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " " ;
+            echo PASM::$lop++ . " " ;
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2549,12 +2557,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ecx == 1 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2568,11 +2576,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2581,12 +2589,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ah == PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2600,11 +2608,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2613,12 +2621,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ah == PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2632,11 +2640,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2645,12 +2653,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ah > PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2664,11 +2672,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2677,12 +2685,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ah >= PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2696,11 +2704,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2709,12 +2717,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ah < PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2728,11 +2736,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2741,12 +2749,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ah < PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2760,11 +2768,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2772,8 +2780,8 @@ class PASM
     {
         $method_del = explode("::", __METHOD__);
         PASM::$chain[] = $method_del[1];
-        
-        
+
+
         PASM::$lop -= PASM::$ldp;
         PASM::$args[] = func_get_args();
 
@@ -2785,11 +2793,11 @@ class PASM
                 PASM::$func();
             }
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2798,12 +2806,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ah < PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2817,11 +2825,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2830,12 +2838,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ah >= PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2849,11 +2857,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2862,12 +2870,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ah > PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2885,11 +2893,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2898,12 +2906,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ecx == 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2917,11 +2925,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2930,8 +2938,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
         //print_r(PASM::$chain);
@@ -2948,11 +2956,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2961,12 +2969,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ah < PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2980,11 +2988,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -2993,12 +3001,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ecx > PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -3012,11 +3020,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3025,12 +3033,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ecx == 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -3044,11 +3052,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3057,12 +3065,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ecx >= 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -3076,11 +3084,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3089,12 +3097,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ecx != 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -3108,11 +3116,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3121,12 +3129,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ecx > 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -3140,11 +3148,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3153,12 +3161,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ecx < 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -3172,11 +3180,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3185,12 +3193,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ecx >= 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -3204,11 +3212,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3217,12 +3225,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ecx <= 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -3236,11 +3244,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3249,12 +3257,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ecx == 1 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -3268,11 +3276,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3281,12 +3289,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ecx%2 == 0 && PASM::$ah%2 && PASM::$ecx%2 == 0) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -3300,11 +3308,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3313,12 +3321,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ecx%2 == 1 && PASM::$ah%2 == 1 && PASM::$ecx%2 == 1) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -3332,11 +3340,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3345,12 +3353,12 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
-        
+
         if (PASM::$ecx == 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -3364,11 +3372,11 @@ class PASM
             PASM::$jbl = 1;
             PASM::coast();
         }
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3377,16 +3385,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$ah = (PASM::$OF) + (PASM::$CF * 2) + (PASM::$ZF * 4);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3403,8 +3411,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -3416,15 +3424,15 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
         PASM::$ah = PASM::$ecx;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3433,15 +3441,15 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
         PASM::$ecx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3450,15 +3458,15 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
         PASM::$string = empty($str) ? PASM::$ecx : $str;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3479,21 +3487,21 @@ class PASM
         PASM::$counter = 0;
     }
 
-    /** 
+    /**
      * @method This function requires that PASM::$ecx
      * be filled with a value > counter. Otherwise
      * it will not work out.
-     */
+      */
     public static function loop()      // loop til $counter == $ecx
     {
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
-         
+
         $count = count(PASM::$chain);
         PASM::$lop -= PASM::$ldp;
         if (PASM::$counter < PASM::$ecx && PASM::$lop + PASM::$counter < $count) {
@@ -3505,7 +3513,7 @@ class PASM
             }
             PASM::$counter++;
             if (PASM::$pdb == 1) {
-                echo PASM::$lop . " ";
+                echo PASM::$lop++ . " ";
             }
             PASM::coast();
 
@@ -3517,23 +3525,23 @@ class PASM
         return new static;
     }
 
-    /** 
+    /**
      * @method This function requires that PASM::$ecx
      * be filled with a value == PASM::$ah. Otherwise
      * it will not work out. Change PASM::$ecx
      * in the previous function
-     */
+      */
     public static function loope()     // loop while ah == ecx
     {
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
         $counter = 0;
-        
+
         $count = count(PASM::$chain);
         PASM::$lop -= PASM::$ldp;
         if (PASM::$ah == PASM::$ecx && PASM::$lop + PASM::$counter < $count) {
@@ -3545,16 +3553,16 @@ class PASM
             }
             PASM::$counter++;
             if (PASM::$pdb == 1) {
-                echo PASM::$lop . " ";
+                echo PASM::$lop++ . " ";
             }
         }
-        
+
         PASM::coast();
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3563,16 +3571,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
         $counter = 0;
         if (!is_numeric(PASM::$ah) || !is_numeric(PASM::$ah)) {
             return new static;
         }
-            
-        
+
+
         $count = count(PASM::$chain);
         PASM::$lop -= PASM::$ldp;
         if (PASM::$ah != PASM::$ecx && PASM::$lop + PASM::$counter < $count) {
@@ -3586,16 +3594,16 @@ class PASM
             if (PASM::$pdb == 1) {
                 PASM::coast();
             }
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
             return new static;
         }
-        
+
         PASM::coast();
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3604,8 +3612,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -3613,8 +3621,8 @@ class PASM
         if (!is_numeric(PASM::$ah) || !is_numeric(PASM::$ah)) {
             return new static;
         }
-            
-        
+
+
         $count = count(PASM::$chain);
         PASM::$lop -= PASM::$ldp;
         if (0 != PASM::$ecx && PASM::$lop + PASM::$counter < $count) {
@@ -3626,18 +3634,18 @@ class PASM
             }
             PASM::$counter++;
             if (PASM::$pdb == 1) {
-                echo PASM::$lop . " ";
+                echo PASM::$lop++ . " ";
             }
             PASM::coast();
 
             return new static;
         }
         PASM::coast();
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3646,8 +3654,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -3655,7 +3663,7 @@ class PASM
         if (!is_numeric(PASM::$ah) || !is_numeric(PASM::$ah)) {
             return new static;
         }
-        
+
         $count = count(PASM::$chain);
         PASM::$lop -= PASM::$ldp;
         if (0 == PASM::$ecx && PASM::$lop + PASM::$counter < $count) {
@@ -3669,11 +3677,11 @@ class PASM
             PASM::coast();
         }
         PASM::coast();
-        
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3682,16 +3690,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$ecx *= PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3700,17 +3708,17 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         array_push(PASM::$stack, PASM::$string);
         PASM::$string = "";
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3719,8 +3727,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -3734,8 +3742,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -3744,9 +3752,9 @@ class PASM
         }
         PASM::$array = [];
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3755,16 +3763,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         array_push(PASM::$array, $ar);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3774,9 +3782,9 @@ class PASM
         PASM::$chain[] = $method_del[1];
         usleep(PASM::$wait);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3785,8 +3793,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
         return new static;
@@ -3797,8 +3805,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -3806,9 +3814,9 @@ class PASM
             PASM::$cl = 1;
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3817,8 +3825,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -3826,9 +3834,9 @@ class PASM
             PASM::$cl = 1;
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3837,8 +3845,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -3853,9 +3861,9 @@ class PASM
             fclose($socket);
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3873,17 +3881,17 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3892,16 +3900,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         array_push(PASM::$stack, PASM::$ecx);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3910,8 +3918,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -3929,9 +3937,9 @@ class PASM
         PASM::$ah = bindec(PASM::$ah);
         $t = 0;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3940,8 +3948,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -3962,9 +3970,9 @@ class PASM
         PASM::$ah = bindec(PASM::$ah);
         $t = 0;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -3973,8 +3981,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -3993,9 +4001,9 @@ class PASM
         PASM::$ah = bindec(PASM::$ah);
         $t = 0;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4004,8 +4012,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -4026,15 +4034,15 @@ class PASM
         PASM::$ah = bindec(PASM::$ah);
         $t = 0;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
     public static function run()
     {     // run file on linux $ST0 is command and arguments are $string
-                   
+
         $method_del = explode("::", __METHOD__);
         PASM::$chain[] = $method_del[1];// $rdx is the output file to show what happened.
         if (substr(php_uname(), 0, 7) == "Windows") {
@@ -4043,15 +4051,15 @@ class PASM
             exec(PASM::$ST0 . " " . PASM::$string . " > /dev/null &", PASM::$output, PASM::$cl);
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
     public static function run_pop()
     {     // same as above but pop
-                   
+
         $method_del = explode("::", __METHOD__);
         PASM::$chain[] = $method_del[1];// again, $rdx is the output
         if (substr(php_uname(), 0, 7) == "Windows") {
@@ -4062,9 +4070,9 @@ class PASM
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4073,8 +4081,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -4085,9 +4093,9 @@ class PASM
         PASM::$ZF = PASM::$ah%2;
         PASM::$ah >>= 1;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4096,16 +4104,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$ecx <<= PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4114,16 +4122,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$ecx >>= PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4132,16 +4140,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$strp = next(PASM::$string);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4150,17 +4158,17 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         reset(PASM::$string);
         PASM::$strp = current(PASM::$string);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4181,9 +4189,9 @@ class PASM
             exit();
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4192,8 +4200,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -4204,9 +4212,9 @@ class PASM
             exit();
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4215,8 +4223,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -4227,9 +4235,9 @@ class PASM
             exit();
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4238,8 +4246,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -4250,9 +4258,9 @@ class PASM
             exit();
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4261,8 +4269,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -4273,9 +4281,9 @@ class PASM
             exit();
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4284,8 +4292,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -4296,9 +4304,9 @@ class PASM
             exit();
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4307,8 +4315,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -4319,9 +4327,9 @@ class PASM
             exit();
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4330,8 +4338,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -4342,9 +4350,9 @@ class PASM
             exit();
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4353,8 +4361,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -4365,9 +4373,9 @@ class PASM
             exit();
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4376,8 +4384,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -4388,9 +4396,9 @@ class PASM
             exit();
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4399,8 +4407,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -4411,9 +4419,9 @@ class PASM
             exit();
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4422,8 +4430,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -4434,9 +4442,9 @@ class PASM
             exit();
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4445,8 +4453,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -4457,9 +4465,9 @@ class PASM
             exit();
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4471,7 +4479,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$ah > PASM::$ecx) {
@@ -4481,9 +4489,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4495,7 +4503,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$ah >= PASM::$ecx) {
@@ -4505,9 +4513,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4519,7 +4527,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$ah < PASM::$ecx) {
@@ -4529,9 +4537,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4543,7 +4551,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$ah <= PASM::$ecx) {
@@ -4553,9 +4561,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4567,7 +4575,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$CF != 0) {
@@ -4577,9 +4585,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4591,7 +4599,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$ah == PASM::$ecx) {
@@ -4601,9 +4609,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4615,7 +4623,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$ah > PASM::$ecx) {
@@ -4625,9 +4633,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4639,7 +4647,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$ah >= PASM::$ecx) {
@@ -4649,9 +4657,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4663,7 +4671,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$ah < PASM::$ecx) {
@@ -4673,9 +4681,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4687,7 +4695,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$ah <= PASM::$ecx) {
@@ -4697,9 +4705,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4711,7 +4719,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$ah < PASM::$ecx) {
@@ -4721,9 +4729,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4735,7 +4743,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$ah > PASM::$ecx) {
@@ -4745,9 +4753,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4759,7 +4767,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$ah > PASM::$ecx) {
@@ -4769,9 +4777,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4783,7 +4791,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$ah >= PASM::$ecx) {
@@ -4793,9 +4801,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4804,8 +4812,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -4815,9 +4823,9 @@ class PASM
             return new static;
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4829,7 +4837,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$ah != PASM::$ecx) {
@@ -4839,9 +4847,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4853,7 +4861,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$ah <= PASM::$ecx) {
@@ -4863,9 +4871,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4877,7 +4885,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$ah < PASM::$ecx) {
@@ -4887,9 +4895,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4901,7 +4909,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$ah >= PASM::$ecx) {
@@ -4911,9 +4919,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4925,7 +4933,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$ah > PASM::$ecx) {
@@ -4935,9 +4943,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4946,8 +4954,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -4958,9 +4966,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4972,7 +4980,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (decbin(PASM::$ah) != decbin(PASM::$ecx)) {
@@ -4982,9 +4990,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -4996,7 +5004,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$ah >= 0) {
@@ -5006,9 +5014,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5017,8 +5025,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -5029,9 +5037,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5043,7 +5051,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (decbin(PASM::$ecx) != decbin(PASM::$ah)) {
@@ -5053,9 +5061,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5067,7 +5075,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (decbin(PASM::$ecx) != decbin(PASM::$ah) && PASM::$cl%2 == 0) {
@@ -5077,9 +5085,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5091,7 +5099,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (decbin(PASM::$ecx) != decbin(PASM::$ah) && PASM::$cl%2 == 1) {
@@ -5101,9 +5109,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5115,7 +5123,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$ah < 0) {
@@ -5125,9 +5133,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5139,7 +5147,7 @@ class PASM
             echo "Error in " . __METHOD__ . ": Incomparable types";
             exit(0);
         }
-        
+
         PASM::$args[] = func_get_args();
 
         if (PASM::$ah == 0) {
@@ -5149,9 +5157,9 @@ class PASM
         }
         PASM::$rdx = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5160,16 +5168,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$CF = 1;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5178,16 +5186,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$buffer .= PASM::$string;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5196,15 +5204,15 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
         PASM::$buffer = "";
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5213,16 +5221,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         file_put_contents(PASM::$string, serialize((PASM::$stack)));
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5231,16 +5239,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$rdx = (PASM::$ecx - PASM::$ah)%256;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5249,16 +5257,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$rdx = (PASM::$ecx - PASM::$ah)%pow(2, 16);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5267,16 +5275,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$rdx = (PASM::$ecx - PASM::$ah)%pow(2, 32);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5285,16 +5293,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$rdx = (PASM::$ecx - PASM::$ah)%pow(2, 64);
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5303,16 +5311,16 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
         PASM::$cl = PASM::$ah;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5321,8 +5329,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -5338,9 +5346,9 @@ class PASM
             PASM::$cl = 4;
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5349,8 +5357,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -5360,9 +5368,9 @@ class PASM
         }
         exec("php PASM::$string/$x > /dev/null &");
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5371,8 +5379,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -5380,9 +5388,9 @@ class PASM
         PASM::$rdx = PASM::$ah;
         PASM::$ah = $temp + PASM::$ecx;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5391,8 +5399,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -5400,9 +5408,9 @@ class PASM
         PASM::$ecx = PASM::$ah;
         PASM::$ah = $temp;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5411,8 +5419,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         {
             PASM::$chain[PASM::$counter] = $method_del[1];
-        
-            PASM::$args[PASM::$counter] = func_get_args();
+
+            PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
 
@@ -5420,9 +5428,9 @@ class PASM
             PASM::$rdx = 1;
         }
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5440,9 +5448,9 @@ class PASM
         PASM::$cl = 1;
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5451,11 +5459,11 @@ class PASM
         $method_del = explode("::", __METHOD__);
         PASM::$chain[] = $method_del[1];
         PASM::${$ST0}();
-            
+
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 
@@ -5466,12 +5474,12 @@ class PASM
         PASM::$chain[] = $method_del[1];
         PASM::${$sp}();
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
-    
+
     public static function create_register(string $register, $value) // create a new variable "register"
     {
         $method_del = explode("::", __METHOD__);
@@ -5480,9 +5488,9 @@ class PASM
 
         ${$register} = $value;
         if (PASM::$pdb == 1) {
-            echo PASM::$lop . " ";
+            echo PASM::$lop++ . " ";
         }
-        PASM::$lop++;
+
         return new static;
     }
 }
