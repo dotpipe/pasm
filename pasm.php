@@ -45,15 +45,17 @@ class PASM
     public static $jbl;     // deprecated
     public static $buffer;  // socket buffer
     public static $output;  // output for run_pop and similar
+    public static $cnt;     // Dedicated to counting for external arrays
+    public static $FUNC0;   // Top of function stack
 
-    public static function get()
+    public static function runTest()
     {    // Useful for some testing
 
         $method_del = explode("::", __METHOD__);
         PASM::$chain[] = $method_del[1];// Will be easier to just play around
         // However this verifies all methods work
         foreach (get_class_methods("PHP") as $method) {
-            if ($method == "get") {
+            if ($method == "runTest") {
                 continue;
             }
             $r = new \ReflectionMethod("PASM", $method);
@@ -86,6 +88,13 @@ class PASM
                 PASM::$method();
             }
         }
+    }
+
+    public static function get(string $var = "ah")
+    {
+        yield PASM::${$var};
+
+        return new static;
     }
 
     public static function var_p(string $var = "ah")
@@ -340,7 +349,7 @@ class PASM
         return new static;
     }
 
-    public static function call()                  // call top of stack function
+    public static function call() // call top of stack function
     {
         $method_del = explode("::", __METHOD__);
         {
@@ -350,9 +359,10 @@ class PASM
             PASM::$counter++;
         }
 
-        if (is_callable(PASM::$ST0)) {
-            return call_user_func(PASM::${$ST0}(), PASM::$string, PASM::$ah);
+        if (is_callable(PASM::$FUNC0)) {
+            return call_user_func_array(PASM::$FUNC0(), PASM::$string);
         }
+        return new static;
     }
 
     public static function cmp_mov_a()         // check ah against top of stack
@@ -691,7 +701,7 @@ class PASM
         return new static;
     }
 
-    public static function decr()                  // decrement ecx
+    public static function decr(string $var = "ecx")                  // decrement ecx
     {
         $method_del = explode("::", __METHOD__);
         {
@@ -701,7 +711,7 @@ class PASM
             PASM::$counter++;
         }
 
-        PASM::$ecx--;
+        PASM::${$var}--;
         if (PASM::$pdb == 1) {
             echo PASM::$lop++ . " ";
         }
@@ -993,7 +1003,7 @@ class PASM
         return new static;
     }
 
-    public static function stack_pnt_rev()         // go reverse the stack
+    public static function stack_pnt_rev()         // go traverse the stack backward
     {
         $method_del = explode("::", __METHOD__);
         {
@@ -3463,6 +3473,11 @@ class PASM
             PASM::$counter++;
         }
         PASM::$string = empty($str) ? PASM::$ecx : $str;
+        if (PASM::$ecx == PASM::$string && $str != PASM::$ecx)
+        {
+            echo "Function load_str failed.";
+            return;
+        }
         if (PASM::$pdb == 1) {
             echo PASM::$lop++ . " ";
         }
@@ -3866,6 +3881,7 @@ class PASM
 
         return new static;
     }
+
 
     public static function obj_push(string $object, array $args) // push object to stack
     {
