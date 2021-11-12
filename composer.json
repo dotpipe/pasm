@@ -2,8 +2,8 @@
     "name": "swatchphp/pasm",
     "description": "Oracle Assembler in PHP",
     "support": {
-        "issues": "https://github.com/swatchphp/pasm/issues",
-        "source": "https://github.com/swatchphp/pasm"
+        "issues": "https://github.com/wise-penny/pasm/issues",
+        "source": "https://github.com/wise-penny/pasm"
     },
     "require": {
         "php": ">=5.4.0"
