@@ -1768,7 +1768,7 @@ class PASM
             next(PASM::$stack);
             $pn--;
         }
-        $temp = &current(PASM:$stack);
+        $temp = current(PASM:$stack);
         
         $temp = PASM::$ST0;
         
