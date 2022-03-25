@@ -286,7 +286,7 @@ class PASM
     {
         PASM::setup_chain(__METHOD__);
 
-        PASM::$bitcmp = PASM::$tp[PASM::$ah]
+        PASM::$bitcmp = PASM::$tp[PASM::$ah];
 
         // v What is this for? v
         // return new static;
