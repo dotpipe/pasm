@@ -288,7 +288,8 @@ class PASM
 
         PASM::$bitcmp = PASM::$tp[PASM::$ah]
 
-        return new static;
+        // v What is this for? v
+        // return new static;
     }
 
     
