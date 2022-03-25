@@ -687,7 +687,6 @@ class PASM
         return new static;
     }
 
-
     public static function xchg(&$x, &$y)
     {
         $method_del = explode("::", __METHOD__);
@@ -1602,7 +1601,6 @@ class PASM
             PASM::$counter++;
         }
 
-
         PASM::$cl = atan(PASM::$ah);
         if (PASM::$pdb == 1) {
             echo PASM::$lop++ . " ";
@@ -2439,7 +2437,6 @@ class PASM
             PASM::$counter++;
         }
 
-
         if (PASM::$ah > PASM::$ecx) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2471,7 +2468,6 @@ class PASM
             PASM::$counter++;
         }
 
-
         if (PASM::$ah >= PASM::$ecx) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2502,7 +2498,6 @@ class PASM
             PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
-
 
         if (PASM::$ah < PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -2572,7 +2567,6 @@ class PASM
             PASM::$counter++;
         }
 
-
         if (PASM::$ecx == 1 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2603,7 +2597,6 @@ class PASM
             PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
-
 
         if (PASM::$ah == PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -2636,7 +2629,6 @@ class PASM
             PASM::$counter++;
         }
 
-
         if (PASM::$ah == PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2667,7 +2659,6 @@ class PASM
             PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
-
 
         if (PASM::$ah > PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -2700,7 +2691,6 @@ class PASM
             PASM::$counter++;
         }
 
-
         if (PASM::$ah >= PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2731,7 +2721,6 @@ class PASM
             PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
-
 
         if (PASM::$ah < PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -2764,7 +2753,6 @@ class PASM
             PASM::$counter++;
         }
 
-
         if (PASM::$ah < PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2790,7 +2778,6 @@ class PASM
     {
         $method_del = explode("::", __METHOD__);
         PASM::$chain[] = $method_del[1];
-
 
         PASM::$lop -= PASM::$ldp;
         PASM::$args[] = func_get_args();
@@ -2820,7 +2807,6 @@ class PASM
             PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
-
 
         if (PASM::$ah < PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -2853,7 +2839,6 @@ class PASM
             PASM::$counter++;
         }
 
-
         if (PASM::$ah >= PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2884,7 +2869,6 @@ class PASM
             PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
-
 
         if (PASM::$ah > PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -2920,7 +2904,6 @@ class PASM
             PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
-
 
         if (PASM::$ecx == 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -2984,7 +2967,6 @@ class PASM
             PASM::$counter++;
         }
 
-
         if (PASM::$ah < PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -3015,7 +2997,6 @@ class PASM
             PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
-
 
         if (PASM::$ecx > PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -3048,7 +3029,6 @@ class PASM
             PASM::$counter++;
         }
 
-
         if (PASM::$ecx == 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -3079,7 +3059,6 @@ class PASM
             PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
-
 
         if (PASM::$ecx >= 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -3112,7 +3091,6 @@ class PASM
             PASM::$counter++;
         }
 
-
         if (PASM::$ecx != 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -3143,7 +3121,6 @@ class PASM
             PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
-
 
         if (PASM::$ecx > 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -3176,7 +3153,6 @@ class PASM
             PASM::$counter++;
         }
 
-
         if (PASM::$ecx < 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -3207,7 +3183,6 @@ class PASM
             PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
-
 
         if (PASM::$ecx >= 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -3240,7 +3215,6 @@ class PASM
             PASM::$counter++;
         }
 
-
         if (PASM::$ecx <= 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -3271,7 +3245,6 @@ class PASM
             PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
-
 
         if (PASM::$ecx == 1 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -3304,7 +3277,6 @@ class PASM
             PASM::$counter++;
         }
 
-
         if (PASM::$ecx%2 == 0 && PASM::$ah%2 && PASM::$ecx%2 == 0) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -3336,7 +3308,6 @@ class PASM
             PASM::$counter++;
         }
 
-
         if (PASM::$ecx%2 == 1 && PASM::$ah%2 == 1 && PASM::$ecx%2 == 1) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -3367,7 +3338,6 @@ class PASM
             PASM::$args[PASM::$counter] = func_get_args() || null;
             PASM::$counter++;
         }
-
 
         if (PASM::$ecx == 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -3595,7 +3565,6 @@ class PASM
             return new static;
         }
 
-
         $count = count(PASM::$chain);
         PASM::$lop -= PASM::$ldp;
         if (PASM::$ah != PASM::$ecx && PASM::$lop + PASM::$counter < $count) {
@@ -3636,7 +3605,6 @@ class PASM
         if (!is_numeric(PASM::$ah) || !is_numeric(PASM::$ah)) {
             return new static;
         }
-
 
         $count = count(PASM::$chain);
         PASM::$lop -= PASM::$ldp;
@@ -3881,7 +3849,6 @@ class PASM
 
         return new static;
     }
-
 
     public static function obj_push(string $object, array $args) // push object to stack
     {
