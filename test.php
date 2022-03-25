@@ -1,8 +1,6 @@
 <?php
 include_once 'pasm.php';
 
-include_once('pasm.php');
-
     $x = new PASM();
 
     $x->set('ecx',3)    // REGISTER
