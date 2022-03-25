@@ -1,5 +1,4 @@
 <?php
-
 //namespace src\pasm;
 
 class PASM
@@ -49,11 +48,10 @@ class PASM
     public static $cnt;     // Dedicated to counting for external arrays
     public static $FUNC0;   // Top of function stack
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function runTest()
     {    // Useful for some testing
@@ -95,9 +93,9 @@ class PASM
     }
 
     /**
-     *	
+     *
      * get retrieves the given string as a variable
-     * 
+     *
      */
     public static function get(string $var = "ah")
     {
@@ -105,11 +103,10 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * var_p prints the given string as a variable
-     * 
+     *
      */
     public static function var_p(string $var = "ah")
     {
@@ -124,93 +121,88 @@ class PASM
     }
 
     /**
-     *	
+     *
      * char_adjust_addition changes $rdx to 8 bits
-     * 
+     *
      */
     public static function char_adjust_addition()
     {
         PASM::setup_chain(__METHOD__);
         PASM::$rdx = chr((PASM::$ecx + PASM::$ah)%256);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * carry_add sets the $cl flag for carrying over on addition commands
-     * 
+     *
      */
     public static function carry_add()
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$cl = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * add uses addition to form $rdx from $ecx annd $ah
-     * 
+     *
      */
     public static function add()
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$rdx = PASM::$ecx + PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * and changes the $cl flag to the $ecx & $ah answer
-     * 
+     *
      */
     public static function and()
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$cl = PASM::$ecx & PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * chmod uses $string as the first parameter
      * and $ah as the second param for PHP's native chmod()
-     * 
+     *
      */
     public static function chmod()
     {
         PASM::setup_chain(__METHOD__);
 
         chmod(PASM::$string, PASM::$ah);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * bit_scan_fwd if $tp is null at current() it breaks up $qword into
      * portions according to '1's from a binary string
      * derived from the $qword and resets the $tp variable to the beginning.
-     * 
+     *
      * otherwise it will goto the next $tp in the array
-     * 
+     *
      */
     public static function bit_scan_fwd()
     {
@@ -224,20 +216,19 @@ class PASM
             return new static;
         }
         next(PASM::$tp);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * bit_scan_rvr if $tp is null at current() it breaks up $qword into
      * portions according to '1's from a binary string
      * derived from the $qword and resets the $tp variable to the end.
-     * 
+     *
      * otherwise it will goto the previous $tp in the array
-     * 
+     *
      */
     public static function bit_scan_rvr()                  // reverse of above
     {
@@ -251,17 +242,16 @@ class PASM
             return new static;
         }
         prev(PASM::$tp);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * byte_rvr will reverse the given $ecx in binary
      * then set it as $rdx
-     * 
+     *
      */
     public static function byte_rvr()                  // reverse byte
     {
@@ -270,17 +260,16 @@ class PASM
         $temp = decbin(PASM::$ecx);
         PASM::$rdx = strrev($temp);
         PASM::$rdx = bindec(PASM::$rdx);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * bit_test sets $bitcmp to the $ah'th bit
      * just on or off
-     * 
+     *
      */
     public static function bit_test()                  // bit is filled in pointer
     {
@@ -292,14 +281,13 @@ class PASM
         // return new static;
     }
 
-    
     /**
-     *	
+     *
      * bit_test_comp search thru arbitry $ecx for the $ahth bit
      * and set $CF to it's returned value
-     * 
+     *
      * if given anything returned as true for a parameter, it will also set the $bitcmp flag
-     * 
+     *
      */
     public static function bit_test_comp(bool $bitc = false)         // look thru byte and see the $ah'th bit
     {
@@ -313,12 +301,11 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * bit_test_comp search thru arbitry $ecx for the $ahth bit
      * and set $CF to it's returned value reset $ecx to 0
-     * 
+     *
      */
     public static function bit_test_reset()    // Clear bit (ah) test flag
     {
@@ -328,17 +315,16 @@ class PASM
         $bo = $bo[PASM::$ah];
         PASM::$CF = (bool)($bo);
         PASM::$ecx = 0;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * bit_test_comp search thru arbitry $ecx for the $ahth bit
      * and set $CF to it's returned value and ecx[$ah] to 1
-     * 
+     *
      */
     public static function bit_test_set()                  // Test bit
     {
@@ -348,16 +334,15 @@ class PASM
         $bo = $bo[PASM::$ah];
         PASM::$CF = (bool)($bo);
         PASM::$ecx[PASM::$ah] = 1;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * call is used to call a function from the stack
-     * 
+     *
      */
     public static function call() // call top of stack function
     {
@@ -369,199 +354,187 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * cmp_mov_a compares the top of the stack '>' to $ah for true
      * changes $ecx to $ah if $ah is
-     * 
+     *
      */
     public static function cmp_mov_a()         // check ah against top of stack
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$ecx = (PASM::$ah > PASM::$ST0) ? PASM::$ah : PASM::$ecx;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * cmp_mov_ae compares the top of the stack '>=' to $ah for true
      * changes $ecx to $ah if $ah is
-     * 
+     *
      */
     public static function cmp_mov_ae()    // same (documenting will continue below)
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$ecx = (PASM::$ah >= PASM::$ST0) ? PASM::$ah : PASM::$ecx;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * cmp_mov_b compares the top of the stack '<' to $ah for true
-     * changes $ecx to $ah if $ah is 
-     * 
+     * changes $ecx to $ah if $ah is
+     *
      */
     public static function cmp_mov_b()
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$ecx = (PASM::$ah < PASM::$ST0) ? PASM::$ah : PASM::$ecx;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * cmp_mov_be compares the top of the stack '<=' to $ah for true
-     * changes $ecx to $ah if $ah is 
-     * 
+     * changes $ecx to $ah if $ah is
+     *
      */
     public static function cmp_mov_be()
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$ecx = (PASM::$ah <= PASM::$ST0) ? PASM::$ah : PASM::$ecx;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * cmp_mov_e compares the top of the stack '==' to $ah for true
      * changes $ecx to $ah if $ah is
-     * 
+     *
      */
     public static function cmp_mov_e()
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$ecx = (PASM::$ah == PASM::$ST0) ? PASM::$ah : PASM::$ecx;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * cmp_mov_nz compares the top of the stack '==' to $ah for true
      * and $CF needs to be equal to that annswer
      * changes $ecx to $ah if it is
-     * 
+     *
      */
     public static function cmp_mov_nz()
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$ecx = (PASM::$CF == 1 & PASM::$ah == PASM::$ST0) ? PASM::$ah : PASM::$ecx;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * cmp_mov_pe compares the top of the stack '<' to $ah for true
-     * changes $ecx to $ah if $ah is higher 
-     * 
+     * changes $ecx to $ah if $ah is higher
+     *
      */
     public static function cmp_mov_pe()
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$ecx = (PASM::$CF == 0) ? PASM::$ah : PASM::$ecx;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * cmp_mov_po compares 1 '==' to $CF for true
      * changes $ecx to $ah if $ah is
-     * 
+     *
      */
     public static function cmp_mov_po()
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$ecx = (PASM::$CF == 1) ? PASM::$ah : PASM::$ecx;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * cmp_mov_s compares 0 '<' to $ah for true
      * changes $ecx to $ah if $ah is
-     * 
+     *
      */
     public static function cmp_mov_s()
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$ecx = (PASM::$ah < 0) ? PASM::$ah : PASM::$ecx;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * cmp_mov_a compares 0 '>' to $ah for true
      * changes $ecx to $ah if $ah is
-     * 
+     *
      */
     public static function cmp_mov_z()
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$ecx = (PASM::$ah > 0) ? PASM::$ah : PASM::$ecx;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * mov copies $ah to $ecx
-     * 
+     *
      */
     public static function mov()   // move ah to ecx. Same as mov_ah()
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$ecx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * movabs pushes the current $ecx to $stack['movabs']
      * then moves the ST0 pointer to the end of the stack
-     * 
+     *
      */
     public static function movabs()    // copy $ecx to stack
     {
@@ -569,97 +542,91 @@ class PASM
 
         array_push(PASM::$stack, array("movabs" => PASM::$ecx));
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * clear_carry sets CF to 0
-     * 
+     *
      */
     public static function clear_carry()   // clear $CF
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$CF = 0;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * clear_registers clears all native PASM registers and $CF bit to 0
-     * 
+     *
      */
     public static function clear_registers()   // make all registers 0
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$CF = PASM::$adx = PASM::$bdx = PASM::$cdx = PASM::$ddx = PASM::$edx = PASM::$rdx = 0;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * comp_carry negates the current status of $CF
-     * 
+     *
      */
     public static function comp_carry()    // negate $CF
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$CF = !(PASM::$CF);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * cmp_e compares '==' $ecx to $ah and sets the $cl field accordingly
-     * 
+     *
      */
     public static function cmp_e()         // bool of equality comparison (documentation continues below)
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$cl = PASM::$ecx == PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * cmp_same compares '==' $ecx to $ah and sets the $cl field accordingly
-     * 
+     *
      */
     public static function cmp_same()
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$cl = PASM::$ecx == PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * cmp_xchg compares '==' $ecx to $ah and sets the $ZF field accordingly
      * as well, it switches $rdx and $ah
-     * 
+     *
      */
     public static function cmp_xchg()
     {
@@ -670,12 +637,10 @@ class PASM
         return new static;
     }
 
-
-    
     /**
      *
      * switches $rdx and $ah
-     * 
+     *
      */
     public static function xchg(&$x, &$y)
     {
@@ -684,28 +649,26 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * decr decrements any variable via string (ie 'rdx')
-     * one integer value 
-     * 
+     * one integer value
+     *
      */
     public static function decr(string $var = "ecx")                  // decrement ecx
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::${$var}--;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * divide $ecx by $ah
-     * 
+     *
      */
     public static function divide()    // $ecx/$ah
     {
@@ -714,65 +677,62 @@ class PASM
         if (is_numeric(PASM::$ecx) && is_numeric(PASM::$ah)) {
             PASM::$rdx = round(PASM::$ecx/PASM::$ah);
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * absf sets $rdx to the absolute value of ah
-     * 
+     *
      */
     public static function absf()                  // absolute value of $ah
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$rdx = abs(PASM::$ah);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * addf uses addition of $ecx and $ah to set $rdx
-     * 
+     *
      */
     public static function addf()                  // add $ecx and $ah
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$rdx = PASM::$ecx + PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
     /**
-     *	
+     *
      * addc uses addition of $ecx and $ah and current $rdx to set $rdx
-     * 
+     *
      */
     public static function addc()                  // add $ecx and $ah
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$rdx += PASM::$ecx + PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * round uses the PHP native function round() with $ST0
      * and the number in $RC for the number of decimal places
      * to set the $stack
-     * 
+     *
      */
     public static function round()         // round top stack to RC decimal
     {
@@ -780,19 +740,18 @@ class PASM
         PASM::$chain[] = $method_del[1];
         PASM::$ST0 = &PASM::$stack[array_key_last(PASM::$stack)];
         PASM::$ST0 = round(PASM::$ST0, PASM::$RC);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * round_pop uses the PHP native function round() with $ST0
      * and the number in $RC for the number of decimal places
      * to set the $ah register and pops the stack once
      * it then sets $ST0 to the last element in the $stack
-     * 
+     *
      */
     public static function round_pop()         // same but pop
     {
@@ -806,18 +765,17 @@ class PASM
         } else {
             PASM::$ST0 = null;
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * neg inverts a positive number to a positive number
      * or the reverse action, depending on the value. $ah
      * is multiplied by -1 to set $rdx to the answer
-     * 
+     *
      */
     public static function neg()   // negate $ah
     {
@@ -826,17 +784,16 @@ class PASM
         if (is_numeric(PASM::$ah)) {
             PASM::$rdx = PASM::$ah * (-1);
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * stack_cmov_b compares $ST0 '>' to $ah
      * if true, it makes $rdx the value in $ah
-     * 
+     *
      */
     public static function stack_cmov_b()                  // move on comparison (begins again below)
     {
@@ -850,17 +807,16 @@ class PASM
         if (PASM::$ST0 != null && PASM::$ah < PASM::$ST0) {
             PASM::$rdx = PASM::$ah;
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * stack_cmov_be compares $ST0 '>=' to $ah
      * if true, it makes $rdx the value in $ah
-     * 
+     *
      */
     public static function stack_cmov_be()
     {
@@ -877,12 +833,11 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * stack_cmov_e compares $ST0 '==' to $ah
      * if true, it makes $rdx the value in $ah
-     * 
+     *
      */
     public static function stack_cmov_e()
     {
@@ -899,12 +854,11 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * stack_cmov_nb compares $ST0 '<' to $ah
      * if true, it makes $rdx the value in $ah
-     * 
+     *
      */
     public static function stack_cmov_nb()
     {
@@ -921,12 +875,11 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * stack_cmov_nbe compares $ST0 '<=' to $ah
      * if true, it makes $rdx the value in $ah
-     * 
+     *
      */
     public static function stack_cmov_nbe()
     {
@@ -943,12 +896,11 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * stack_cmov_b compares $ST0 '!=' to $ah
      * if true, it makes $rdx the value in $ah
-     * 
+     *
      */
     public static function stack_cmov_ne()
     {
@@ -965,12 +917,11 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * fcomp substracts the $ST0 stack pointer
      * from $ah and pops its last value off
-     * 
+     *
      */
     public static function fcomp()         // subtract top of stack from $ah and pop
     {
@@ -992,12 +943,11 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * cosine sets the $ST0 pointer to the current $ST0
      * wrapped in the PHP native mathematical function, cosine (cos)
-     * 
+     *
      */
     public static function cosine()    // change top of stack to cosine of top of stack
     {
@@ -1005,17 +955,16 @@ class PASM
 
         PASM::$ST0 = &PASM::$stack[array_key_last(PASM::$stack)];
         PASM::$ST0 = (PASM::$ST0 != null) ? cos(PASM::$ST0) : null;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * stack_pnt_rev goes thru the stack backward,
      * in reverse, and sets the $sp variable to its position
-     * 
+     *
      */
     public static function stack_pnt_rev()         // go traverse the stack backward
     {
@@ -1023,17 +972,16 @@ class PASM
 
         prev(PASM::$stack);
         PASM::$sp = current(PASM::$stack);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * fdiv divides $ecx by $ST0, the stack's last entry
      * setting the value of $rdx
-     * 
+     *
      */
     public static function fdiv()                  // divide ST0 into $ecx
     {
@@ -1043,16 +991,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ecx / PASM::$ST0;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * fdiv_pop divides $ST0 by $ecx and sets the last element to $ST0 again
-     * 
+     *
      */
     public static function fdiv_pop()                  // opposite as above and pop
     {
@@ -1061,32 +1008,30 @@ class PASM
         PASM::$rdx = PASM::$ST0 / PASM::$ecx;
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * fdiv_rev divides $ST0 by $ecx and sets the value at $rdx
-     * 
+     *
      */
     public static function fdiv_rev()                  // opposite of fdiv
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$rdx = PASM::$ST0 / PASM::$ecx;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * fdiv_rev divides $ecx by $ST0 and sets the value at $rdx
-     * 
+     *
      */
     public static function fdiv_rev_pop()                  // same as above with po
     {
@@ -1100,17 +1045,16 @@ class PASM
         PASM::$rdx = PASM::$ecx / PASM::$ST0;
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * add_stack uses addition to set $rdx
      * with the value of $ecx + $ST0
-     * 
+     *
      */
     public static function add_stack()         // add top of stack to ecx
     {
@@ -1120,19 +1064,18 @@ class PASM
             exit("Stack is empty at " . PASM::$lop);
         }
         PASM::$rdx = PASM::$ecx + PASM::$ST0;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * ficomp uses comparison of $ST0 '==' to $ah
      * and sets the bit $cl with it
      * Then it pops the stack and reissues the last
      * element to $ST0
-     * 
+     *
      */
     public static function ficomp()    // compare and pop
     {
@@ -1143,16 +1086,16 @@ class PASM
         }
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
     /**
-     *	
+     *
      * s_ref_ptr creates a referenced variable fro the $ST0 pointer
      * to the tail end of the stack in case you plan on changing it a lot
-     * 
+     *
      */
     public static function s_ref_ptr()
     {
@@ -1162,9 +1105,9 @@ class PASM
     }
 
     /**
-     *	
+     *
      * recvr_stack recover contents of the stack from the filename given as a parameter
-     * 
+     *
      */
     public static function recvr_stack(string $filename)
     {
@@ -1177,13 +1120,12 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * stack_load uses $key so it's indexable by string coefficient
      * 'fc' so you can have the count of the reference rather than
      * name it everytime
-     * 
+     *
      */
     public static function stack_load() // stack with count on stack
     {
@@ -1193,18 +1135,17 @@ class PASM
         array_push(PASM::$stack, array($key => PASM::$ecx));
         PASM::$ecx = null;
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * stack_mrg uses $key so it's indexable by string coefficient
      * 'fc' so you can have the count of the reference rather than
      * name it everytime, all of this while merging native $array and $stack
-     * 
+     *
      */
     public static function stack_mrg() // stack with count on stack
     {
@@ -1214,16 +1155,15 @@ class PASM
         array_merge(PASM::$stack, PASM::$array);
         PASM::$ecx = null;
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * fmul multiplies $ecx by $ah giving $rdx it's value
-     * 
+     *
      */
     public static function fmul()                  // multiplies ecx and ah
     {
@@ -1233,16 +1173,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ecx * PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * stack_pnt_fwd moves the $sp (stack pointer) forward, one iteration
-     * 
+     *
      */
     public static function stack_pnt_fwd()         // moves stack pointer forward
     {
@@ -1250,16 +1189,15 @@ class PASM
 
         next(PASM::$stack);
         PASM::$sp = current(PASM::$stack);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * store_int subtracts by $ST0 - 2^$ah and sets $rdx to the value
-     * 
+     *
      */
     public static function store_int()         // subtracts $ST0 - 2-to-the-$ah and puts answer in $rdx
     {
@@ -1284,17 +1222,16 @@ class PASM
             return;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * store_int subtracts by $ST0 - 2^$ah and sets $rdx to the value
      * and pops the last value, then resets the $ST0 pointer to the last entry
-     * 
+     *
      */
     public static function store_int_pop() // same as above, but with pop
     {
@@ -1324,17 +1261,16 @@ class PASM
         }
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * substract_rev subtracts $ah from $ech and places the
      * value in $rdx
-     * 
+     *
      */
     public static function subtract_rev() // like subtract but backwards
     {
@@ -1344,17 +1280,16 @@ class PASM
             return;
         }
         PASM::$rdx = PASM::$ecx - PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * substract substracts $ecx from $ah
      * and puts the value in $rdx
-     * 
+     *
      */
     public static function subtract()  // $ah - $ecx
     {
@@ -1364,16 +1299,15 @@ class PASM
             return;
         }
         PASM::$rdx = PASM::$ah - PASM::$ecx;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * fld1 pushes ecx+1 to the stack
-     * 
+     *
      */
     public static function fld1()  // pushes ecx+1 to stack
     {
@@ -1389,11 +1323,10 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * load_logl2 pushs log(log(2)) to the stack
-     * 
+     *
      */
     public static function load_logl2() //
     {
@@ -1406,11 +1339,10 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * load_logl2t pushes log(2,10)
-     * 
+     *
      */
     public static function load_logl2t()
     {
@@ -1423,11 +1355,10 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * load_loglg2 pushes log(2, log($ah)) to the stack
-     * 
+     *
      */
     public static function load_loglg2()
     {
@@ -1444,11 +1375,10 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * load_ln2 pushes log(e, 2) to the stack
-     * 
+     *
      */
     public static function load_ln2()
     {
@@ -1462,11 +1392,10 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * load_pi pushes 3.14159... to the stack
-     * 
+     *
      */
     public static function load_pi()
     {
@@ -1479,11 +1408,10 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * float_test recreates $ah as a decimal in $rdx
-     * 
+     *
      */
     public static function float_test()
     {
@@ -1494,17 +1422,16 @@ class PASM
             return;
         }
         PASM::$rdx = PASM::$ah + 0.0;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * fmul_pop multiplies $ah and $ecx as $rdx
      * pops the stack and puts the top as $ST0
-     * 
+     *
      */
     public static function fmul_pop() // ah * ecx and pop
     {
@@ -1516,97 +1443,89 @@ class PASM
         PASM::$rdx = PASM::$ah * PASM::$ecx;
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * clean_exceptions clears the $ZF bit
-     * 
+     *
      */
     public static function clean_exceptions()  // clear exception bit
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$ZF = 0;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * clean_reg claers the $cl bit
-     * 
+     *
      */
     public static function clean_reg() // clear cl
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$cl = 0;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * fnop counts as a function, but does absolutely nothing
      * its there because people want hackers in their stuff i guess
-     * 
+     *
      */
     public static function fnop()  // counts as function, does nothing but takes up space (like in assembly)
     {
         PASM::setup_chain(__METHOD__);
 
-
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * fpatan puts the value of arctan($ah) in the $cl flag
-     * 
+     *
      */
     public static function fpatan()    // gets arctan of $ah
     {
         PASM::setup_chain(__METHOD__);
 
-
         PASM::$cl = atan(PASM::$ah);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * fptan puts the value of tan($ah) in the $cl flag
-     * 
+     *
      */
     public static function fptan() // gets tangent of ah
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$cl = tan(PASM::$ah);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * fprem divide the top of the stack by the next down
-     * 
+     *
      */
     public static function fprem() // look to documentation (Oracle Systems Manual)
     {
@@ -1624,17 +1543,16 @@ class PASM
             exit("Programming error: " . PASM::$lop . " count is at fault");
         PASM::$rdx = (round(PASM::$ecx, (PASM::$RC+1)) - (PASM::$ecx*10*(PASM::$RC+1)))/10/(1+PASM::$RC);
         PASM::$cl = 0;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * frndint rounds the top of the stack, with the remaining $RC decimals
      * and puts it into $rdx
-     * 
+     *
      */
     public static function frndint()   // round top of stack into $rdx
     {
@@ -1644,33 +1562,31 @@ class PASM
             exit("\$ecx or \$ST0 is not numeric");
         }
         PASM::$rdx = round(PASM::$stack[array_key_last(PASM::$stack)], PASM::$RC);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * frstor copies $ah to $rdx
-     * 
+     *
      */
     public static function frstor() // copy $ah to $rdx
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * fsin stores the sin of $ST0 in the final element of $stack
      * wherein it was retrieved from.
-     * 
+     *
      */
     public static function fsin() // change top of stack to sin of top of stack
     {
@@ -1678,16 +1594,15 @@ class PASM
         PASM::$chain[] = $method_del[1];
         PASM::$ST0 = &PASM::$stack[array_key_last(PASM::$stack)];
         PASM::$ST0 = (PASM::$ST0 != null) ? sin(PASM::$ST0) : null;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * fsincos pushes cosine of $ST0 to stack and applies sine to it
-     * 
+     *
      */
     public static function fsincos() // push cos of $ST0 to stack and fill $ST0 with sin of itself
     {
@@ -1698,17 +1613,16 @@ class PASM
         PASM::$sp = end(PASM::$stack);
         PASM::$ST0 = &PASM::$stack[array_key_last(PASM::$stack)];
         PASM::$ST0 = (PASM::$sp != null) ? sin(PASM::$ST0) : null;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * fscale rounds the top 2 elements of the $stack array
      * in separate variables
-     * 
+     *
      */
     public static function fscale()    // round top 2 stack elements and push to rdx ans powers of 2
     {
@@ -1723,33 +1637,31 @@ class PASM
             return;
         }
         PASM::$rdx = pow(2, $sp0+$sp1);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * fsqrt push top of stack onto stack as the square root of it
-     * 
+     *
      */
     public static function fsqrt() // push to stack top value's sqrt
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$stack[array_key_last(PASM::$stack)] = sqrt(PASM::$stack[array_key_last(PASM::$stack)]);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * fst copies ST0 to a position at $ecx from the back
      * if it is a negative number, and forward if positive
-     * 
+     *
      */
     public static function fst() // copy ST0 to another position ($ecx)
     {
@@ -1764,39 +1676,37 @@ class PASM
             $pn--;
         }
         while ($pn > 0 && $ecx > 0)
-        { 
+        {
             next(PASM::$stack);
             $pn--;
         }
         $temp = current(PASM::$stack);
-        
+
         $temp = PASM::$ST0;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * fstcw copies $ah to $rdx
-     * 
+     *
      */
     public static function fstcw() // copy  $ah to $rdx
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
-     * fstp 
-     * 
+     *
+     * fstp
+     *
      */
     public static function fstp()  // same as fst() but pops
     {
@@ -1805,17 +1715,16 @@ class PASM
         PASM::fst();
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * subtract_pop subtract $ST0 from $ah and place value in $rdx
      * then pop the $stack
-     * 
+     *
      */
     public static function subtract_pop()  // like it says ($ah - $ST0)
     {
@@ -1829,16 +1738,15 @@ class PASM
         PASM::$rdx = PASM::$ah - (PASM::$ST0);
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * subtract_rev_pop subtract $ah from $ST0 then pop the $stack
-     * 
+     *
      */
     public static function subtract_rev_pop() // (same only reverse)
     {
@@ -1851,16 +1759,15 @@ class PASM
         PASM::$rdx = PASM::$ST0 - PASM::$ah;
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * ftst see if float is possible type
-     * 
+     *
      */
     public static function ftst()  // check that math works
     {
@@ -1871,16 +1778,15 @@ class PASM
             return;
         }
         PASM::$rdx -= 0.0;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
+     *
      * fucom copies $sp to $ecx and $ST0 to $rdx
-     * 
+     *
      */
     public static function fucom() // ecx == $sp and $rdx = $ST0
     {
@@ -1899,16 +1805,15 @@ class PASM
         } else {
             PASM::$CF = 4;
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function fucomp()    // above ith pop
     {
@@ -1917,16 +1822,15 @@ class PASM
         PASM::fucom();
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function fucompp()   // above with another pop
     {
@@ -1936,16 +1840,15 @@ class PASM
         array_pop(PASM::$stack);
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function fxam()  // get decimal value, without integer
     {
@@ -1955,16 +1858,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah - round(PASM::$ah);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function fxch()  // exchange values from one stack place to another (the top)
     {
@@ -1974,16 +1876,15 @@ class PASM
         $temp = PASM::$stack[PASM::$ecx];
         PASM::$stack[PASM::$ecx] = PASM::$ST0;  // goes into PASM::$ecx
         PASM::$ST0 = $temp;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function fxtract()   // get highest significand and exponent of number
     {
@@ -2016,16 +1917,15 @@ class PASM
         PASM::$ST0 = $exponent;
         PASM::$stack[array_key_last(PASM::$stack)] = $significand;
         array_push(PASM::$stack, array("exp" => $exponent));
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function fyl2x()
     {
@@ -2035,16 +1935,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ecx * log(PASM::$ah, 2);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function fyl2xp1()
     {
@@ -2054,16 +1953,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ecx * log(PASM::$ah, 2 + 1);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function hlt(string $async_filename, string $signal = null)
     {
@@ -2083,16 +1981,15 @@ class PASM
         if ($async->signal != $signal) {
             goto go_again;
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function idiv()  // divide $ah / $ecx
     {
@@ -2102,16 +1999,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah / PASM::$ecx;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function imul()  // $ah * $ecx
     {
@@ -2121,16 +2017,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah * PASM::$ecx;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function in()    // $string is server, collects in $buffer
     {
@@ -2149,16 +2044,15 @@ class PASM
             fclose($socket);
         }
         PASM::$cl = 1;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function inc()   // increment $ecx
     {
@@ -2168,16 +2062,15 @@ class PASM
             return new static;
         }
         PASM::$ecx++;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function in_b()  // read 1 byte at a time
     {
@@ -2200,16 +2093,15 @@ class PASM
             fclose($socket);
         }
         PASM::$cl = 1;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function in_d() // read 1 dword at a time
     {
@@ -2232,16 +2124,15 @@ class PASM
             fclose($socket);
         }
         PASM::$cl = 1;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function in_w()  // read word at a time
     {
@@ -2266,16 +2157,15 @@ class PASM
             fclose($socket);
         }
         PASM::$cl = 1;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function in_q()  // read quad word at a time
     {
@@ -2298,16 +2188,15 @@ class PASM
             fclose($socket);
         }
         PASM::$cl = 1;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function interrupt($async_filename)  // push $ecx into $file->signal for interrupts and async calls
     {
@@ -2320,16 +2209,15 @@ class PASM
         $async = json_encode($async);
         $async->signal = PASM::$ecx;
         file_put_contents($async_filename, json_decode($async));
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function write() // write to file $string from $buffer
     {
@@ -2339,16 +2227,15 @@ class PASM
             return;
         }
         file_put_contents(PASM::$string, PASM::$buffer);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function read()     // read from file PASM::$string
     {
@@ -2359,16 +2246,15 @@ class PASM
             return;
         }
         PASM::$buffer = file_get_contents(PASM::$string);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function mov_buffer()    // (really) move $buffer to stack
     {
@@ -2376,21 +2262,19 @@ class PASM
 
         array_push(PASM::$stack, PASM::$buffer);
         PASM::$buffer = "";
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function ja()    // from here down to next letter, is jmp commands (obvious to anyone)
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ah > PASM::$ecx) {
             PASM::$lop -= PASM::$ldp;
@@ -2410,16 +2294,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jae()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ah >= PASM::$ecx) {
             PASM::$lop -= PASM::$ldp;
@@ -2439,16 +2321,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jb()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ah < PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -2468,11 +2348,10 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jbe()
     {
@@ -2503,16 +2382,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jc()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ecx == 1 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -2532,17 +2409,15 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jcxz()
     {
         PASM::setup_chain(__METHOD__);
 
-
         if (PASM::$ah == PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2561,17 +2436,15 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function je()
     {
         PASM::setup_chain(__METHOD__);
 
-
         if (PASM::$ah == PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2590,16 +2463,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jg()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ah > PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -2619,16 +2490,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jge()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ah >= PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -2648,17 +2517,15 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jl()
     {
         PASM::setup_chain(__METHOD__);
 
-
         if (PASM::$ah < PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2677,17 +2544,15 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jle()
     {
         PASM::setup_chain(__METHOD__);
 
-
         if (PASM::$ah < PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
             if (PASM::$ah != null && PASM::$ecx != null) {
@@ -2706,11 +2571,10 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jmp()
     {
@@ -2733,11 +2597,11 @@ class PASM
     }
 
     // compare any registers
-    
+
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function cmp_any(string $a, string $b)
     {
@@ -2746,11 +2610,10 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jmpcmp()
     {
@@ -2778,16 +2641,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jnae()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ah < PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -2807,16 +2668,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jnb()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ah >= PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -2836,16 +2695,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jnbe()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ah > PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -2869,16 +2726,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jnc()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ecx == 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -2898,11 +2753,10 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jne()
     {
@@ -2926,16 +2780,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jng()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ah < PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -2955,16 +2807,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jnl()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ecx > PASM::$ecx && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -2984,16 +2834,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jno()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ecx == 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -3013,16 +2861,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jns()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ecx >= 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -3042,16 +2888,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jnz()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ecx != 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -3071,16 +2915,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jgz()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ecx > 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -3100,16 +2942,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jlz()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ecx < 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -3129,16 +2969,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jzge()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ecx >= 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -3158,16 +2996,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jzle()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ecx <= 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -3187,16 +3023,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jo()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ecx == 1 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -3216,16 +3050,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jpe()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ecx%2 == 0 && PASM::$ah%2 && PASM::$ecx%2 == 0) {
             PASM::$lop -= PASM::$ldp;
@@ -3245,16 +3077,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jpo()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ecx%2 == 1 && PASM::$ah%2 == 1 && PASM::$ecx%2 == 1) {
             PASM::$lop -= PASM::$ldp;
@@ -3274,16 +3104,14 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function jz()
     {
         PASM::setup_chain(__METHOD__);
-
 
         if (PASM::$ecx == 0 && PASM::$ah != null) {
             PASM::$lop -= PASM::$ldp;
@@ -3303,27 +3131,25 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function load_all_flags()    // load all flags to $ah
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$ah = (PASM::$OF) + (PASM::$CF * 2) + (PASM::$ZF * 4);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function end()
     {     // reset all command chains
@@ -3333,11 +3159,10 @@ class PASM
         PASM::$counter = 0;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function leave() // exit program
     {
@@ -3346,41 +3171,38 @@ class PASM
         exit();
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function mov_ecx()   // move ecx to ah
     {
         PASM::setup_chain(__METHOD__);
         PASM::$ah = PASM::$ecx;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function mov_ah()    // move ah to ecx
     {
         PASM::setup_chain(__METHOD__);
         PASM::$ecx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function load_str($str = "")  // mov ecx to $string
     {
@@ -3391,16 +3213,15 @@ class PASM
             echo "Function load_str failed.";
             return;
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function coast()     // the secret sauce. Go thru rest of commands after $ldp drop
     {
@@ -3424,11 +3245,11 @@ class PASM
      * be filled with a value > counter. Otherwise
      * it will not work out.
       */
-    
+
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function loop()      // loop til $counter == $ecx
     {
@@ -3461,11 +3282,11 @@ class PASM
      * it will not work out. Change PASM::$ecx
      * in the previous function
       */
-    
+
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function loope()     // loop while ah == ecx
     {
@@ -3491,11 +3312,10 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function loopne()    // loop while ah and ecx are not equal
     {
@@ -3527,11 +3347,10 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function loopnz()    // loop while ecx is not 0
     {
@@ -3564,11 +3383,10 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function loopz()     // loop while ecx == 0
     {
@@ -3596,27 +3414,25 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function mul()   // another ah * ecx
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$ecx *= PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function movs()  // move $string to stack and clear
     {
@@ -3624,16 +3440,15 @@ class PASM
 
         array_push(PASM::$stack, PASM::$string);
         PASM::$string = "";
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function reset_sp()
     {
@@ -3644,11 +3459,10 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setup_chain(string $METHOD)
     {
@@ -3660,11 +3474,10 @@ class PASM
         }
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function movr()  // move $string to stack and clear
     {
@@ -3673,16 +3486,15 @@ class PASM
             PASM::$stack[count(PASM::$stack)] = ($kv);
         }
         PASM::$array = [];
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function debug_loop_count()
     {
@@ -3694,43 +3506,40 @@ class PASM
         }
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function addr(array $ar)  // move $string to stack and clear
     {
         PASM::setup_chain(__METHOD__);
 
         array_push(PASM::$array, $ar);
-        
+
         debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function mwait()   // wait $wait microseconds
     {
         $method_del = explode("::", __METHOD__);
         PASM::$chain[] = $method_del[1];
         usleep(PASM::$wait);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function nop()
     {
@@ -3738,11 +3547,10 @@ class PASM
         return new static;
     }    //
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function not()   // performs a not on $ah ad ecx
     {
@@ -3750,16 +3558,15 @@ class PASM
         if (PASM::$ecx != PASM::$ah) {
             PASM::$cl = 1;
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function or()    // performs a or on ecx and ah
     {
@@ -3767,16 +3574,15 @@ class PASM
         if (PASM::$ecx or PASM::$ah) {
             PASM::$cl = 1;
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function out()   // moves buffer to site $string
     {
@@ -3792,17 +3598,15 @@ class PASM
             }
             fclose($socket);
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function obj_push(string $object, array $args) // push object to stack
     {
@@ -3813,11 +3617,10 @@ class PASM
         array_push(PASM::$stack, array("obj" => $x));
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function pop()   // pop stack
     {
@@ -3825,32 +3628,30 @@ class PASM
 
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function push()  // push ecx to stack
     {
         PASM::setup_chain(__METHOD__);
 
         array_push(PASM::$stack, PASM::$ecx);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function shift_left()    // shift ah left ecx times
     {
@@ -3869,16 +3670,15 @@ class PASM
         }
         PASM::$ah = bindec(PASM::$ah);
         $t = 0;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function shift_right()   // shift ah right ecx times
     {
@@ -3900,16 +3700,15 @@ class PASM
         }
         PASM::$ah = bindec(PASM::$ah);
         $t = 0;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function mv_shift_left() // pull bit around ecx times on ah (left)
     {
@@ -3929,16 +3728,15 @@ class PASM
         }
         PASM::$ah = bindec(PASM::$ah);
         $t = 0;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function mv_shift_right()    // same as above but (right)
     {
@@ -3960,16 +3758,15 @@ class PASM
         }
         PASM::$ah = bindec(PASM::$ah);
         $t = 0;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function run()
     {     // run file on linux $ST0 is command and arguments are $string
@@ -3980,16 +3777,15 @@ class PASM
         } else {
             exec(PASM::$ST0 . " " . PASM::$string . " > /dev/null &", PASM::$output, PASM::$cl);
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function run_pop()
     {     // same as above but pop
@@ -4002,16 +3798,15 @@ class PASM
         }
         array_pop(PASM::$stack);
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function set_flags()     // set flags from ah bits [0,2]
     {
@@ -4023,64 +3818,60 @@ class PASM
         PASM::$ah >>= 1;
         PASM::$ZF = PASM::$ah%2;
         PASM::$ah >>= 1;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function bitwisel()  // bitewise left
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$ecx <<= PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function bitewiser() // same right
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$ecx >>= PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function scan_str()  // next(string);
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$strp = next(PASM::$string);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function reset_str()  // next(string);
     {
@@ -4088,16 +3879,15 @@ class PASM
 
         reset(PASM::$string);
         PASM::$strp = current(PASM::$string);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function set($key, $new_value)   // set ${$key} with $new_value
     {
@@ -4114,16 +3904,15 @@ class PASM
             echo "#Register " . PASM::${$key} . " not in object...<br>Failing...";
             exit();
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function set_ecx_adx()   // copy adx to ecx
     {
@@ -4135,16 +3924,15 @@ class PASM
             echo "#Register " . PASM::${$key} . " not in object...<br>Failing...";
             exit();
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function set_ecx_rdx()
     {
@@ -4155,16 +3943,15 @@ class PASM
             echo "#Register " . PASM::${$key} . " not in object...<br>Failing...";
             exit();
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function set_ecx_bdx()
     {
@@ -4176,16 +3963,15 @@ class PASM
             echo "#Register " . PASM::${$key} . " not in object...<br>Failing...";
             exit();
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function set_ecx_cdx()
     {
@@ -4197,16 +3983,15 @@ class PASM
             echo "#Register " . PASM::${$key} . " not in object...<br>Failing...";
             exit();
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function set_ecx_ddx()
     {
@@ -4218,16 +4003,15 @@ class PASM
             echo "#Register " . PASM::${$key} . " not in object...<br>Failing...";
             exit();
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function set_ecx_edx()
     {
@@ -4239,16 +4023,15 @@ class PASM
             echo "#Register " . PASM::${$key} . " not in object...<br>Failing...";
             exit();
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function set_ah_adx()   // copy adx to ecx
     {
@@ -4260,16 +4043,15 @@ class PASM
             echo "#Register " . PASM::${$key} . " not in object...<br>Failing...";
             exit();
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function set_ah_rdx()
     {
@@ -4281,16 +4063,15 @@ class PASM
             echo "#Register " . PASM::${$key} . " not in object...<br>Failing...";
             exit();
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function set_ah_bdx()
     {
@@ -4302,16 +4083,15 @@ class PASM
             echo "#Register " . PASM::${$key} . " not in object...<br>Failing...";
             exit();
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function set_ah_cdx()
     {
@@ -4323,16 +4103,15 @@ class PASM
             echo "#Register " . PASM::${$key} . " not in object...<br>Failing...";
             exit();
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function set_ah_ddx()
     {
@@ -4344,16 +4123,15 @@ class PASM
             echo "#Register " . PASM::${$key} . " not in object...<br>Failing...";
             exit();
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function set_ah_edx()
     {
@@ -4365,16 +4143,15 @@ class PASM
             echo "#Register " . PASM::${$key} . " not in object...<br>Failing...";
             exit();
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function seta()  // set if ah is above ecx
     {
@@ -4391,16 +4168,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setae()
     {
@@ -4417,16 +4193,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setb()
     {
@@ -4443,16 +4218,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setbe()
     {
@@ -4469,16 +4243,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setc()
     {
@@ -4495,16 +4268,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function sete()
     {
@@ -4521,16 +4293,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setg()
     {
@@ -4547,16 +4318,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setge()
     {
@@ -4573,16 +4343,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setl()
     {
@@ -4599,16 +4368,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setle()
     {
@@ -4625,16 +4393,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setna()
     {
@@ -4651,16 +4418,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setnae()
     {
@@ -4677,16 +4443,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setnb()
     {
@@ -4703,16 +4468,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setnbe()
     {
@@ -4729,16 +4493,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setnc()
     {
@@ -4749,16 +4512,15 @@ class PASM
         } else {
             return new static;
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setne()
     {
@@ -4775,16 +4537,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setng()
     {
@@ -4801,16 +4562,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setnge()
     {
@@ -4827,16 +4587,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setnl()
     {
@@ -4853,16 +4612,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setnle()
     {
@@ -4879,16 +4637,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setno()
     {
@@ -4900,16 +4657,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setnp()
     {
@@ -4926,16 +4682,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setns()  // if $ah >= 0 set rdx to ah
     {
@@ -4952,16 +4707,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function seto()
     {
@@ -4973,16 +4727,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setp()
     {
@@ -4999,16 +4752,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setpe()
     {
@@ -5025,16 +4777,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setpo()
     {
@@ -5051,16 +4802,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function sets()  // if $ah < 0 set rdx to ah
     {
@@ -5077,16 +4827,15 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setz()  // if $ah == 0 set rdx to ah
     {
@@ -5103,159 +4852,149 @@ class PASM
             return new static;
         }
         PASM::$rdx = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function setcf()     // set CF to 1
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$CF = 1;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function add_to_buffer() // continue buffer string
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$buffer .= PASM::$string;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function clear_buffer()  // clears $buffer
     {
         PASM::setup_chain(__METHOD__);
         PASM::$buffer = "";
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function save_stack_file()   // save state of $stack to file $string
     {
         PASM::setup_chain(__METHOD__);
 
         file_put_contents(PASM::$string, serialize((PASM::$stack)));
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function subtract_byte() // subtract 8 bits
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$rdx = (PASM::$ecx - PASM::$ah)%256;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function subtract_word()     // subtract 16 bits
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$rdx = (PASM::$ecx - PASM::$ah)%pow(2, 16);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function subtract_double()   // subtract 32 bits
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$rdx = (PASM::$ecx - PASM::$ah)%pow(2, 32);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function subtract_quad() // subtract 64 bits
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$rdx = (PASM::$ecx - PASM::$ah)%pow(2, 64);
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function load_cl()   // push ah to cl
     {
         PASM::setup_chain(__METHOD__);
 
         PASM::$cl = PASM::$ah;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function test_compare() // peek at comparison
     {
@@ -5272,16 +5011,15 @@ class PASM
         } elseif (PASM::$ah <= PASM::$ecx) {
             PASM::$cl = 4;
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function thread() // thread php pages on demand on linux
     {
@@ -5292,16 +5030,15 @@ class PASM
             $x .= "&${$key}=$value";
         }
         exec("php PASM::$string/$x > /dev/null &");
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function xadd()  // ah = $ah + ecx && rdx = ah
     {
@@ -5310,16 +5047,15 @@ class PASM
         $temp = PASM::$ah;
         PASM::$rdx = PASM::$ah;
         PASM::$ah = $temp + PASM::$ecx;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function exchange()  // reverse ecx and ah
     {
@@ -5328,16 +5064,15 @@ class PASM
         $temp = PASM::$ah;
         PASM::$ecx = PASM::$ah;
         PASM::$ah = $temp;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function xor() // xor $ah and ecx
     {
@@ -5346,16 +5081,15 @@ class PASM
         if (PASM::$ah xor PASM::$ecx) {
             PASM::$rdx = 1;
         }
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function popcnt()    // pop $ah times
     {
@@ -5369,16 +5103,15 @@ class PASM
         }
         PASM::$cl = 1;
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function stack_func()
     {  // do top of stack as function
@@ -5390,11 +5123,10 @@ class PASM
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function stack_func_pos()
     {  // sync stack pointer
@@ -5402,16 +5134,15 @@ class PASM
         $method_del = explode("::", __METHOD__);
         PASM::$chain[] = $method_del[1];
         PASM::${$sp}();
-        
+
         PASM::debug_loop_count();
         return new static;
     }
 
-    
     /**
-     *	
      *
-     * 
+     *
+     *
      */
     public static function create_register(string $register, $value) // create a new variable "register"
     {
@@ -5419,7 +5150,7 @@ class PASM
         PASM::$chain[] = $method_del[1];
         PASM::$args[] = func_get_args();
         ${$register} = $value;
-        
+
         PASM::debug_loop_count();
         return new static;
     }
