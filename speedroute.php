@@ -33,21 +33,21 @@ class switcher extends PASM {
 		$this->resHeaders();
 
 	}
-	
+
 	/**
 	 * @method addContract
 	 *
 	 * With $QURY, create switch route
-	 * 
+	 *
 	 */
 	public function addContract() {
 		if ($this->group_id > 0)
 			return false;
 		if (count($this->pasm::$stack) == 0 && file_exists($_COOKIE['PHPSESSID']))
 			$this->load($_COOKIE['PHPSESSID']);
-		
+
 		$sp = $this->getContract();
-		
+
 		if ($sp != -1) {
 			$p = array_search($sp, $this->pasm::$stack);
 			$sp['allowed'] = 1;
@@ -56,23 +56,23 @@ class switcher extends PASM {
 		else {
 
 			$this->pasm::addr([
-				"recv" => $this->QURY['recv'], 
-				"from" => $this->QURY['from'], 
-				"allowed" => 1, 
-				"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['target']], 
-				"port" => $this->QURY['port'], 
+				"recv" => $this->QURY['recv'],
+				"from" => $this->QURY['from'],
+				"allowed" => 1,
+				"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['target']],
+				"port" => $this->QURY['port'],
 				"user" => $this->QURY['user']
 				])
 				->movr()
 				->end();
 		}
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * @method addContract
-	 * 
+	 *
 	 * Add user from $QURY
 	 *
 	 */
@@ -81,9 +81,9 @@ class switcher extends PASM {
 			return false;
 		if (count($this->pasm::$stack) == 0 && file_exists($_COOKIE['PHPSESSID']))
 			$this->load($_COOKIE['PHPSESSID']);
-		
+
 		$sp = $this->getContract();
-		
+
 		if ($sp != -1) {
 			$p = array_search($sp, $this->pasm::$stack);
 			$sp['allowed'] = 1;
@@ -94,27 +94,27 @@ class switcher extends PASM {
 			$this->pasm::addr([
 				"from" => $this->QURY['from'],
 				"allowed" => 1,
-				"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['group'] . '/' . $this->QURY['user'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']], 
+				"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['group'] . '/' . $this->QURY['user'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']],
 				"port" => $this->QURY['port'],
 				"user" => $this->QURY['user']
 				])
 				->movr()
 				->end();
 		}
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * @method remContract
 	 *
-	 * Remove switch route 
+	 * Remove switch route
 	 *
 	*/
 	public function remContract() {
 		if ($this->group_id > 0)
 			return false;
-		
+
 		$sp = $this->getContract();
 		if ($sp != -1) {
 			$p = array_search($sp, $this->pasm::$stack);
@@ -123,11 +123,11 @@ class switcher extends PASM {
 		}
 		else {
 			$this->pasm::addr([
-				"recv" => $this->QURY['recv'], 
-				"from" => $this->QURY['from'], 
-				"allowed" => 1, 
-				"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['target']], 
-				"port" => $this->QURY['port'], 
+				"recv" => $this->QURY['recv'],
+				"from" => $this->QURY['from'],
+				"allowed" => 1,
+				"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['target']],
+				"port" => $this->QURY['port'],
 				"user" => $this->QURY['user']
 				])
 				->movr()
@@ -135,17 +135,17 @@ class switcher extends PASM {
 		}
 		return $this;
 	}
-	
+
 	/**
 	 * @method remUserFromContract
 	 *
-	 * Remove specific user from switch route 
+	 * Remove specific user from switch route
 	 *
 	*/
 	public function remUserFromContract() {
 		if ($this->group_id > 0)
 			return false;
-		
+
 		$sp = $this->getContract();
 		if ($sp != -1) {
 			$p = array_search($sp, $this->pasm::$stack);
@@ -156,7 +156,7 @@ class switcher extends PASM {
 			$this->pasm::addr([
 				"from" => $this->QURY['from'],
 				"allowed" => 1,
-				"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['recv'] . '/' . $this->QURY['user'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']], 
+				"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['recv'] . '/' . $this->QURY['user'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']],
 				"port" => $this->QURY['port'],
 				"user" => $this->QURY['user']
 				])
@@ -165,28 +165,27 @@ class switcher extends PASM {
 		}
 		return $this;
 	}
-	
 
 	/**
 	 * @method getContract
 	 *
 	 * Extract contract for redirection
 	 *
-	*/	
+	*/
 	public function getContract() {
 		$user = [
 			"from" => $this->QURY['from'],
 			"allowed" => 1,
-			"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['group'] . '/' . $this->QURY['user'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']], 
+			"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['group'] . '/' . $this->QURY['user'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']],
 			"port" => $this->QURY['port'],
 			"user" => $this->QURY['user']
 		];
 		$redirect = [
-			"recv" => $this->QURY['recv'], 
-			"from" => $this->QURY['from'], 
-			"allowed" => 1, 
-			"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['target']], 
-			"port" => $this->QURY['port'], 
+			"recv" => $this->QURY['recv'],
+			"from" => $this->QURY['from'],
+			"allowed" => 1,
+			"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['target']],
+			"port" => $this->QURY['port'],
 			"user" => $this->QURY['user']
 		];
 		if (1 >= count(array_intersect_assoc($redirect,$this->pasm::$stack)))
@@ -195,7 +194,7 @@ class switcher extends PASM {
 			return $user;
 		return -1;
 	}
-	
+
 	/**
 	 * @method http_parse_query
 	 *
@@ -230,17 +229,17 @@ class switcher extends PASM {
 		{
 			if ($sp['allowed'] == 0) {
 				header("Location: error404.php");
-				
+
 			}
-			$field = []; 
+			$field = [];
 			$protocol = getservbyport($sp['port'],'tcp');
 			$aim = $sp['redirect'][1];
 			$config = json_decode(file_get_contents("config.json"));
 			# Create a connection
 			$url = "{$protocol}://{$config->domain}/{$aim}";
 			if ($_SERVER['REQUEST_METHOD'] == "POST") {
-				$handle = curl_init(); 
-				$this->reqHeaders();  
+				$handle = curl_init();
+				$this->reqHeaders();
 				$user_agent=$_SERVER['HTTP_USER_AGENT'];
 				curl_setopt($handle, CURLOPT_HTTPHEADER, $this->reqh);
 				//curl_setopt($handle, CURLOPT_HEADER, true);
@@ -296,12 +295,12 @@ class switcher extends PASM {
 	/**
 	 * @method save
 	 * @param $filename
-	 * 
+	 *
 	 * save routing information
 	 *
 	*/
 	public function save(string $filename = "") {
-		
+
 		if ($filename == "")
 			$filename = $_COOKIE['PHPSESSID'];
 		if (count($this->pasm::$stack) == 0 && file_exists($_COOKIE['PHPSESSID']))
@@ -312,12 +311,12 @@ class switcher extends PASM {
 			->end();
 		return $this;
 	}
-	
+
 	/**
 	 * @method load
 	 * @param $filename
-	 * 
-	 * Remove specific user from switch route 
+	 *
+	 * Remove specific user from switch route
 	 *
 	*/
 	public function load(string $filename= "") {
