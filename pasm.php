@@ -54,7 +54,8 @@ class PASM
         $method_del = explode("::", __METHOD__);
         PASM::$chain[] = $method_del[1];// Will be easier to just play around
         // However this verifies all methods work
-        foreach (get_class_methods("PHP") as $method) {
+        $method_list_class_object = new static;
+        foreach (get_class_methods($method_list_class_object) as $method) {
             if ($method == "runTest") {
                 continue;
             }
@@ -66,7 +67,6 @@ class PASM
                 //$param is an instance of ReflectionParameter
                 $p[] = $param->getName();
                 $results = $p;
-
                 //echo $param->isOptional();
             }
 
@@ -83,8 +83,8 @@ class PASM
                 PASM::$method();
                 continue;
             } finally {
-                PASM::$ecx = [2];
-                PASM::$ah = [3];
+                PASM::$ecx = 2;
+                PASM::$ah = 3;
                 PASM::$method();
             }
         }
