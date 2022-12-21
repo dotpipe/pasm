@@ -105,6 +105,18 @@ class PASM
 
     /**
      *
+     * get retrieves the given string as a variable
+     *
+     */
+    public static function file_read(string $file, string $var = "string")
+    {
+        
+        yield PASM::${$var} = file_get_contents($file);
+        return new static;
+    }
+
+    /**
+     *
      * var_p prints the given string as a variable
      *
      */
