@@ -1,0 +1,1283 @@
+Dux Documentation for pasm
+<pre class='pasm'>
+     * @method get retrieves the given string as a variable
+     *
+    public static function get(string $var = "ah")
+</pre>
+<pre class='pasm'>
+     * @method var_p prints the given string as a variable
+     *
+    public static function var_p(string $var = "ah")
+</pre>
+<pre class='pasm'>
+     * @method char_adjust_addition changes $rdx to 8 bits
+     *
+    public static function char_adjust_addition()
+</pre>
+<pre class='pasm'>
+     * @method carry_add sets the $cl flag for carrying over on addition commands
+     *
+    public static function carry_add()
+</pre>
+<pre class='pasm'>
+     * @method add uses addition to form $rdx from $ecx annd $ah
+     *
+    public static function add()
+</pre>
+<pre class='pasm'>
+     * @method and changes the $cl flag to the $ecx & $ah answer
+     *
+    public static function and()
+</pre>
+<pre class='pasm'>
+     * @method chmod uses $string as the first parameter
+     * and $ah as the second param for PHP's native chmod()
+     *
+    public static function chmod()
+</pre>
+<pre class='pasm'>
+     * @method bit_scan_fwd if $tp is null at current() it breaks up $qword into
+     * portions according to '1's from a binary string
+     * derived from the $qword and resets the $tp variable to the beginning.
+     *
+     * otherwise it will goto the next $tp in the array
+     *
+    public static function bit_scan_fwd()
+</pre>
+<pre class='pasm'>
+     * @method bit_scan_rvr if $tp is null at current() it breaks up $qword into
+     * portions according to '1's from a binary string
+     * derived from the $qword and resets the $tp variable to the end.
+     *
+     * otherwise it will goto the previous $tp in the array
+     *
+    public static function bit_scan_rvr()                  // reverse of above
+</pre>
+<pre class='pasm'>
+     * @method byte_rvr will reverse the given $ecx in binary
+     * then set it as $rdx
+     *
+    public static function byte_rvr()                  // reverse byte
+</pre>
+<pre class='pasm'>
+     * @method bit_test sets $bitcmp to the $ah'th bit
+     * just on or off
+     *
+    public static function bit_test()                  // bit is filled in pointer
+</pre>
+<pre class='pasm'>
+     * @method bit_test_comp search thru arbitry $ecx for the $ahth bit
+     * and set $CF to it's returned value
+     *
+     * if given anything returned as true for a parameter, it will also set the $bitcmp flag
+     *
+    public static function bit_test_comp(bool $bitc = false)         // look thru byte and see the $ah'th bit
+</pre>
+<pre class='pasm'>
+     * bit_test_comp search thru arbitry $ecx for the $ahth bit
+     * and set $CF to it's returned value reset $ecx to 0
+     *
+    public static function bit_test_reset()    // Clear bit (ah) test flag
+</pre>
+<pre class='pasm'>
+     * @method bit_test_comp search thru arbitry $ecx for the $ahth bit
+     * and set $CF to it's returned value and ecx[$ah] to 1
+     *
+    public static function bit_test_set()                  // Test bit
+</pre>
+<pre class='pasm'>
+     * @method call is used to call a function from the stack
+     *
+    public static function call() // call top of stack function
+</pre>
+<pre class='pasm'>
+     * @method cmp_mov_a compares the top of the stack '>' to $ah for true
+     * changes $ecx to $ah if $ah is
+     *
+    public static function cmp_mov_a()         // check ah against top of stack
+</pre>
+<pre class='pasm'>
+     * @method cmp_mov_ae compares the top of the stack '>=' to $ah for true
+     * changes $ecx to $ah if $ah is
+     *
+    public static function cmp_mov_ae()    // same (documenting will continue below)
+</pre>
+<pre class='pasm'>
+     * @method cmp_mov_b compares the top of the stack '<' to $ah for true
+     * changes $ecx to $ah if $ah is
+     *
+    public static function cmp_mov_b()
+</pre>
+<pre class='pasm'>
+     * @method cmp_mov_be compares the top of the stack '<=' to $ah for true
+     * changes $ecx to $ah if $ah is
+     *
+    public static function cmp_mov_be()
+</pre>
+<pre class='pasm'>
+     * @method cmp_mov_e compares the top of the stack '==' to $ah for true
+     * changes $ecx to $ah if $ah is
+     *
+    public static function cmp_mov_e()
+</pre>
+<pre class='pasm'>
+     * @method cmp_mov_nz compares the top of the stack '==' to $ah for true
+     * and $CF needs to be equal to that annswer
+     * changes $ecx to $ah if it is
+     *
+    public static function cmp_mov_nz()
+</pre>
+<pre class='pasm'>
+     * @method cmp_mov_pe compares the top of the stack '<' to $ah for true
+     * changes $ecx to $ah if $ah is higher
+     *
+    public static function cmp_mov_pe()
+</pre>
+<pre class='pasm'>
+     * @method cmp_mov_po compares 1 '==' to $CF for true
+     * changes $ecx to $ah if $ah is
+     *
+    public static function cmp_mov_po()
+</pre>
+<pre class='pasm'>
+     * @method cmp_mov_s compares 0 '<' to $ah for true
+     * changes $ecx to $ah if $ah is
+     *
+    public static function cmp_mov_s()
+</pre>
+<pre class='pasm'>
+     * @method cmp_mov_a compares 0 '>' to $ah for true
+     * changes $ecx to $ah if $ah is
+     *
+    public static function cmp_mov_z()
+</pre>
+<pre class='pasm'>
+     * @method mov copies $ah to $ecx
+     *
+    public static function mov()   // move ah to ecx. Same as mov_ah()
+</pre>
+<pre class='pasm'>
+     * @method movabs pushes the current $ecx to $stack['movabs']
+     * then moves the ST0 pointer to the end of the stack
+     *
+    public static function movabs()    // copy $ecx to stack
+</pre>
+<pre class='pasm'>
+     * @method clear_carry sets CF to 0
+     *
+    public static function clear_carry()   // clear $CF
+</pre>
+<pre class='pasm'>
+     * @method clear_registers clears all native PASM registers and $CF bit to 0
+     *
+    public static function clear_registers()   // make all registers 0
+</pre>
+<pre class='pasm'>
+     * @method comp_carry negates the current status of $CF
+     *
+    public static function comp_carry()    // negate $CF
+</pre>
+<pre class='pasm'>
+     * @method cmp_e compares '==' $ecx to $ah and sets the $cl field accordingly
+     *
+    public static function cmp_e()         // bool of equality comparison (documentation continues below)
+</pre>
+<pre class='pasm'>
+     * @method cmp_same compares '==' $ecx to $ah and sets the $cl field accordingly
+     *
+    public static function cmp_same()
+</pre>
+<pre class='pasm'>
+     * @method cmp_xchg compares '==' $ecx to $ah and sets the $ZF field accordingly
+     * as well, it switches $rdx and $ah
+     *
+    public static function cmp_xchg()
+</pre>
+<pre class='pasm'>
+     * @method xchg switches $rdx and $ah
+     *
+    public static function xchg(&$x, &$y)
+</pre>
+<pre class='pasm'>
+     * @method decr decrements any variable via string (ie 'rdx')
+     * one integer value
+     *
+    public static function decr(string $var = "ecx")                  // decrement ecx
+</pre>
+<pre class='pasm'>
+     * @method divide $ecx by $ah
+     *
+    public static function divide()    // $ecx/$ah
+</pre>
+<pre class='pasm'>
+     * @method absf sets $rdx to the absolute value of ah
+     *
+    public static function absf()                  // absolute value of $ah
+</pre>
+<pre class='pasm'>
+     * @method addf uses addition of $ecx and $ah to set $rdx
+     *
+    public static function addf()                  // add $ecx and $ah
+</pre>
+<pre class='pasm'>
+     * @method addc uses addition of $ecx and $ah and current $rdx to set $rdx
+     *
+    public static function addc()                  // add $ecx and $ah
+</pre>
+<pre class='pasm'>
+     * @method round uses the PHP native function round() with $ST0
+     * and the number in $RC for the number of decimal places
+     * to set the $stack
+     *
+    public static function round()         // round top stack to RC decimal
+</pre>
+<pre class='pasm'>
+     * @method round_pop uses the PHP native function round() with $ST0
+     * and the number in $RC for the number of decimal places
+     * to set the $ah register and pops the stack once
+     * it then sets $ST0 to the last element in the $stack
+     *
+    public static function round_pop()         // same but pop
+</pre>
+<pre class='pasm'>
+     * @method neg inverts a positive number to a positive number
+     * or the reverse action, depending on the value. $ah
+     * is multiplied by -1 to set $rdx to the answer
+     *
+    public static function neg()   // negate $ah
+</pre>
+<pre class='pasm'>
+     * @method stack_cmov_b compares $ST0 '>' to $ah
+     * if true, it makes $rdx the value in $ah
+     *
+    public static function stack_cmov_b()                  // move on comparison (begins again below)
+</pre>
+<pre class='pasm'>
+     * @method stack_cmov_be compares $ST0 '>=' to $ah
+     * if true, it makes $rdx the value in $ah
+     *
+    public static function stack_cmov_be()
+</pre>
+<pre class='pasm'>
+     * @method stack_cmov_e compares $ST0 '==' to $ah
+     * if true, it makes $rdx the value in $ah
+     *
+    public static function stack_cmov_e()
+</pre>
+<pre class='pasm'>
+     * @method stack_cmov_nb compares $ST0 '<' to $ah
+     * if true, it makes $rdx the value in $ah
+     *
+    public static function stack_cmov_nb()
+</pre>
+<pre class='pasm'>
+     * @method stack_cmov_nbe compares $ST0 '<=' to $ah
+     * if true, it makes $rdx the value in $ah
+     *
+    public static function stack_cmov_nbe()
+</pre>
+<pre class='pasm'>
+     * @method stack_cmov_b compares $ST0 '!=' to $ah
+     * if true, it makes $rdx the value in $ah
+     *
+    public static function stack_cmov_ne()
+</pre>
+<pre class='pasm'>
+     * @method fcomp substracts the $ST0 stack pointer
+     * from $ah and pops its last value off
+     *
+    public static function fcomp()         // subtract top of stack from $ah and pop
+</pre>
+<pre class='pasm'>
+     * @method cosine sets the $ST0 pointer to the current $ST0
+     * wrapped in the PHP native mathematical function, cosine (cos)
+     *
+    public static function cosine()    // change top of stack to cosine of top of stack
+</pre>
+<pre class='pasm'>
+     * @method stack_pnt_rev goes thru the stack backward,
+     * in reverse, and sets the $sp variable to its position
+     *
+    public static function stack_pnt_rev()         // go traverse the stack backward
+</pre>
+<pre class='pasm'>
+     * @method fdiv divides $ecx by $ST0, the stack's last entry
+     * setting the value of $rdx
+     *
+    public static function fdiv()                  // divide ST0 into $ecx
+</pre>
+<pre class='pasm'>
+     * @method fdiv_pop divides $ST0 by $ecx and sets the last element to $ST0 again
+     *
+    public static function fdiv_pop()                  // opposite as above and pop
+</pre>
+<pre class='pasm'>
+     * @method fdiv_rev divides $ST0 by $ecx and sets the value at $rdx
+     *
+    public static function fdiv_rev()                  // opposite of fdiv
+</pre>
+<pre class='pasm'>
+     * @method fdiv_rev divides $ecx by $ST0 and sets the value at $rdx
+     *
+    public static function fdiv_rev_pop()                  // same as above with po
+</pre>
+<pre class='pasm'>
+     * @method add_stack uses addition to set $rdx
+     * with the value of $ecx + $ST0
+     *
+    public static function add_stack()         // add top of stack to ecx
+</pre>
+<pre class='pasm'>
+     * @method ficomp uses comparison of $ST0 '==' to $ah
+     * and sets the bit $cl with it
+     * Then it pops the stack and reissues the last
+     * element to $ST0
+     *
+    public static function ficomp()    // compare and pop
+</pre>
+<pre class='pasm'>
+     * @method resta recover contents of the stack from the filename given as a parameter
+     *
+    public static function resta(string $filename)
+</pre>
+<pre class='pasm'>
+     * @method stack_load uses $key so it's indexable by string coefficient
+     * 'fc' so you can have the count of the reference rather than
+     * name it everytime
+     *
+    public static function stack_load() // stack with count on stack
+</pre>
+<pre class='pasm'>
+     * @method stack_mrg merging native $array and $stack
+     *
+    public static function stack_mrg() // stack with count on stack
+</pre>
+<pre class='pasm'>
+     * @method fmul multiplies $ecx by $ah giving $rdx it's value
+     *
+    public static function fmul()                  // multiplies ecx and ah
+</pre>
+<pre class='pasm'>
+     * @method stack_pnt_fwd moves the $sp (stack pointer) forward, one iteration
+     *
+    public static function stack_pnt_fwd()         // moves stack pointer forward
+</pre>
+<pre class='pasm'>
+     * @method store_int subtracts by $ST0 - 2^$ah and sets $rdx to the value
+     *
+    public static function sintexp()         // subtracts $ST0 - 2-to-the-$ah and puts answer in $rdx
+</pre>
+<pre class='pasm'>
+     * @method int_pop subtracts by $ST0 - 2^$ah and sets $rdx to the value
+     * and pops the last value, then resets the $ST0 pointer to the last entry
+     *
+    public static function intpop() // same as above, but with pop
+</pre>
+<pre class='pasm'>
+     * @method subea subtracts $ah from $ech and places the
+     * value in $rdx
+     *
+    public static function subea() // like subtract but backwards
+</pre>
+<pre class='pasm'>
+     * @method subae substracts $ecx from $ah
+     * and puts the value in $rdx
+     *
+    public static function subae()  // $ah - $ecx
+</pre>
+<pre class='pasm'>
+     * @method fld1 pushes ecx+1 to the stack
+     *
+    public static function fld1()  // pushes ecx+1 to stack
+</pre>
+<pre class='pasm'>
+     * @method load_logl2 pushs log(log(2)) to the stack
+     *
+    public static function load_logl2() //
+</pre>
+<pre class='pasm'>
+     * @method load_logl2t pushes log(2,10)
+     *
+    public static function load_logl2t()
+</pre>
+<pre class='pasm'>
+     * @method load_loglg2 pushes log(2, log($ah)) to the stack
+     *
+    public static function load_loglg2()
+</pre>
+<pre class='pasm'>
+     * @method load_ln2 pushes log(e, 2) to the stack
+     *
+    public static function load_ln2()
+</pre>
+<pre class='pasm'>
+     * @method load_pi pushes 3.14159... to the stack
+     *
+    public static function load_pi()
+</pre>
+<pre class='pasm'>
+     * @method float_test recreates $ah as a decimal in $rdx
+     *
+    public static function float_test()
+</pre>
+<pre class='pasm'>
+     * @method fmul_pop multiplies $ah and $ecx as $rdx
+     * pops the stack and puts the top as $ST0
+     *
+    public static function fmul_pop() // ah * ecx and pop
+</pre>
+<pre class='pasm'>
+     * @method clex clears the $ZF bit
+     *
+    public static function clex()  // clear exception bit
+</pre>
+<pre class='pasm'>
+     * @method clflags clears the $cl flags
+     *
+    public static function clflags() // clear cl
+</pre>
+<pre class='pasm'>
+     * @method fnop counts as a function, but does absolutely nothing
+     * its there because people want hackers in their stuff i guess
+     *
+    public static function fnop()  // counts as function, does nothing but takes up space (like in assembly)
+</pre>
+<pre class='pasm'>
+     * @method fpatan puts the value of arctan($ah) in the $cl flag
+     *
+    public static function fpatan()    // gets arctan of $ah
+</pre>
+<pre class='pasm'>
+     * @method fptan puts the value of tan($ah) in the $cl flag
+     *
+    public static function fptan() // gets tangent of ah
+</pre>
+<pre class='pasm'>
+     * @method fprem divide the top of the stack by the next down
+     *
+    public static function fprem() // look to documentation (Oracle Systems Manual)
+</pre>
+<pre class='pasm'>
+     * @method frndint rounds the top of the stack, with the remaining $RC decimals
+     * and puts it into $rdx
+     *
+    public static function frndint()   // round top of stack into $rdx
+</pre>
+<pre class='pasm'>
+     * @method car $ah to $rdx
+     *
+    public static function car() // copy $ah to $rdx
+</pre>
+<pre class='pasm'>
+     * @method fsin stores the sin of $ST0 in the final element of $stack
+     * wherein it was retrieved from.
+     *
+    public static function fsin() // change top of stack to sin of top of stack
+</pre>
+<pre class='pasm'>
+     * @method fsincos pushes cosine of $ST0 to stack and applies sine to it
+     *
+    public static function fsincos() // push cos of $ST0 to stack and fill $ST0 with sin of itself
+</pre>
+<pre class='pasm'>
+     * @method fscale rounds the top 2 elements of the $stack array
+     * in separate variables
+     *
+    public static function fscale()    // round top 2 stack elements and push to rdx ans powers of 2
+</pre>
+<pre class='pasm'>
+     * @method fsqrt push top of stack onto stack as the square root of it
+     *
+    public static function fsqrt() // push to stack top value's sqrt
+</pre>
+<pre class='pasm'>
+     * @method fst copies ST0 to a position at $ecx from the back
+     * if it is a negative number, and forward if positive
+     *
+    public static function fst() // copy ST0 to another position ($ecx)
+</pre>
+<pre class='pasm'>
+     * @method fstcw copies $ah to $rdx
+     *
+    public static function fstcw() // copy  $ah to $rdx
+</pre>
+<pre class='pasm'>
+     * @method fstp fst but pops from stack
+     *
+    public static function fstp()  // same as fst() but pops
+</pre>
+<pre class='pasm'>
+     * @method subtract_pop subtract $ST0 from $ah and place value in $rdx
+     * then pop the $stack
+     *
+    public static function subtract_pop()  // like it says ($ah - $ST0)
+</pre>
+<pre class='pasm'>
+     * @method subtract_rev_pop subtract $ah from $ST0 then pop the $stack
+     *
+    public static function subtract_rev_pop() // (same only reverse)
+</pre>
+<pre class='pasm'>
+     * @method ftst see if float is possible type
+     *
+    public static function ftst()  // check that math works
+</pre>
+<pre class='pasm'>
+     * @method fucom copies $ecx = $sp and $rdx = $ST0
+     *
+    public static function fucom() // ecx == $sp and $rdx = $ST0
+</pre>
+<pre class='pasm'>
+     * @method fucomp copies $sp to $ecx and $ST0 to $rdx and pop
+     *
+    public static function fucomp()    // above ith pop
+</pre>
+<pre class='pasm'>
+     * @method fucompp copies $sp to $ecx and $ST0 to $rdx and pops twice
+     *
+    public static function fucompp()   // above with another pop
+</pre>
+<pre class='pasm'>
+     * @method fxam retrieves complex side of number
+     *
+    public static function fxam()  // get decimal value, without integer
+</pre>
+<pre class='pasm'>
+     * @method fxch exchange values from one stack place to another (the top)
+     *
+    public static function fxch()  // 
+</pre>
+<pre class='pasm'>
+     * @method fxtract get highest significand and exponent of number
+     *
+    public static function fxtract()   // get highest significand and exponent of number
+</pre>
+<pre class='pasm'>
+     * @method fyl2x multiplies $ecxby log($ah,2) to $rdx
+     *
+    public static function fyl2x()
+</pre>
+<pre class='pasm'>
+     * @method fyl2xp1 multiplies $ecxby log($ah,2 + 1) to $rdx
+     *
+    public static function fyl2xp1()
+</pre>
+<pre class='pasm'>
+     * @method hlt sleep function
+     *
+    public static function hlt(string $async_filename, string $signal = null)
+</pre>
+<pre class='pasm'>
+     * @method cdiv divide $ah / $ecx
+     *
+    public static function cdiv()  // divide $ah / $ecx
+</pre>
+<pre class='pasm'>
+     * @method fldiv divide $ah / $ecx
+     *
+    public static function fldiv()  // divide $ah / $ecx
+</pre>
+<pre class='pasm'>
+     * @method flmul multiply $ah * $ecx
+     *
+    public static function flmul()  // $ah * $ecx
+</pre>
+<pre class='pasm'>
+     * @method cmul multiply $ah * $ecx
+     *
+    public static function cmul()  // $ah * $ecx
+</pre>
+<pre class='pasm'>
+     * @method in $string is server, collects in $buffer
+     *
+    public static function in()    // 
+</pre>
+<pre class='pasm'>
+     * @method inc increment $ecx
+     *
+    public static function inc()   // increment $ecx
+</pre>
+<pre class='pasm'>
+     * @method in_b $string is server, collects in $buffer (byte per read)
+     *
+    public static function in_b()  // read 1 byte at a time
+</pre>
+<pre class='pasm'>
+     * @method in_d $string is server, collects in $buffer (dword per read)
+     *
+    public static function in_d() // read 1 dword at a time
+</pre>
+<pre class='pasm'>
+     * @method in_w $string is server, collects in $buffer (word per read)
+     *
+    public static function in_w()  // read word at a time
+</pre>
+<pre class='pasm'>
+     * @method in_q $string is server, collects in $buffer (qword per read)
+     *
+    public static function in_q()  // read quad word at a time
+</pre>
+<pre class='pasm'>
+     * @method interrupt pushes $ecx into $file->signal for interrupts and async calls
+     *
+    public static function interrupt($async_filename)  // push $ecx into $file->signal for interrupts and async calls
+</pre>
+<pre class='pasm'>
+     * @method write writes to file $string from $buffer
+     *
+    public static function write() // write to file $string from $buffer
+</pre>
+<pre class='pasm'>
+     * @method read writes to file $string from $buffer
+     *
+    public static function read()     // read from file PASM::$string
+</pre>
+<pre class='pasm'>
+     * @method mbuf move (not copy) $buffer to stack
+     *
+    public static function mbuf()    // (really) move $buffer to stack
+</pre>
+<pre class='pasm'>
+     * @method ja jump while $ah > $ecx
+     *
+    public static function ja()    // from here down to next letter, is jmp commands (obvious to anyone)
+</pre>
+<pre class='pasm'>
+     * @method jae jump while $ah >= $ecx
+     *
+    public static function jae() 
+</pre>
+<pre class='pasm'>
+     * @method jb jump while $ah < $ecx
+     *
+    public static function jb()
+</pre>
+<pre class='pasm'>
+     * @method jbe jump while $ah <= $ecx
+     *
+    public static function jbe()
+</pre>
+<pre class='pasm'>
+     * @method jc jump while 1 == $ecx
+     *
+    public static function jc()
+</pre>
+<pre class='pasm'>
+     * @method jcxz jump while $ah == $ecx
+     *
+    public static function jcxz()
+</pre>
+<pre class='pasm'>
+     * @method je jump while $ah == $ecx
+     *
+    public static function je()
+</pre>
+<pre class='pasm'>
+     * @method jg jump while $ah > $ecx
+     *
+    public static function jg()
+</pre>
+<pre class='pasm'>
+     * @method jge jump while $ah >= $ecx
+     *
+    public static function jge()
+</pre>
+<pre class='pasm'>
+     * @method ja jump while $ah < $ecx
+     *
+    public static function jl()
+</pre>
+<pre class='pasm'>
+     * @method ja jump while $ah < $ecx
+     *
+    public static function jle()
+</pre>
+<pre class='pasm'>
+     * @method ja jump while $lop < count($chain)
+     *
+    public static function jmp()
+</pre>
+<pre class='pasm'>
+     * @method cmpab compare "ah" to "ecx"
+     * or whatever you want to put in as params
+     *
+    public static function cmpab(string $a, string $b)
+</pre>
+<pre class='pasm'>
+     * @method jcmp jump if $bitcmp == true
+     *
+    public static function jcmp()
+</pre>
+<pre class='pasm'>
+     * @method jnae jump while $ah < $ecx
+     *
+    public static function jnae()
+</pre>
+<pre class='pasm'>
+     * @method jnb jump while $ah >= $ecx
+     *
+    public static function jnb()
+</pre>
+<pre class='pasm'>
+     * @method jnbe jump while $ah > $ecx
+     *
+    public static function jnbe()
+</pre>
+<pre class='pasm'>
+     * @method jnc jump while 0 == $ecx
+     *
+    public static function jnc()
+</pre>
+<pre class='pasm'>
+     * @method jne jump while $ah != $ecx
+     *
+    public static function jne()
+</pre>
+<pre class='pasm'>
+     * @method jng jump while $ah < $ecx
+     *
+    public static function jng()
+</pre>
+<pre class='pasm'>
+     * @method jnl jump while $ah < $ecx
+     *
+    public static function jnl()
+</pre>
+<pre class='pasm'>
+     * @method jno jump while 0 == $ecx
+     *
+    public static function jno()
+</pre>
+<pre class='pasm'>
+     * @method jns jump while 0 <= $ecx
+     *
+    public static function jns()
+</pre>
+<pre class='pasm'>
+     * @method jnz jump while 0 != $ecx
+     *
+    public static function jnz()
+</pre>
+<pre class='pasm'>
+     * @method jgz jump while 0 < $ecx
+     *
+    public static function jgz()
+</pre>
+<pre class='pasm'>
+     * @method jlz jump while 0 > $ecx
+     *
+    public static function jlz()
+</pre>
+<pre class='pasm'>
+     * @method jzge jump while 0 <= $ecx
+     *
+    public static function jzge()
+</pre>
+<pre class='pasm'>
+     * @method jzle jump while 0 >= $ecx
+     *
+    public static function jzle()
+</pre>
+<pre class='pasm'>
+     * @method jo jump while 1 == $ecx
+     *
+    public static function jo()
+</pre>
+<pre class='pasm'>
+     * @method jpe jump while $ecx %2 == 0
+     *
+    public static function jpe()
+</pre>
+<pre class='pasm'>
+     * @method jpo jump while $ecx %2 == 1
+     *
+    public static function jpo()
+</pre>
+<pre class='pasm'>
+     * @method jz jump while 0 == $ecx
+     *
+    public static function jz()
+</pre>
+<pre class='pasm'>
+     * @method load_all_flags loads all flags to $ah
+     *
+    public static function load_all_flags()    // load all flags to $ah
+</pre>
+<pre class='pasm'>
+     * @method end 
+     * reset chains
+     *
+    public static function end()
+</pre>
+<pre class='pasm'>
+     * @method quit 
+     * exits the program
+     *
+    public static function quit() // exit program
+</pre>
+<pre class='pasm'>
+     * @method ea 
+     * move $ecx to $ah
+     *
+    public static function ea()   // move ecx to ah
+</pre>
+<pre class='pasm'>
+     * @method ae
+     * move $ah to $ecx
+     *
+    public static function ae()    // move ah to ecx
+</pre>
+<pre class='pasm'>
+     * @method mov_ecx
+     * move $ecx to $ah
+     *
+    public static function load_str($str = "")  // mov ecx to $string
+</pre>
+<pre class='pasm'>
+     * @method coast
+     * Go thru rest of commands after $ldp drop
+     *
+    public static function coast()     // the secret sauce. Go thru rest of commands after $ldp drop
+</pre>
+<pre class='pasm'>
+     * @method loop requires that PASM::$ecx
+     * be filled with a value > counter. Otherwise
+     * it will not work out.
+     *
+    public static function loop()      // loop til $counter == $ecx
+</pre>
+<pre class='pasm'>
+     * @method mul multiply $ah by $ecx
+     *
+    public static function mul()   // another ah * ecx
+</pre>
+<pre class='pasm'>
+     * @method movs move $string to stack and clear
+     *
+    public static function movs()  // move $string to stack and clear
+</pre>
+<pre class='pasm'>
+     * @method sptr move stack pointer to end
+     *
+    public static function sptr()
+</pre>
+<pre class='pasm'>
+     * @method setup_chain create the chain of functions
+     *
+    public static function setup_chain(string $METHOD)
+</pre>
+<pre class='pasm'>
+     * @method movr move $string to stack and clear $array
+     *
+    public static function movr()  // move $array to stack and clear
+</pre>
+<pre class='pasm'>
+     * @method debug_loop_count show the current position in looping
+     *
+    public static function debug_loop_count()
+</pre>
+<pre class='pasm'>
+     * @method addr move param1 (array) onto $array
+     *
+    public static function addr(array $ar)  // move $string to stack and clear
+</pre>
+<pre class='pasm'>
+     * @method mwait wait $wait microseconds
+     *
+    public static function mwait()   // wait $wait microseconds
+</pre>
+<pre class='pasm'>
+     * @method nop skip function
+     *
+    public static function nop()
+</pre>
+<pre class='pasm'>
+     * @method not performs a not on $ah and $ecx
+     *
+    public static function not()   // performs a not on $ah ad ecx
+</pre>
+<pre class='pasm'>
+     * @method or performs a not on $ah and $ecx
+     *
+    public static function or()    // performs a or on ecx and ah
+</pre>
+<pre class='pasm'>
+     * @method out disperses $buffer to $conn (server connection with $string)
+     *
+    public static function out()   // moves buffer to site $string
+</pre>
+<pre class='pasm'>
+     * @method ops push $object to $stack
+     *
+    public static function ops(string $object, array $args) // push object to stack
+</pre>
+<pre class='pasm'>
+     * @method pop pop stack
+     *
+    public static function pop()   // pop stack
+</pre>
+<pre class='pasm'>
+     * @method push push ecx to stack
+     *
+    public static function push()  // push ecx to stack
+</pre>
+<pre class='pasm'>
+     * @method bitl shift ah left ecx times
+     *
+    public static function bitl()    // shift ah left ecx times
+</pre>
+<pre class='pasm'>
+     * @method bitr shift ah right ecx times
+     *
+    public static function bitr()   // shift ah right ecx times
+</pre>
+<pre class='pasm'>
+     * @method wrapl pull bit around ecx times on ah
+     *
+    public static function wrapl() // pull bit around ecx times on ah (left)
+</pre>
+<pre class='pasm'>
+     * @method wrapr pull bit around ecx times on ah
+     *
+    public static function wrapr()    // same as above but (right)
+</pre>
+<pre class='pasm'>
+     * @method run exeute file on system (Windows or Linux)
+     *
+    public static function run()
+</pre>
+<pre class='pasm'>
+     * @method flags set flags from ah bits [0,2]
+     *
+    public static function flags()     // set flags from ah bits [0,2]
+</pre>
+<pre class='pasm'>
+     * @method bitwisel bitwise left $ecx $ah times
+     *
+    public static function bitwisel()  // bitewise left
+</pre>
+<pre class='pasm'>
+     * @method bitwiser bitwise right $ecx $ah times
+     *
+    public static function bitwiser() // same right
+</pre>
+<pre class='pasm'>
+     * @method nxs move to copy next element in $string to $strp
+     *
+    public static function nxs()  // next(string);
+</pre>
+<pre class='pasm'>
+     * @method restr copy current element in $string to $strp
+     *
+    public static function restr()  // next(string);
+</pre>
+<pre class='pasm'>
+     * @method set set ${$key} to $new_value
+     *
+    public static function set($key, $new_value)   // set ${$key} with $new_value
+</pre>
+<pre class='pasm'>
+     * @method seteadx copy adx to ecx
+     *
+    public static function set_ecx_adx()   // copy adx to ecx
+</pre>
+<pre class='pasm'>
+     * @method seterdx copy rdx to ecx
+     *
+    public static function set_ecx_rdx()
+</pre>
+<pre class='pasm'>
+     * @method setebdx copy bdx to ecx
+     *
+    public static function set_ecx_bdx()
+</pre>
+<pre class='pasm'>
+     * @method setecdx copy cdx to ecx
+     *
+    public static function set_ecx_cdx()
+</pre>
+<pre class='pasm'>
+     * @method seteddx copy ddx to ecx
+     *
+    public static function set_ecx_ddx()
+</pre>
+<pre class='pasm'>
+     * @method setedx copy edx to ecx
+     *
+    public static function set_ecx_edx()
+</pre>
+<pre class='pasm'>
+     * @method setadx copy adx to ah
+     *
+    public static function set_ah_adx()   // copy adx to ecx
+</pre>
+<pre class='pasm'>
+     * @method setardx copy rdx to ah
+     *
+    public static function set_ah_rdx()
+</pre>
+<pre class='pasm'>
+     * @method setebdx copy bdx to ah
+     *
+    public static function set_ah_bdx()
+</pre>
+<pre class='pasm'>
+     * @method seterdx copy cdx to ah
+     *
+    public static function set_ah_cdx()
+</pre>
+<pre class='pasm'>
+     * @method setddx copy ddx to ah
+     *
+    public static function set_ah_ddx()
+</pre>
+<pre class='pasm'>
+     * @method setedx copy edx to ah
+     *
+    public static function setar()
+</pre>
+<pre class='pasm'>
+     * @method seta set rdx to ah if ah > ecx
+     *
+    public static function seta()  // set if ah is above ecx
+</pre>
+<pre class='pasm'>
+     * @method setae set rdx to ah if ah >= ecx
+     *
+    public static function setae()
+</pre>
+<pre class='pasm'>
+     * @method setb set rdx to ah if ah < ecx
+     *
+    public static function setb()
+</pre>
+<pre class='pasm'>
+     * @method setbe set rdx to ah if ah <= ecx
+     *
+    public static function setbe()
+</pre>
+<pre class='pasm'>
+     * @method setc set rd to ah if CF == 1 
+     *
+    public static function setc()
+</pre>
+<pre class='pasm'>
+     * @method sete set if ah == ecx
+     *
+    public static function sete()
+</pre>
+<pre class='pasm'>
+     * @method setg set rdx to ah if ah > ecx
+     *
+    public static function setg()
+</pre>
+<pre class='pasm'>
+     * @method setge set rdx to ah if ah >= ecx
+     *
+    public static function setge()
+</pre>
+<pre class='pasm'>
+     * @method setl set rdx to ah if ah < ecx
+     *
+    public static function setl()
+</pre>
+<pre class='pasm'>
+     * @method setle set rdx to ah if ah <= ecx
+     *
+    public static function setle()
+</pre>
+<pre class='pasm'>
+     * @method setna set rdx to ah if ah < ecx
+     *
+    public static function setna()
+</pre>
+<pre class='pasm'>
+     * @method setnae set rdx to ah if ah > ecx
+     *
+    public static function setnae()
+</pre>
+<pre class='pasm'>
+     * @method setnb set rdx to ah if ah > ecx
+     *
+    public static function setnb()
+</pre>
+<pre class='pasm'>
+     * @method setnbe set rdx to ah if ah >= ecx
+     *
+    public static function setnbe()
+</pre>
+<pre class='pasm'>
+     * @method setnc set $cl if CF == 0
+     *
+    public static function setnc()
+</pre>
+<pre class='pasm'>
+     * @method setne set rdx to ah if ah != ecx
+     *
+    public static function setne()
+</pre>
+<pre class='pasm'>
+     * @method setng set rdx to ah if ah <= ecx
+     *
+    public static function setng()
+</pre>
+<pre class='pasm'>
+     * @method setnge set rdx to ah if ah < ecx
+     *
+    public static function setnge()
+</pre>
+<pre class='pasm'>
+     * @method setnl set rdx to ah if ah >= ecx
+     *
+    public static function setnl()
+</pre>
+<pre class='pasm'>
+     * @method setnle set rdx to ah if ah > ecx
+     *
+    public static function setnle()
+</pre>
+<pre class='pasm'>
+     * @method setno set rdx to ah if OF != 1
+     *
+    public static function setno()
+</pre>
+<pre class='pasm'>
+     * @method setnp set rdx to ah if ah != ecx
+     *
+    public static function setnp()
+</pre>
+<pre class='pasm'>
+     * @method setns set rdx to ah if ah >= 0
+     *
+    public static function setns()  // if $ah >= 0 set rdx to ah
+</pre>
+<pre class='pasm'>
+     * @method seto set rdx to ah if OF == 1
+     *
+    public static function seto()
+</pre>
+<pre class='pasm'>
+     * @method setp set rdx to ah if ah != ecx
+     *
+    public static function setp()
+</pre>
+<pre class='pasm'>
+     * @method setpe set rdx to ah if ah != ecx && cl %2 == 0
+     *
+    public static function setpe()
+</pre>
+<pre class='pasm'>
+     * @method setle set rdx to ah if ah != ecx && cl %2 == 1
+     *
+    public static function setpo()
+</pre>
+<pre class='pasm'>
+     * @method sets set rdx to ah if ah < 0
+     *
+    public static function sets()  // if $ah < 0 set rdx to ah
+</pre>
+<pre class='pasm'>
+     * @method setz set rdx to ah if ah == 0
+     *
+    public static function setz()  // if $ah == 0 set rdx to ah
+</pre>
+<pre class='pasm'>
+     * @method setcf set rdx to CF
+     *
+    public static function setcf()     // set CF to 1
+</pre>
+<pre class='pasm'>
+     * @method appbuf append buffer with $string
+     *
+    public static function appbuf() // continue buffer string
+</pre>
+<pre class='pasm'>
+     * @method clbuf clears buffer
+     *
+    public static function clbuf()  // clears $buffer
+</pre>
+<pre class='pasm'>
+     * @method stackout outputs stack to file $string
+     *
+    public static function stackout()   // save state of $stack to file $string
+</pre>
+<pre class='pasm'>
+     * @method subb subtract 8 bits from larger int
+     *
+    public static function subb() // subtract 8 bits
+</pre>
+<pre class='pasm'>
+     * @method subw subtract 16 bits from larger int
+     *
+    public static function subw() // subtract 16 bits
+</pre>
+<pre class='pasm'>
+     * @method subdw subtract 32 bits from larger int
+     *
+    public static function subd() // subtract 32 bits
+</pre>
+<pre class='pasm'>
+     * @method subq subtract 64 bits from larger int
+     *
+    public static function subq() // subtract 64 bits
+</pre>
+<pre class='pasm'>
+     * @method subn subtract 4 bits from larger int
+     *
+    public static function subn() // subtract 4 bits
+</pre>
+<pre class='pasm'>
+     * @method subnl subtract 2 bits from larger int
+     *
+    public static function subnl() // subtract 2 bits
+</pre>
+<pre class='pasm'>
+     * @method subi subtract 1 bits from larger int
+     *
+    public static function subi() // subtract 8 bits
+</pre>
+<pre class='pasm'>
+     * @method cmpa compare ah to ecx
+     *
+    public static function cmpa() // peek at comparison
+</pre>
+<pre class='pasm'>
+     * @method thread php pages on demand on linux
+     *
+    public static function thread() // thread php pages on demand on linux
+</pre>
+<pre class='pasm'>
+     * @method xadd ah = ah + ecx && rdx =s ah
+     *
+    public static function xadd()  // ah = $ah + ecx && rdx = ah
+</pre>
+<pre class='pasm'>
+     * @method xch move ecx to ah annd vice versa
+     *
+    public static function xch()  // reverse ecx and ah
+</pre>
+<pre class='pasm'>
+     * @method xor $ah ^ $ecx
+     *
+    public static function xor() // xor $ah and ecx
+</pre>
+<pre class='pasm'>
+     * @method popcnt pop stack $ah times
+     *
+    public static function popcnt()    // pop $ah times
+</pre>
+<pre class='pasm'>
+     * @method stackf ah = ah + ecx && rdx =s ah
+     *
+    public static function stackf()
+</pre>
+<pre class='pasm'>
+     * @method stackfp sync stack and call function from stack
+     *
+    public static function stack_func_pos()
+</pre>
+<pre class='pasm'>
+     * @method newreg create a new variable
+     *
+    public static function newreg(string $register, $value) // create a new variable "register"
+</pre>
