@@ -48,6 +48,8 @@ class PASM
     public static $cnt;     // Dedicated to counting for external arrays
     public static $FUNC0;   // Top of function stack
     public static $fopen;  // File Open Stack
+    public static $version; // Version of current PASM file
+    public static $checksum; // Current Checksum of file
 
     public static function runTest()
     {    // Useful for some testing
@@ -85,6 +87,13 @@ class PASM
                 PASM::$method();
             }
         }
+    }
+
+    public static function verified()
+    {
+        PASM::$version = "v2.0";
+        PASM::$checksum = "3e91da59a60ebbb625ba6d2a27704bccd81429b4a978b4e18815f555440117ac";
+        return new static;
     }
 
     /**
@@ -1041,16 +1050,16 @@ class PASM
     }
 
     /**
-     * @method resta recover contents of the stack from the filename given as a parameter
+     * @method restore recover contents of the stack from the filename given as a parameter
      *
      */
-    public static function resta(string $filename)
+    public static function restore(string $filename)
     {
         $method_del = explode("::", __METHOD__);
         PASM::$chain[] = $method_del[1];
         if (!file_exists($filename)) {
             return false;
-        }
+        } 
         PASM::$stack = (unserialize(file_get_contents($filename)));
         return new static;
     }
@@ -3704,7 +3713,7 @@ class PASM
     }
 
     /**
-     * @method restr copy current element in $string to $strp
+     * @method reset copy current element in $string to $strp
      *
      */
     public static function restr()  // next(string);
@@ -3719,7 +3728,7 @@ class PASM
     }
 
     /**
-     * @method set set ${$key} to $new_value
+     * @method set ${$key} to $new_value
      *
      */
     public static function set($key, $new_value)   // set ${$key} with $new_value
@@ -3743,7 +3752,7 @@ class PASM
     }
 
     /**
-     * @method seteadx copy adx to ecx
+     * @method set adx copy adx to ecx
      *
      */
     public static function set_ecx_adx()   // copy adx to ecx
@@ -3762,7 +3771,7 @@ class PASM
     }
 
     /**
-     * @method seterdx copy rdx to ecx
+     * @method set rdx copy rdx to ecx
      *
      */
     public static function set_ecx_rdx()
