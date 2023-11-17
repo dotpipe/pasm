@@ -110,7 +110,6 @@ class PASM
      */
     public static function file_read(string $file, string $var = "string")
     {
-        
         yield PASM::${$var} = file_get_contents($file);
         return new static;
     }
@@ -163,7 +162,7 @@ class PASM
 
     /**
      *
-     * add uses addition to form $rdx from $ecx annd $ah
+     * add uses addition to form $rdx from $ecx and $ah
      *
      */
     public static function add()
@@ -295,13 +294,13 @@ class PASM
 
     /**
      *
-     * bit_test_comp search thru arbitry $ecx for the $ahth bit
+     * bit_test_comp search through arbitrary $ecx for the $ahth bit
      * and set $CF to it's returned value
      *
      * if given anything returned as true for a parameter, it will also set the $bitcmp flag
      *
      */
-    public static function bit_test_comp(bool $bitc = false)         // look thru byte and see the $ah'th bit
+    public static function bit_test_comp(bool $bitc = false)         // look through byte and see the $ah'th bit
     {
         PASM::setup_chain(__METHOD__);
 
@@ -315,7 +314,7 @@ class PASM
 
     /**
      *
-     * bit_test_comp search thru arbitry $ecx for the $ahth bit
+     * bit_test_comp search through arbitrary $ecx for the $ahth bit
      * and set $CF to it's returned value reset $ecx to 0
      *
      */
@@ -334,7 +333,7 @@ class PASM
 
     /**
      *
-     * bit_test_comp search thru arbitry $ecx for the $ahth bit
+     * bit_test_comp search through arbitrary $ecx for the $ahth bit
      * and set $CF to it's returned value and ecx[$ah] to 1
      *
      */
@@ -931,7 +930,7 @@ class PASM
 
     /**
      *
-     * fcomp substracts the $ST0 stack pointer
+     * fcomp subtracts the $ST0 stack pointer
      * from $ah and pops its last value off
      *
      */
@@ -974,7 +973,7 @@ class PASM
 
     /**
      *
-     * stack_pnt_rev goes thru the stack backward,
+     * stack_pnt_rev goes through the stack backward,
      * in reverse, and sets the $sp variable to its position
      *
      */
@@ -1136,7 +1135,7 @@ class PASM
      *
      * stack_load uses $key so it's indexable by string coefficient
      * 'fc' so you can have the count of the reference rather than
-     * name it everytime
+     * name it every time
      *
      */
     public static function stack_load() // stack with count on stack
@@ -1156,7 +1155,7 @@ class PASM
      *
      * stack_mrg uses $key so it's indexable by string coefficient
      * 'fc' so you can have the count of the reference rather than
-     * name it everytime, all of this while merging native $array and $stack
+     * name it every time, all of this while merging native $array and $stack
      *
      */
     public static function stack_mrg() // stack with count on stack
@@ -1280,7 +1279,7 @@ class PASM
 
     /**
      *
-     * substract_rev subtracts $ah from $ech and places the
+     * subtract_rev subtracts $ah from $ech and places the
      * value in $rdx
      *
      */
@@ -1299,7 +1298,7 @@ class PASM
 
     /**
      *
-     * substract substracts $ecx from $ah
+     * subtract subtracts $ecx from $ah
      * and puts the value in $rdx
      *
      */
@@ -3235,7 +3234,7 @@ class PASM
      *
      *
      */
-    public static function coast()     // the secret sauce. Go thru rest of commands after $ldp drop
+    public static function coast()     // the secret sauce. Go through rest of commands after $ldp drop
     {
         $counted = 0;
         $count = count(PASM::$chain);
@@ -3580,7 +3579,7 @@ class PASM
      *
      *
      */
-    public static function or()    // performs a or on ecx and ah
+    public static function or()    // performs an or on ecx and ah
     {
         PASM::setup_chain(__METHOD__);
         if (PASM::$ecx or PASM::$ah) {
