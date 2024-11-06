@@ -20,7 +20,7 @@ Dux Documentation for pasm
     public static function carry_add()
 </pre>
 <pre class='pasm'>
-     * @method add uses addition to form $rdx from $ecx annd $ah
+     * @method add uses addition to form $rdx from $ecx and $ah
      *
     public static function add()
 </pre>
@@ -66,21 +66,21 @@ Dux Documentation for pasm
     public static function bit_test()                  // bit is filled in pointer
 </pre>
 <pre class='pasm'>
-     * @method bit_test_comp search thru arbitry $ecx for the $ahth bit
+     * @method bit_test_comp search through arbitrary $ecx for the $ahth bit
      * and set $CF to it's returned value
      *
      * if given anything returned as true for a parameter, it will also set the $bitcmp flag
      *
-    public static function bit_test_comp(bool $bitc = false)         // look thru byte and see the $ah'th bit
+    public static function bit_test_comp(bool $bitc = false)         // look through byte and see the $ah'th bit
 </pre>
 <pre class='pasm'>
-     * bit_test_comp search thru arbitry $ecx for the $ahth bit
+     * bit_test_comp search through arbitrary $ecx for the $ahth bit
      * and set $CF to it's returned value reset $ecx to 0
      *
     public static function bit_test_reset()    // Clear bit (ah) test flag
 </pre>
 <pre class='pasm'>
-     * @method bit_test_comp search thru arbitry $ecx for the $ahth bit
+     * @method bit_test_comp search through arbitrary $ecx for the $ahth bit
      * and set $CF to it's returned value and ecx[$ah] to 1
      *
     public static function bit_test_set()                  // Test bit
@@ -283,7 +283,7 @@ Dux Documentation for pasm
     public static function stack_cmov_ne()
 </pre>
 <pre class='pasm'>
-     * @method fcomp substracts the $ST0 stack pointer
+     * @method fcomp subtracts the $ST0 stack pointer
      * from $ah and pops its last value off
      *
     public static function fcomp()         // subtract top of stack from $ah and pop
@@ -295,7 +295,7 @@ Dux Documentation for pasm
     public static function cosine()    // change top of stack to cosine of top of stack
 </pre>
 <pre class='pasm'>
-     * @method stack_pnt_rev goes thru the stack backward,
+     * @method stack_pnt_rev goes through the stack backward,
      * in reverse, and sets the $sp variable to its position
      *
     public static function stack_pnt_rev()         // go traverse the stack backward
@@ -343,7 +343,7 @@ Dux Documentation for pasm
 <pre class='pasm'>
      * @method stack_load uses $key so it's indexable by string coefficient
      * 'fc' so you can have the count of the reference rather than
-     * name it everytime
+     * name it every time
      *
     public static function stack_load() // stack with count on stack
 </pre>
@@ -380,7 +380,7 @@ Dux Documentation for pasm
     public static function subea() // like subtract but backwards
 </pre>
 <pre class='pasm'>
-     * @method subae substracts $ecx from $ah
+     * @method subae subtracts $ecx from $ah
      * and puts the value in $rdx
      *
     public static function subae()  // $ah - $ecx
@@ -545,7 +545,7 @@ Dux Documentation for pasm
 <pre class='pasm'>
      * @method fxch exchange values from one stack place to another (the top)
      *
-    public static function fxch()  // 
+    public static function fxch()  //
 </pre>
 <pre class='pasm'>
      * @method fxtract get highest significand and exponent of number
@@ -590,7 +590,7 @@ Dux Documentation for pasm
 <pre class='pasm'>
      * @method in $string is server, collects in $buffer
      *
-    public static function in()    // 
+    public static function in()    //
 </pre>
 <pre class='pasm'>
      * @method inc increment $ecx
@@ -645,7 +645,7 @@ Dux Documentation for pasm
 <pre class='pasm'>
      * @method jae jump while $ah >= $ecx
      *
-    public static function jae() 
+    public static function jae()
 </pre>
 <pre class='pasm'>
      * @method jb jump while $ah < $ecx
@@ -804,19 +804,19 @@ Dux Documentation for pasm
     public static function load_all_flags()    // load all flags to $ah
 </pre>
 <pre class='pasm'>
-     * @method end 
+     * @method end
      * reset chains
      *
     public static function end()
 </pre>
 <pre class='pasm'>
-     * @method quit 
+     * @method quit
      * exits the program
      *
     public static function quit() // exit program
 </pre>
 <pre class='pasm'>
-     * @method ea 
+     * @method ea
      * move $ecx to $ah
      *
     public static function ea()   // move ecx to ah
@@ -835,9 +835,9 @@ Dux Documentation for pasm
 </pre>
 <pre class='pasm'>
      * @method coast
-     * Go thru rest of commands after $ldp drop
+     * Go through rest of commands after $ldp drop
      *
-    public static function coast()     // the secret sauce. Go thru rest of commands after $ldp drop
+    public static function coast()     // the secret sauce. Go through rest of commands after $ldp drop
 </pre>
 <pre class='pasm'>
      * @method loop requires that PASM::$ecx
@@ -899,7 +899,7 @@ Dux Documentation for pasm
 <pre class='pasm'>
      * @method or performs a not on $ah and $ecx
      *
-    public static function or()    // performs a or on ecx and ah
+    public static function or()    // performs an or on ecx and ah
 </pre>
 <pre class='pasm'>
      * @method out disperses $buffer to $conn (server connection with $string)
@@ -1057,7 +1057,7 @@ Dux Documentation for pasm
     public static function setbe()
 </pre>
 <pre class='pasm'>
-     * @method setc set rd to ah if CF == 1 
+     * @method setc set rd to ah if CF == 1
      *
     public static function setc()
 </pre>
@@ -1252,7 +1252,7 @@ Dux Documentation for pasm
     public static function xadd()  // ah = $ah + ecx && rdx = ah
 </pre>
 <pre class='pasm'>
-     * @method xch move ecx to ah annd vice versa
+     * @method xch move ecx to ah and vice versa
      *
     public static function xch()  // reverse ecx and ah
 </pre>

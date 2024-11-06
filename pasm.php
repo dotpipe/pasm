@@ -1,5 +1,5 @@
 <?php declare (strict_types = 1);
-namespace pasm;  
+namespace pasm;
 
 class PASM
 {
@@ -150,7 +150,7 @@ class PASM
     }
 
     /**
-     * @method add uses addition to form $rdx from $ecx annd $ah
+     * @method add uses addition to form $rdx from $ecx and $ah
      *
      */
     public static function add()
@@ -275,13 +275,13 @@ class PASM
     }
 
     /**
-     * @method bit_test_comp search thru arbitry $ecx for the $ahth bit
+     * @method bit_test_comp search through arbitrary $ecx for the $ahth bit
      * and set $CF to it's returned value
      *
      * if given anything returned as true for a parameter, it will also set the $bitcmp flag
      *
      */
-    public static function bit_test_comp(bool $bitc = false)         // look thru byte and see the $ah'th bit
+    public static function bit_test_comp(bool $bitc = false)         // look through byte and see the $ah'th bit
     {
         PASM::setup_chain(__METHOD__);
 
@@ -294,7 +294,7 @@ class PASM
     }
 
     /**
-     * bit_test_comp search thru arbitry $ecx for the $ahth bit
+     * bit_test_comp search through arbitrary $ecx for the $ahth bit
      * and set $CF to it's returned value reset $ecx to 0
      *
      */
@@ -312,7 +312,7 @@ class PASM
     }
 
     /**
-     * @method bit_test_comp search thru arbitry $ecx for the $ahth bit
+     * @method bit_test_comp search through arbitrary $ecx for the $ahth bit
      * and set $CF to it's returned value and ecx[$ah] to 1
      *
      */
@@ -874,7 +874,7 @@ class PASM
     }
 
     /**
-     * @method fcomp substracts the $ST0 stack pointer
+     * @method fcomp subtracts the $ST0 stack pointer
      * from $ah and pops its last value off
      *
      */
@@ -915,7 +915,7 @@ class PASM
     }
 
     /**
-     * @method stack_pnt_rev goes thru the stack backward,
+     * @method stack_pnt_rev goes through the stack backward,
      * in reverse, and sets the $sp variable to its position
      *
      */
@@ -1059,7 +1059,7 @@ class PASM
         PASM::$chain[] = $method_del[1];
         if (!file_exists($filename)) {
             return false;
-        } 
+        }
         PASM::$stack = (unserialize(file_get_contents($filename)));
         return new static;
     }
@@ -1067,7 +1067,7 @@ class PASM
     /**
      * @method stack_load uses $key so it's indexable by string coefficient
      * 'fc' so you can have the count of the reference rather than
-     * name it everytime
+     * name it every time
      *
      */
     public static function stack_load() // stack with count on stack
@@ -1090,7 +1090,7 @@ class PASM
     public static function stack_mrg() // stack with count on stack
     {
         PASM::setup_chain(__METHOD__);
- 
+
         array_merge(PASM::$stack, PASM::$array);
         PASM::$ecx = null;
         PASM::$ST0 = PASM::$stack[array_key_last(PASM::$stack)];
@@ -1220,7 +1220,7 @@ class PASM
     }
 
     /**
-     * @method subae substracts $ecx from $ah
+     * @method subae subtracts $ecx from $ah
      * and puts the value in $rdx
      *
      */
@@ -1770,7 +1770,7 @@ class PASM
      * @method fxch exchange values from one stack place to another (the top)
      *
      */
-    public static function fxch()  // 
+    public static function fxch()  //
     {
         PASM::setup_chain(__METHOD__);
 
@@ -1955,7 +1955,7 @@ class PASM
      * @method in $string is server, collects in $buffer
      *
      */
-    public static function in()    // 
+    public static function in()    //
     {
         PASM::setup_chain(__METHOD__);
 
@@ -2216,7 +2216,7 @@ class PASM
      * @method jae jump while $ah >= $ecx
      *
      */
-    public static function jae() 
+    public static function jae()
     {
         PASM::setup_chain(__METHOD__);
 
@@ -3032,7 +3032,7 @@ class PASM
     }
 
     /**
-     * @method end 
+     * @method end
      * reset chains
      *
      */
@@ -3045,7 +3045,7 @@ class PASM
     }
 
     /**
-     * @method quit 
+     * @method quit
      * exits the program
      *
      */
@@ -3057,7 +3057,7 @@ class PASM
     }
 
     /**
-     * @method ea 
+     * @method ea
      * move $ecx to $ah
      *
      */
@@ -3105,10 +3105,10 @@ class PASM
 
     /**
      * @method coast
-     * Go thru rest of commands after $ldp drop
+     * Go through rest of commands after $ldp drop
      *
      */
-    public static function coast()     // the secret sauce. Go thru rest of commands after $ldp drop
+    public static function coast()     // the secret sauce. Go through rest of commands after $ldp drop
     {
         $counted = 0;
         $count = count(PASM::$chain);
@@ -3430,7 +3430,7 @@ class PASM
      * @method or performs a not on $ah and $ecx
      *
      */
-    public static function or()    // performs a or on ecx and ah
+    public static function or()    // performs an or on ecx and ah
     {
         PASM::setup_chain(__METHOD__);
         if (PASM::$ecx or PASM::$ah) {
@@ -4075,7 +4075,7 @@ class PASM
     }
 
     /**
-     * @method setc set rd to ah if CF == 1 
+     * @method setc set rd to ah if CF == 1
      *
      */
     public static function setc()
@@ -4869,7 +4869,7 @@ class PASM
     }
 
     /**
-     * @method xch move ecx to ah annd vice versa
+     * @method xch move ecx to ah and vice versa
      *
      */
     public static function xch()  // reverse ecx and ah
